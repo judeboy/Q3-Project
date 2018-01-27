@@ -21,7 +21,21 @@
 .App-intro {
   font-size: large;
 }
-
+.validation{
+  margin-left: 1px;
+}
+.signIn, .signUp{
+  font-size: 10px;
+  margin-right: 2px;
+  background: #0003a1;
+}
+#navbar{
+  background: #0024a4
+}
+.firstImage{
+  height: 400px;
+  width: 100%;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
