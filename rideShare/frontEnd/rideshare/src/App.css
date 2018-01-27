@@ -36,6 +36,22 @@
   height: 400px;
   width: 100%;
 }
+.slider .slides li{
+  opacity: 1
+}
+div.slider{
+  height: 440px;
+  touch-action: pan-y;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+ul.slides{
+  height: 400px;
+}
+.collapsibleConcert{
+  width: 60%;
+  margin: auto;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

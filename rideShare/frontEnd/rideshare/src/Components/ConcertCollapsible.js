@@ -1,11 +1,14 @@
 import React from 'react'
-import {Collapsible,CollapsibleItem} from 'react-materialize'
+import {Collapsible,CollapsibleItem, Button} from 'react-materialize'
 const ConcertCollapsible = ({concert}) => {
   return(
     <div>
-      <Collapsible>
-      	<CollapsibleItem header={concert.name} icon='filter_drama'>
-      		Lorem ipsum dolor sit amet.
+      <Collapsible accordion popout className="collapsibleConcert">
+      	<CollapsibleItem header={concert.name} icon='place' Button='Buy'>
+      		<p>{concert.body}</p>
+          <p>DATE : {concert.date}</p>
+          <p>TIME : {concert.time}</p>
+          <Button waves='light'>Confirm Ride</Button>
       	</CollapsibleItem>
       </Collapsible>
     </div>

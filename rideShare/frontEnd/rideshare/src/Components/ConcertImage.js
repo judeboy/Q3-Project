@@ -7,7 +7,7 @@ const ConcertImage = ({concerts}) => {
       {concerts.map(concert => {
         return(
           <Slide
-        		src="http://lorempixel.com/580/250/nature/1"
+        		src={concert.imageSrc}
         		title="This is our big Tagline!">
         		Here's our small slogan.
         	</Slide>
