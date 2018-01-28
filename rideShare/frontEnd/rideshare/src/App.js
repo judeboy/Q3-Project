@@ -9,6 +9,10 @@ import Navbar from './Components/Navbar'
 import OfferRide from './Components/OfferRide'
 import {fetchConcert} from './Actions'
 import {connect} from 'react-redux'
+import SignIn from './Components/SignIn'
+import SignUp from './Components/SignUp'
+
+
 import {
   Route,
 } from 'react-router-dom'
@@ -17,14 +21,20 @@ class App extends Component {
   constructor(props) {
     super(props)
   }
-  async componentDidMount() {
-    this.props.fetchConcert()
-  }
+  // async componentDidMount() {
+  //   this.props.fetchConcert()
+  // }
   render() {
     return (
       <div>
-        {/* <Navbar /> */}
         <Header />
+        {/* <Route path='/' render={() => (
+          <SignIn/>
+        )} /> */}
+        {/* <SignIn /> */}
+        {/* <SignUp /> */}
+        {/* <Dashboard /> */}
+        {/* <Navbar /> */}
         {/* <SideNav /> */}
         {/* <Landing /> */}
         {/* <ConcertImage /> */}
