@@ -1,23 +1,15 @@
 # Quarter Three Project:
 ## Bishal Malla, Joe Grounds, Judah Trimmer, Matt Agin
 
-☆┌─┐  ─┐☆
-
-　│▒│ /▒/
-
-　│▒│/▒/
-
-　│▒ /▒/─┬─┐◯
-
-　│▒│▒|▒│▒│
-
-┌┴─┴─┐-┘─┘
-
-│▒┌──┘▒▒▒│◯
-
-└┐▒▒▒▒▒▒┌┘
-
-◯└┐▒▒▒▒┌
+                            ☆┌─┐  ─┐☆
+                            　│▒│ /▒/
+                            　│▒│/▒/
+                            　│▒ /▒/─┬─┐◯
+                            　│▒│▒|▒│▒│
+                            ┌┴─┴─┐-┘─┘
+                            │▒┌──┘▒▒▒│◯
+                            └┐▒▒▒▒▒▒┌┘
+                            ◯└┐▒▒▒▒┌
 
 ----
 #### [Waffle Planning](https://waffle.io/magin3191/Q3-Project)
