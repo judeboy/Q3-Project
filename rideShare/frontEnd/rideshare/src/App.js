@@ -7,8 +7,12 @@ import Header from  './Components/Header'
 import SideNav from './Components/Sidenav'
 import Navbar from './Components/Navbar'
 import OfferRide from './Components/OfferRide'
-import {fetchConcert} from './Actions'
+import {Button,Input} from 'react-materialize'
 import {connect} from 'react-redux'
+import SignIn from './Components/SignIn'
+import SignUp from './Components/SignUp'
+import {fetchConcert} from './Actions'
+
 import {
   Route,
 } from 'react-router-dom'
@@ -17,14 +21,20 @@ class App extends Component {
   constructor(props) {
     super(props)
   }
-  async componentDidMount() {
-    this.props.fetchConcert()
-  }
+  // async componentDidMount() {
+  //   this.props.fetchConcert()
+  // }
   render() {
     return (
       <div>
-        {/* <Navbar /> */}
         <Header />
+        {/* <Route path='/' render={() => (
+          <SignIn/>
+        )} /> */}
+        {/* <SignIn /> */}
+        {/* <SignUp /> */}
+        {/* <Dashboard /> */}
+        {/* <Navbar /> */}
         {/* <SideNav /> */}
         {/* <Landing /> */}
         {/* <ConcertImage /> */}
@@ -41,7 +51,8 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     concerts: state.concertReducer.concerts,
-    concert: state.concertReducer.concert
+    concert: state.concertReducer.concert,
+    // concertsAPI: state.concertReducer.concertAPI
   }
 }
 const mapDispatchToProps = dispatch => bindActionCreators({

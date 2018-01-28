@@ -1,23 +1,29 @@
 import {combineReducers} from 'redux'
-import { CONCERT_RECEIVED, OFFER_RIDE} from '../Actions'
+import { CONCERTS_RECEIVED, OFFER_RIDE} from '../Actions'
 import store from '../store'
 const initialState = {
-  concerts: [ ],
+  concerts: [],
   concert: []
 }
 const concertReducer = (state=initialState,action) => {
   switch (action.type) {
-    case 'CONCERT_RECEIVED':
+    case 'CONCERTS_RECEIVED':
     return {
       ...state,
       concerts: action.concerts,
     }
+    case CONCERTS_RECEIVED:
+      return {
+        ...state,
+        concertsAPI: action.messages
+      }
+      break;
     case 'OFFER_RIDE':
       let newConcert = store.getState().concertReducer.concerts
       return{
         ...state,
         concert: newConcert.filter(concert => {
-          if(concert.id === Number(action.id)) {
+          if(concert.Id === Number(action.id)) {
             return concert
           }
         })
