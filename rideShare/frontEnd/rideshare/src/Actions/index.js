@@ -63,3 +63,14 @@ export function fetchConcert() {
     })
   }
 }
+export const OFFER_RIDE = 'OFFER_RIDE'
+export function offerRide(e) {
+  e.preventDefault()
+  console.log(e.target.id)
+  return async (dispatch) => {
+    dispatch({
+      type: OFFER_RIDE,
+      id: e.target.id
+    })
+  }
+}

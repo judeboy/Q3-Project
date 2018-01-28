@@ -21,16 +21,21 @@
 .App-intro {
   font-size: large;
 }
-.validation{
-  margin-left: 1px;
-}
-.signIn, .signUp{
-  font-size: 10px;
-  margin-right: 2px;
-  background: #0003a1;
-}
+
 #navbar{
   background: #0024a4
+}
+.header{
+  position: relative;
+  width: 100%;
+  height: 8%;
+  background: #0024a4;
+  color: white;
+}
+#title{
+  margin-left: 25%;
+  font-size: 40px;
+  margin-top: 20px
 }
 .firstImage{
   height: 400px;
@@ -49,9 +54,27 @@ ul.slides{
   height: 400px;
 }
 .collapsibleConcert{
-  width: 60%;
+  width: 95%;
   margin: auto;
 }
+.offerRide{
+  margin-left: 9%
+}
+.needRide{
+  margin-left: 5%
+}
+#collapsibleHeader{
+  font-size: 20px;
+  color: #826767;
+}
+.concertsList{
+  position: relative;
+}
+/*button.btn{
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}*/
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

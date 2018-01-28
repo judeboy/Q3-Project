@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import 'font-awesome/css/font-awesome.css';
 import './index.css';
-import 'react-materialize'
+import 'react-materialize';
 import App from './App';
 import {
   BrowserRouter as Router,
@@ -14,7 +14,7 @@ import store from './store'
 import { Provider } from 'react-redux'
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router><App /></Router>
   </Provider>,
   document.getElementById('root'));
 registerServiceWorker();

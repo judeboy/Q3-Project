@@ -1,7 +1,9 @@
 import {combineReducers} from 'redux'
-import { CONCERT_RECEIVED } from '../Actions'
+import { CONCERT_RECEIVED, OFFER_RIDE} from '../Actions'
+import store from '../store'
 const initialState = {
-  concerts: [ ]
+  concerts: [ ],
+  concert: []
 }
 const concertReducer = (state=initialState,action) => {
   switch (action.type) {
@@ -10,6 +12,16 @@ const concertReducer = (state=initialState,action) => {
       ...state,
       concerts: action.concerts,
     }
+    case 'OFFER_RIDE':
+      let newConcert = store.getState().concertReducer.concerts
+      return{
+        ...state,
+        concert: newConcert.filter(concert => {
+          if(concert.id === Number(action.id)) {
+            return concert
+          }
+        })
+      }
     default:
       return state
   }
