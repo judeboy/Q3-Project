@@ -28,19 +28,22 @@ class App extends Component {
     return (
       <div>
         <Header />
+        {/* <Route path='/' render={() => (
+          <SignIn/>
+        )} /> */}
         {/* <SignIn /> */}
         {/* <SignUp /> */}
-        <Dashboard />
+        {/* <Dashboard /> */}
         {/* <Navbar /> */}
         {/* <SideNav /> */}
         {/* <Landing /> */}
         {/* <ConcertImage /> */}
-        {/* <Route exact path='/' render={() => (
+        <Route exact path='/' render={() => (
           <Dashboard />
         )} />
         <Route path='/offerRide' render={() => (
           <OfferRide concert={this.props.concert}/>
-        )} /> */}
+        )} />
       </div>
     );
   }

@@ -4,7 +4,6 @@ import {offerRide} from '../Actions'
 import {connect} from 'react-redux'
 import {
   Link,
-  withRouter
 } from 'react-router-dom'
 // import {browserHistory} from 'react-router'
 // import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router'
@@ -14,6 +13,7 @@ const ConcertCollapsible = ({concert,offerRide}) => {
     let a = concert.TicketUrl.toString()
     console.log(a)
   return(
+      <Link to='/offerRide'>
       <div>
         <Collapsible accordion>
         	<CollapsibleItem header={concert.Artists[0].Name} icon='filter_drama'>
@@ -23,11 +23,14 @@ const ConcertCollapsible = ({concert,offerRide}) => {
                 <p>City: {concert.Venue.City}</p>
                 <p>State: {concert.Venue.State}</p>
                 <p>Buy Ticket: {concert.TicketUrl} </p>
-                <Button waves='light' >OfferRide</Button>
+                <Link to ='/offerRide'>
+                    <Button waves='light' onClick={offerRide} id={concert.Id} >OfferRide</Button>
+                </Link>
                 <Button waves='light'>NeedRide</Button>
         	</CollapsibleItem>
         </Collapsible>
       </div>
+  </Link>
 
   )
 }

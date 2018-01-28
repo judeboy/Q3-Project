@@ -17,7 +17,7 @@ const concertReducer = (state=initialState,action) => {
       return{
         ...state,
         concert: newConcert.filter(concert => {
-          if(concert.id === Number(action.id)) {
+          if(concert.Id === Number(action.id)) {
             return concert
           }
         })
