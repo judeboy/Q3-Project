@@ -17,7 +17,7 @@ app.use(bodyParser.json())
 // })
 app.get('/api', (req, res, next) => {
     knex('users')
-    .select('id','username','email','password')
+    .select('id','username','email','password','phone_number')
     .then(data=>{
         res.send(data)
     })
