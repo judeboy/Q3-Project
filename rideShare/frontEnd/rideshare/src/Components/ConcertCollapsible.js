@@ -10,33 +10,24 @@ import {
 // import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
 const ConcertCollapsible = ({concert,offerRide}) => {
+    console.log(concert.Artists[0].Name)
+    let a = concert.TicketUrl.toString()
+    console.log(a)
   return(
-    <div className="concertsList">
-      <Collapsible accordion popout className="collapsibleConcert">
-      	<CollapsibleItem header={concert.name} icon='place' Button='Buy' id='collapsibleHeader'>
-          <div style={{backgroundImage: `url(${concert.imageSrc})`, color:'white'}}>
-            <p>{concert.body}</p>
-            <p>DATE : {concert.date}</p>
-            <p>TIME : {concert.time}</p>
-            <Row>
-              <Link to="/offerRide">
-                <span l={6} waves='light' className="offerRide" id={concert.id} onClick ={offerRide}>Offer Ride</span>
-              </Link>
-              <Button l={6} waves='light' className="needRide">Need Ride</Button>
-            </Row>
-          </div>
-      	</CollapsibleItem>
-      </Collapsible>
-      {/* <Modal header={concert.name} fixedFooter trigger={<Button>{concert.name}</Button>}>
-      	{concert.body}
-        <Row>
-          <Button l={6} waves='light'className="offerRide">Offer Ride</Button>
-          <Button l={6} waves='light'className="needRide">Need Ride</Button>
-        </Row>
-      </Modal>
-      <br></br>
-      <br></br> */}
-    </div>
+      <div>
+        <Collapsible accordion>
+        	<CollapsibleItem header={concert.Artists[0].Name} icon='filter_drama'>
+        		<p>Venue: {concert.Venue.Name}</p>
+                <p>Date/Time: {concert.Date}</p>
+                <p>Street Address: {concert.Venue.Address}</p>
+                <p>City: {concert.Venue.City}</p>
+                <p>State: {concert.Venue.State}</p>
+                <p>Buy Ticket: {concert.TicketUrl} </p>
+                <Button waves='light' >OfferRide</Button>
+                <Button waves='light'>NeedRide</Button>
+        	</CollapsibleItem>
+        </Collapsible>
+      </div>
 
   )
 }
