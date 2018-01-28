@@ -10,6 +10,10 @@ import OfferRide from './Components/OfferRide'
 import {Button,Input} from 'react-materialize'
 import {fetchconcert} from './Actions'
 import {connect} from 'react-redux'
+import SignIn from './Components/SignIn'
+import SignUp from './Components/SignUp'
+
+
 import {
   Route,
 } from 'react-router-dom'
@@ -19,15 +23,28 @@ class App extends Component {
     super(props)
   }
   // async componentDidMount() {
-  //   this.props.fetchconcert()
+  //   this.props.fetchConcert()
   // }
   render() {
     return (
       <div>
-        {/* <Navbar /> */}
         <Header />
-        <Input type="text" className="zipCode"></Input>
-        <Button onClick={this.props.fetchconcert}>Search</Button>
+        {/* <Route path='/' render={() => (
+          <SignIn/>
+        )} /> */}
+        {/* <SignIn /> */}
+        {/* <SignUp /> */}
+        {/* <Dashboard /> */}
+        {/* <Navbar /> */}
+        {/* <SideNav /> */}
+        {/* <Landing /> */}
+        {/* <ConcertImage /> */}
+        <Route exact path='/' render={() => (
+          <Dashboard />
+        )} />
+        <Route path='/offerRide' render={() => (
+          <OfferRide concert={this.props.concert}/>
+        )} />
       </div>
     );
   }

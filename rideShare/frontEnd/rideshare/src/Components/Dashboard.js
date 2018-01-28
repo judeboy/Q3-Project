@@ -1,10 +1,15 @@
 import React from 'react'
 import ConcertCollapsible from './ConcertCollapsible'
 import {connect} from 'react-redux'
-const Dashboard = ({concerts,concert}) => {
+import {Input, Button} from 'react-materialize'
+import {fetchConcert} from '../Actions'
+import { bindActionCreators } from 'redux'
+const Dashboard = ({concerts,concert,fetchConcert}) => {
   console.log(concerts)
   return(
     <div className="collection">
+        <Input type ='Number' placeholder="zip-code e.g 80301" className="zipCode"></Input>
+        <Button waves='light' onClick={fetchConcert}>button</Button>
       {concerts.map(concert=> {
         return(
           <ConcertCollapsible key={concert.id} id={concert.id} concert={concert} />
@@ -19,4 +24,9 @@ function mapStateToProps(state) {
     concert: state.concertReducer.concert
   }
 }
-export default connect(mapStateToProps)(Dashboard)
+const mapDispatchToProps = dispatch => bindActionCreators({
+  fetchConcert
+}, dispatch)
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Dashboard)
