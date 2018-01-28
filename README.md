@@ -1,7 +1,7 @@
 # Quarter Three Project:
 ## Bishal Malla, Joe Grounds, Judah Trimmer, Matt Agin
 
-                            ☆┌─┐  ─┐☆
+                             ☆┌─┐  ─┐☆
                             　│▒│ /▒/
                             　│▒│/▒/
                             　│▒ /▒/─┬─┐◯
