@@ -1,11 +1,10 @@
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('rides').del()
-    .then(function () {
+
       // Inserts seed entries
       return knex('rides').insert([
-        {id: 1,
+        {
         date_time:'feb,1',
         venue_name:'Red Rocks',
         address:'Golden,CO',
@@ -19,9 +18,9 @@ exports.seed = function(knex, Promise) {
         name:'judah',
         phone_number:'555-555-5555',
         email:'juda@aol.com'
-
-      },
-
-      ]);
+      }
+      ])
+      .then(function(){
+        return knex.raw("SELECT setval('rides_id_seq',(SELECT MAX(id) FROM rides))")
     });
 };
