@@ -63,6 +63,21 @@ export function fetchConcert() {
     })
   }
 }
+export const CONCERTS_RECEIVED = 'CONCERTS_RECEIVED'
+export function fetchconcert() {
+  let zipCode = document.getElementsByClassName('zipCode')[0].value
+  console.log(zipCode)
+  return async (dispatch) => {
+    const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=100&page=0&api_key=22c7usm63w7kpdw2q3e62aed`)
+    console.log(response)
+    const json = await response.json()
+    console.log(json.Events)
+    dispatch({
+      type: CONCERTS_RECEIVED,
+      messages: json
+    })
+  }
+}
 export const OFFER_RIDE = 'OFFER_RIDE'
 export function offerRide(e) {
   e.preventDefault()

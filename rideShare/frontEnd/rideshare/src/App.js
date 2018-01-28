@@ -7,7 +7,8 @@ import Header from  './Components/Header'
 import SideNav from './Components/Sidenav'
 import Navbar from './Components/Navbar'
 import OfferRide from './Components/OfferRide'
-import {fetchConcert} from './Actions'
+import {Button,Input} from 'react-materialize'
+import {fetchconcert} from './Actions'
 import {connect} from 'react-redux'
 import {
   Route,
@@ -17,23 +18,16 @@ class App extends Component {
   constructor(props) {
     super(props)
   }
-  async componentDidMount() {
-    this.props.fetchConcert()
-  }
+  // async componentDidMount() {
+  //   this.props.fetchconcert()
+  // }
   render() {
     return (
       <div>
         {/* <Navbar /> */}
         <Header />
-        {/* <SideNav /> */}
-        {/* <Landing /> */}
-        {/* <ConcertImage /> */}
-        <Route exact path='/' render={() => (
-          <Dashboard />
-        )} />
-        <Route path='/offerRide' render={() => (
-          <OfferRide concert={this.props.concert}/>
-        )} />
+        <Input type="text" className="zipCode"></Input>
+        <Button onClick={this.props.fetchconcert}>Search</Button>
       </div>
     );
   }
@@ -41,11 +35,12 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     concerts: state.concertReducer.concerts,
-    concert: state.concertReducer.concert
+    concert: state.concertReducer.concert,
+    // concertsAPI: state.concertReducer.concertAPI
   }
 }
 const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchConcert
+  fetchconcert
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
