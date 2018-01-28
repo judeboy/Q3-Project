@@ -8,11 +8,10 @@ import SideNav from './Components/Sidenav'
 import Navbar from './Components/Navbar'
 import OfferRide from './Components/OfferRide'
 import {Button,Input} from 'react-materialize'
-import {fetchconcert} from './Actions'
 import {connect} from 'react-redux'
 import SignIn from './Components/SignIn'
 import SignUp from './Components/SignUp'
-
+import {fetchConcert} from './Actions'
 
 import {
   Route,
@@ -57,7 +56,7 @@ function mapStateToProps(state) {
   }
 }
 const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchconcert
+  fetchConcert
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
