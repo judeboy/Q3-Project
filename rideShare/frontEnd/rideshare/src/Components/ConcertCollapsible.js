@@ -4,6 +4,7 @@ import {offerRide} from '../Actions'
 import {connect} from 'react-redux'
 import {
   Link,
+  withRouter
 } from 'react-router-dom'
 // import {browserHistory} from 'react-router'
 // import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router'
@@ -11,7 +12,6 @@ import { bindActionCreators } from 'redux'
 const ConcertCollapsible = ({concert,offerRide}) => {
   return(
     <div className="concertsList">
-      <Link to="/offerRide">
       <Collapsible accordion popout className="collapsibleConcert">
       	<CollapsibleItem header={concert.name} icon='place' Button='Buy' id='collapsibleHeader'>
           <div style={{backgroundImage: `url(${concert.imageSrc})`, color:'white'}}>
@@ -27,7 +27,6 @@ const ConcertCollapsible = ({concert,offerRide}) => {
           </div>
       	</CollapsibleItem>
       </Collapsible>
-    </Link>
       {/* <Modal header={concert.name} fixedFooter trigger={<Button>{concert.name}</Button>}>
       	{concert.body}
         <Row>
@@ -47,4 +46,4 @@ const ConcertCollapsible = ({concert,offerRide}) => {
 const mapDispatchToProps = dispatch => bindActionCreators({
   offerRide: offerRide,
 }, dispatch)
-export default connect(null,mapDispatchToProps)(ConcertCollapsible)
+export default connect(null, mapDispatchToProps)(ConcertCollapsible)
