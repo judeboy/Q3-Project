@@ -5,6 +5,7 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('rides').insert([
         {
+        driver_id:1,
         date_time:'feb,1',
         venue_name:'Red Rocks',
         address:'Golden,CO',
@@ -25,4 +26,3 @@ exports.seed = function(knex, Promise) {
     });
 };
 
-//change

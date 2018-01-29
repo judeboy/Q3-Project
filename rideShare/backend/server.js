@@ -7,10 +7,14 @@ const port = process.env.PORT || 3000
 
 
 app.use(express.static('public'))
+
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
-app.use(express.static('public'));
 
+// Get all route
+// app.get('/', (req, res, next) => {
+//     res.send('working')
+// })
 
 // Get All
 app.get('/users', (req, res, next) => {
@@ -24,7 +28,7 @@ app.get('/users', (req, res, next) => {
     })
 })
 
-//Get One 
+//Get One
 app.get('/users/:id', (req, res, next) => {
     let id = req.params.id
     knex('users')
@@ -48,7 +52,7 @@ app.post('/signup', function(req, res, next){
         phone_number:req.body.phone_number,
         password:hash,
         salt:salt
-    },'*') 
+    },'*')
     .then(user=>{
         res.status(204).send({id:user[0].id})
     })
@@ -93,7 +97,7 @@ app.get('/rides/:id', (req, res, next) => {
     })
 })
 
-// Patch Rides 
+// Patch Rides
 app.patch('/rides/:id', (req, res, next) => {
     let id = req.params.id
     console.log(req.body.number_seats)
@@ -111,7 +115,6 @@ app.patch('/rides/:id', (req, res, next) => {
     })
 })
 
-//Delete Rides 
 app.delete('/rides/:id', (req, res, next) => {
     let id = req.params.id
     console.log(req.params.id)
@@ -126,6 +129,33 @@ app.delete('/rides/:id', (req, res, next) => {
         res.status(404).send(err)
     })
 })
+//get all for events database
+
+app.get('/events',(req,res,next)=>{
+  knex('events')
+    .select('*')
+    .then(data=>{
+      res.send(data)
+    })
+    .catch(err=>{
+      res.status(404).send(err)
+    })
+})
+
+app.get('/events/:id',(req,res,next)=>{
+  let id = req.params.id
+  knex('events')
+  .where('id',id)
+  .select('id','*')
+  .then(data=>{
+    res.send(data[0])
+  })
+  .catch(err=>{
+    res.status(404).send(err)
+  })
+})
+
+
 
 //Error
 app.use((err, req, res, next) => {

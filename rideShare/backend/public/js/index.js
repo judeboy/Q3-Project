@@ -5,16 +5,16 @@ $( document ).ready(function() {
         if ($xhr.status !== 200) {
             return;
         }
-        
+
         for(let i in data){
-             numSeats = data[i].number_seats 
+             numSeats = data[i].number_seats
             //console.log(data[i])
             $('#messDate').append(`
             <i>${data[i].id}</i>
             <i>Number of seats: ${data[i].number_seats}</i>
             <br/>
             <br/>
-            `) 
+            `)
         }
        $( "#delete" ).on( "click", function() {
             const id = $( "#id" ).val();
@@ -23,7 +23,7 @@ $( document ).ready(function() {
                 id: id,
             }
             console.log(obj);
-            //Ajax Delete 
+            //Ajax Delete
             $.ajax({
                 url: `/rides/${id}`,
                 type: 'DELETE',
@@ -32,8 +32,8 @@ $( document ).ready(function() {
                 console.log("success")
                 }
             })
-        })   
-    
+        })
+
         $('#update').click(function () {
             event.preventDefault();
             const id = $( "#id" ).val();
@@ -54,7 +54,7 @@ $( document ).ready(function() {
                 console.log("success")
                 }
             })
-        });  
+        });
     })
     // Sign up
     $( "#submit" ).on( "click", function() {
@@ -67,7 +67,7 @@ $( document ).ready(function() {
             message: message
         }
         console.log(obj)
-        // Ajax post 
+        // Ajax post
         $.ajax({
             url: `/signup`,
             type: 'POST',
