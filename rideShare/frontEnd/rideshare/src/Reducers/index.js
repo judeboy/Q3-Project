@@ -3,7 +3,9 @@ import { CONCERTS_RECEIVED, OFFER_RIDE} from '../Actions'
 import store from '../store'
 const initialState = {
   concerts: [],
-  concert: []
+  concert: [],
+  offerRide: [],
+  needRide: [],
 }
 const concertReducer = (state=initialState,action) => {
   switch (action.type) {

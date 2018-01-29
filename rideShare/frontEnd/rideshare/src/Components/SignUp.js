@@ -13,9 +13,6 @@ const SignUp = () => {
                 <Input className='confirmPassword' type='password' s={10} placeholder="Password" validate><Icon>lock</Icon></Input>
             </Row>
             <Button className='signUpButton' waves='light'>Sign Up</Button><br></br>
-            <p className='aboutUs'>
-                <span id="aboutUs">About Us</span>
-            </p>
         </div>
     )
 }
