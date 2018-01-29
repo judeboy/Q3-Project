@@ -1,9 +1,14 @@
 import React from 'react'
 import {Modal, Button, Input, Row} from 'react-materialize'
 import {connect} from 'react-redux'
-
-const OfferRide = ({concert}) => {
-  console.log(concert[0])
+const OfferRide = ({...props,concerts}) => {
+  let a = props.location.search.slice(4)
+  console.log(a)
+  let concert = concerts.filter(ele => {
+    if(ele.Id === Number(a)) {
+      return ele
+    }
+  })
   return(
     <div className='rideOfferdiv'>
         <Modal id='concertModal' header={concert[0].Artists[0].Name} fixedFooter trigger={<Button id="modalButton">{concert[0].Artists[0].Name}</Button>}>
@@ -26,7 +31,7 @@ const OfferRide = ({concert}) => {
   )
 }
 function mapStateToProps(state) {
-  return {concert: state.concertReducer.concert}
+  return {concerts: state.concertReducer.concerts}
 }
 export default connect(mapStateToProps)(OfferRide)
 // export default OfferRide

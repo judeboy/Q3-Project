@@ -5,33 +5,35 @@ import {connect} from 'react-redux'
 import {
   Link,
 } from 'react-router-dom'
-// import {browserHistory} from 'react-router'
-// import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
-const ConcertCollapsible = ({concert,offerRide}) => {
+const ConcertCollapsible = ({concert,offerRide,props}) => {
     console.log(concert.Artists[0].Name)
     let a = concert.TicketUrl.toString()
     console.log(a)
+
   return(
-      <Link to='/offerRide'>
       <div>
-        <Collapsible accordion id='concertCollapsible'>
-        	<CollapsibleItem header={concert.Artists[0].Name} icon='filter_drama'>
+        <Collapsible accordion id='concertCollapsible' onClick={offerRide}>
+        	<CollapsibleItem header={concert.Artists[0].Name} icon='filter_drama' id={concert.id}>
         		<p>Venue: {concert.Venue.Name}</p>
                 <p>Date/Time: {concert.Date}</p>
                 <p>Street Address: {concert.Venue.Address}</p>
                 <p>City: {concert.Venue.City}</p>
                 <p>State: {concert.Venue.State}</p>
                 <p>Buy Ticket: {concert.TicketUrl} </p>
-                <Link to ='/offerRide'>
-                    <Button waves='light' class='offerRide' onClick={offerRide} id={concert.Id} >OfferRide</Button>
+                <Link to ={{
+                  pathname: '/rides',
+                  search: `?id=${concert.Id}`
+                }}>
+                  <Button className='offerRide' waves='light'>
+                    OfferRide
+                  </Button>
                 </Link>
+                {/* <Link to='/rides' onClick={offerRide} id={concert.id}>OfferRide</Link> */}
                 <Button waves='light' className='needRide'>NeedRide</Button>
         	</CollapsibleItem>
         </Collapsible>
       </div>
-  </Link>
-
   )
 }
 // function mapStateToProps(state) {

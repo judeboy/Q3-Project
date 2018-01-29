@@ -1,4 +1,4 @@
-const express =require('express')
+const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const knex = require('./knex')
@@ -24,7 +24,7 @@ app.get('/users', (req, res, next) => {
     })
 })
 
-//Get One 
+//Get One
 app.get('/users/:id', (req, res, next) => {
     let id = req.params.id
     knex('users')
@@ -48,7 +48,7 @@ app.post('/signup', function(req, res, next){
         phone_number:req.body.phone_number,
         password:hash,
         salt:salt
-    },'*') 
+    },'*')
     .then(user=>{
         res.status(204).send({id:user[0].id})
     })
@@ -94,7 +94,7 @@ app.get('/rides/:id', (req, res, next) => {
     })
 })
 
-// Patch Rides 
+// Patch Rides
 app.patch('/rides/:id', (req, res, next) => {
     let id = req.params.id
     console.log(req.body.number_seats)
@@ -112,7 +112,7 @@ app.patch('/rides/:id', (req, res, next) => {
     })
 })
 
-//Delete Rides 
+//Delete Rides
 app.delete('/rides/:id', (req, res, next) => {
     let id = req.params.id
     console.log(req.params.id)

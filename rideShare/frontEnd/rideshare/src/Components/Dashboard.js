@@ -5,12 +5,12 @@ import {Input, Button, Row} from 'react-materialize'
 import {fetchConcert} from '../Actions'
 import { bindActionCreators } from 'redux'
 const Dashboard = ({concerts,concert,fetchConcert}) => {
-  console.log(concerts)
+  console.log('concerts: ', concerts)
   return(
     <div className='searchDiv'>
-      <Row class="inputSearchField">
-        <Input s={6} type ='Number' placeholder="zip-code eg 80301" className="zipCode"></Input>
-        <Input s={6} type ='Number' placeholder="radius in miles eg 20" className="radius"></Input>
+      <Row className="inputSearchField">
+        <Input s={12} type ='Number' placeholder="zip-code eg 80301" className="zipCode"></Input>
+        <Input s={12} type ='Number' placeholder="radius in miles eg 20" className="radius"></Input>
       </Row>
         <Button waves='light' onClick={fetchConcert} className="searchConcert">Search</Button>
       {concerts.map(concert=> {
@@ -32,4 +32,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch)
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Dashboard)
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

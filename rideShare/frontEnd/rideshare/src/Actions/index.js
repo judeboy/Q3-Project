@@ -7,7 +7,7 @@ export function fetchConcert() {
  }
  console.log(zipCode)
  return async (dispatch) => {
-   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=rw79kgvgnavjdhdxhxreufen`)
+   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=vty4dsmgqahqfszehhus9a5t`)
    // console.log(response)
    const json = await response.json()
    console.log(json.Events)
@@ -19,8 +19,9 @@ export function fetchConcert() {
 }
 export const OFFER_RIDE = 'OFFER_RIDE'
 export function offerRide(e) {
+  console.log(e.target)
   e.preventDefault()
-  console.log(e.target.id)
+  console.log(e.target.class)
   return async (dispatch) => {
     dispatch({
       type: OFFER_RIDE,
