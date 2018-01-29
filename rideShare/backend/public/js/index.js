@@ -56,11 +56,11 @@ $( document ).ready(function() {
             })
         });  
     })
-    // Submit click event
+    // Sign up
     $( "#submit" ).on( "click", function() {
         event.preventDefault();
         const name = $( "#first" ).val()
-        const message = $( "#about" ).val()
+        const password = $( "#about" ).val()
         // Log in object
         let obj = {
             name: name,
@@ -69,7 +69,7 @@ $( document ).ready(function() {
         console.log(obj)
         // Ajax post 
         $.ajax({
-            url: `/messages`,
+            url: `/signup`,
             type: 'POST',
             data: obj,
             success: function (data) {
