@@ -1,11 +1,11 @@
 import React from 'react'
-import {NavItem, Navbar, Input} from 'react-materialize'
-const Navbars = () => {
-  return(
-    <Navbar brand='logo' right>
-    	<a>LogIn</a>
-    	<a>SignUp</a>
-    </Navbar>
-  )
-}
-export default Navbars
+// import {NavItem, Navbar, Input} from 'react-materialize'
+import AppBar from 'material-ui/AppBar';
+const Navbar = () => (
+  <AppBar
+    title="Title"
+    iconClassNameRight="muidocs-icon-navigation-expand-more"
+  />
+);
+
+export default Navbar;

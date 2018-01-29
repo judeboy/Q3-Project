@@ -12,7 +12,7 @@ import {connect} from 'react-redux'
 import SignIn from './Components/SignIn'
 import SignUp from './Components/SignUp'
 import {fetchConcert} from './Actions'
-
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {
   Route,
 } from 'react-router-dom'
@@ -34,7 +34,6 @@ class App extends Component {
         {/* <SignIn /> */}
         {/* <SignUp /> */}
         {/* <Dashboard /> */}
-        {/* <Navbar /> */}
         {/* <SideNav /> */}
         {/* <Landing /> */}
         {/* <ConcertImage /> */}

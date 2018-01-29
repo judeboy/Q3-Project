@@ -15,7 +15,7 @@ const ConcertCollapsible = ({concert,offerRide}) => {
   return(
       <Link to='/offerRide'>
       <div>
-        <Collapsible accordion>
+        <Collapsible accordion id='concertCollapsible'>
         	<CollapsibleItem header={concert.Artists[0].Name} icon='filter_drama'>
         		<p>Venue: {concert.Venue.Name}</p>
                 <p>Date/Time: {concert.Date}</p>
@@ -24,9 +24,9 @@ const ConcertCollapsible = ({concert,offerRide}) => {
                 <p>State: {concert.Venue.State}</p>
                 <p>Buy Ticket: {concert.TicketUrl} </p>
                 <Link to ='/offerRide'>
-                    <Button waves='light' onClick={offerRide} id={concert.Id} >OfferRide</Button>
+                    <Button waves='light' class='offerRide' onClick={offerRide} id={concert.Id} >OfferRide</Button>
                 </Link>
-                <Button waves='light'>NeedRide</Button>
+                <Button waves='light' className='needRide'>NeedRide</Button>
         	</CollapsibleItem>
         </Collapsible>
       </div>

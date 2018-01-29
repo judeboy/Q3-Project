@@ -52,14 +52,14 @@
     margin-top: 20%;
 }
 
-/* .aboutUs{
-    margin-top: 15%;
+ .aboutUs{
+    margin-top: 10%;
     font-size: 20px;
-    margin-left: 10%;
-} */
-#aboutUs{
-
-    margin-bottom: 2%;
+    margin-left: 15%;
+    color: blue;
+}
+span#ContactUs{
+  margin-left: 30%;
 }
 .loginRow{
     margin-top: 20%;
@@ -76,7 +76,7 @@
      -o-background-size: cover;
      background-size: cover;
 } */
-.newUserButton{
+.newUserButton, .searchConcert{
     width: 50%;
     margin-left: 25%;
     margin-top: 5%;
@@ -119,11 +119,44 @@ ul.slides{
 .concertsList{
   position: relative;
 }
-/*button.btn{
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-}*/
+.inputSearchField{
+  margin-top: 10%;
+  margin-left: 15%;
+}
+input#input_1.radius, input#input_0.zipCode{
+  width: 80%;
+  font-size: 20px;
+}
+.searchConcert{
+  margin-bottom: 5%;
+}
+#concertCollapsible{
+  font-size: 20px;
+}
+.searchDiv{
+  padding: 10%;
+}
+.needRide{
+  margin-left: 20%;
+}
+#modalButton{
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 10%;
+}
+.offerRideRow{
+  width:80%;
+  margin-left: 10%;
+  margin-top: 10%;
+  font-size: 20px;
+}
+input.rideOfferPara{
+  font-size: 20px;
+}
+.buttonOfferRide{
+  margin-top: 10%;
+  margin-left: 30%;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

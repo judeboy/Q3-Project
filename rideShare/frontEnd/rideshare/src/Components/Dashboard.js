@@ -1,15 +1,18 @@
 import React from 'react'
 import ConcertCollapsible from './ConcertCollapsible'
 import {connect} from 'react-redux'
-import {Input, Button} from 'react-materialize'
+import {Input, Button, Row} from 'react-materialize'
 import {fetchConcert} from '../Actions'
 import { bindActionCreators } from 'redux'
 const Dashboard = ({concerts,concert,fetchConcert}) => {
   console.log(concerts)
   return(
-    <div className="collection">
-        <Input type ='Number' placeholder="zip-code e.g 80301" className="zipCode"></Input>
-        <Button waves='light' onClick={fetchConcert}>button</Button>
+    <div className='searchDiv'>
+      <Row class="inputSearchField">
+        <Input s={6} type ='Number' placeholder="zip-code eg 80301" className="zipCode"></Input>
+        <Input s={6} type ='Number' placeholder="radius in miles eg 20" className="radius"></Input>
+      </Row>
+        <Button waves='light' onClick={fetchConcert} className="searchConcert">Search</Button>
       {concerts.map(concert=> {
         return(
           <ConcertCollapsible key={concert.id} id={concert.id} concert={concert} />
