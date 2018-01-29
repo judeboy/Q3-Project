@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Landing from './Components/Landing'
 import Dashboard from './Components/Dashboard'
-import ConcertImage from './Components/ConcertImage'
 import Header from  './Components/Header'
-import SideNav from './Components/Sidenav'
-import Navbar from './Components/Navbar'
 import OfferRide from './Components/OfferRide'
 import {Button,Input} from 'react-materialize'
 import {connect} from 'react-redux'
