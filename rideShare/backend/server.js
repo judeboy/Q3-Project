@@ -2,7 +2,6 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const knex = require('./knex')
-const bcrypt = require('bcrypt')
 const port = process.env.PORT || 3000
 
 
@@ -128,6 +127,10 @@ app.delete('/rides/:id', (req, res, next) => {
     .catch(err => {
         res.status(404).send(err)
     })
+
+// Get all route
+app.get('/', (req, res, next) => {
+    res.send('working')
 })
 //get all for events database
 
