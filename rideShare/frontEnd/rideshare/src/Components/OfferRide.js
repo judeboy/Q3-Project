@@ -20,7 +20,7 @@ const OfferRide = ({...props,concerts,postOfferRide}) => {
             <p className='rideOfferPara'>City: {concert[0].Venue.City}</p>
             <p className='rideOfferPara'>State: {concert[0].Venue.State}</p>
         </Modal>
-        <form onSubmit={postOfferRide}>
+        <form onSubmit={postOfferRide} id={concert[0].Id}>
           <label htmlFor="Driver">Driver Name</label>
           <input id="driver" name="Username" type="text"/>
 

@@ -1,36 +1,62 @@
 
 $( document ).ready(function() {
-    var $xhr = $.getJSON('http://localhost:3000/users');
+    var $xhr = $.getJSON('http://localhost:5000/users');
     $xhr.done(function(data) {
         if ($xhr.status !== 200) {
             return;
         }
+        console.log(data)
 //login POST
 
 
 
 //login post request testing
 $('.username').on('click',function(){
-
-  console.log('hello');
-  $.ajax({
-url: '/signup',
-type: 'POST',
-data: {
-    username: 'lkjslkjklj',
-    email:'blah@aol.com',
-    phone_number:'333-333-3333',
-    password: 'ooiioo9'
-}
-
+    let obj = {
+    //username: 'Big Baller',
+    email:'weiner@aol.com',
+    //phone_number:'555-333-3333',
+    password: 'yoBro'
+    }
+    console.log(obj);
+    //Ajax Delete
+    $.ajax({
+        url: `/login`,
+        type: 'POST',
+        data: obj,
+        success: function (data) {
+        window.location.href = '/success.html'
+        console.log("success")
+        }
+    })
 })
-  .done(() => {
-      console.log(data);
+$('#poster').on('click',function(){
+    let obj = {
+        username:'judah',
+        address:'colorado',
+        city:'dwood',
+        state:'Co',
+        departing_time:'12 oclock',
+        number_seats:3,
+        comments:'this is going to be awesom',
+        phone_number:'123-456-789',
+        email:'judah@judah.com'
+    }
+    console.log(obj);
+    //Ajax Delete
+    $.ajax({
+        url: `/rides`,
+        type: 'POST',
+        data: obj,
+        success: function (data) {
+        window.location.href = '/success.html'
+        console.log("success")
+        }
     })
 })
 
 
-
+            
 
 
         for(let i in data){
