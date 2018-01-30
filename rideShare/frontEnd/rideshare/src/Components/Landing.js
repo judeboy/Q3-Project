@@ -11,7 +11,7 @@ const Landing = () => {
                     The hitchhiker's guide to a ride. <br></br>
                     Search for a concert in any location.<br></br>
                     Be a hero & OFFER a ride.<br></br>
-                    Need a miracle, REQUEST a ride<br></br>
+                    Need a miracle? REQUEST a ride.<br></br>
                     Never miss a show.
                 </p>
       		</div>

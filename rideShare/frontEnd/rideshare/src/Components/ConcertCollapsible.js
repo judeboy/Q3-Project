@@ -30,38 +30,23 @@ const ConcertCollapsible = ({concert,offerRide,props}) => {
                     Offer a Ride
                   </Button>
                 </Link>
-<<<<<<< HEAD
-<<<<<<< HEAD
                 <br></br>
                 <br></br>
-                <Button className='needRideButton'>Request a Ride</Button>
-=======
-=======
 
-                <br></br>
-                <br></br>
-                <Button className='needRideButton'>Request a Ride</Button>
->>>>>>> 6155cd262bc10cd48285cb86c479805b436267c6
-                {/* <Link to='/rides' onClick={offerRide} id={concert.id}>OfferRide</Link> */}
                 <Link to ={{
                   pathname: '/needRideForm',
-                  search: `?id=${concert.Id}` 
+                  search: `?id=${concert.Id}`
                 }} >
-                <Button waves='light' className='needRide'>NeedRide</Button>
+                <Button className='needRideButton'>Request a Ride</Button>
               </Link>
-<<<<<<< HEAD
->>>>>>> 41ac2480f02a1ce565a85897e557a3ae5602f6b4
-=======
-
->>>>>>> 6155cd262bc10cd48285cb86c479805b436267c6
         	</CollapsibleItem>
         </Collapsible>
       </div>
   )
 }
-// function mapStateToProps(state) {
-//   return {messages: state.messageReducer.messages}
-// }
+function mapStateToProps(state) {
+  return {messages: state.messageReducer.messages}
+}
 const mapDispatchToProps = dispatch => bindActionCreators({
   offerRide: offerRide,
 }, dispatch)
