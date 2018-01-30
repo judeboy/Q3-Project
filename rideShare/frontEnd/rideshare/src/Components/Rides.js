@@ -4,8 +4,6 @@ const RidesPage = () => {
 
 return (
 
-//concert info
-//rides
 <div>
 <Modal
 	header='Modal Header'
@@ -37,13 +35,4 @@ return (
 </div>
 </div>
 
-
-
-
-)
-
-
-
-
-
-}
+)}

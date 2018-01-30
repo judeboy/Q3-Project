@@ -24,31 +24,31 @@ const OfferRide = ({...props,concerts,postOfferRide}) => {
           <label htmlFor="Driver">Driver Name</label>
           <input id="driver" name="Username" type="text"/>
 
-          <label htmlFor="email">Email</label>
-          <input id="email" name="Email" type="email" placeholder='Email'/>
+          <label className='offerRideLabels' htmlFor="email">Email</label>
+          <input id="email" name="Email" type="email"/>
 
-          <label htmlFor="Phone">Phone</label>
+          <label className='offerRideLabels' htmlFor="Phone">Phone</label>
           <input id="Phone" name="Phone" type="number" />
 
-          <label htmlFor="seatsAvailable">Seats Available</label>
+          <label className='offerRideLabels' htmlFor="seatsAvailable">Seats Available</label>
           <input id="Seats" name="Seats" type="number" />
 
-          <label htmlFor="Address">Address</label>
+          {/* <label htmlFor="Address">Address</label>
           <input id="Address" name="Address" type="text" />
 
           <label htmlFor="City">City</label>
           <input id="City" name="City" type="text" />
 
           <label htmlFor="State">State</label>
-          <input id="State" name="State" type="text" />
+          <input id="State" name="State" type="text" /> */}
 
-          <label htmlFor="Departing Time">Departing Time</label>
+          <label className='offerRideLabels' htmlFor="Departing Time">Departing Time</label>
           <input id="Departing" name="Departing" type="text" />
 
           <label htmlFor="Comments">Comments</label>
           <input id="Comments" name="Comments" type="text" />
 
-          <Button waves="light">OfferRide</Button>
+          <Button className='offerRideLabels' className="offerRideButton">OfferRide</Button>
         </form>
     </div>
   )
