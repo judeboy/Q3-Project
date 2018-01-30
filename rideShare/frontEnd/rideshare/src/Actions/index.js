@@ -5,12 +5,10 @@ export function fetchConcert() {
  if(radius === "") {
    radius = '20'
  }
- console.log(zipCode)
  return async (dispatch) => {
    const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=22c7usm63w7kpdw2q3e62aed`)
    // console.log(response)
    const json = await response.json()
-   console.log(json.Events)
    dispatch({
      type: CONCERTS_RECEIVED,
      concerts: json.Events
@@ -53,11 +51,82 @@ export function postOfferRide(e) {
     departingTime: departingTime,
     comments: comments
   }
-  console.log(data)
   return async (dispatch) => {
     dispatch({
       type: OFFER_RIDE,
       name: data
     })
   }
+}
+
+export const POST_SIGN_UP = 'POST_SIGN_UP'
+export function signUpPost(e) {
+  e.preventDefault()
+  let name = e.target.userName.value
+  let email = e.target.email.value
+  let password = e.target.password.value
+  let confirmPassword = e.target.confirmPassword.value
+  let phoneNumber = e.target.phoneNumber.value
+  let data = {
+    first: name,
+    email: email,
+    phone_number: phoneNumber,
+    password: password,
+  }
+  console.log(data)
+  return async (dispatch) => {
+    console.log(name)
+    const response = await fetch('http://localhost:5000/signup', {
+      method: 'POST',
+      body: JSON.stringify({first: name, email: email, phone_number: phoneNumber, password: password}),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      }
+    })
+    console.log(response)
+    const newUser = await response.json()
+    console.log(newUser)
+    dispatch({
+      type: POST_SIGN_UP,
+      newUser: newUser
+    })
+  }
+}
+export const POST_SIGN_IN = 'POST_SIGN_IN'
+export function postSignIn(e) {
+  e.preventDefault()
+  console.log('in post signin')
+  let email = e.target.email.value
+  let password = e.target.password.value
+  console.log(email, password)
+  return async (dispatch) => {
+    const response = await fetch('http://localhost:5000/login', {
+      method: 'POST',
+      body: JSON.stringify({email: email,password: password}),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      }
+    })
+    const user = await response.json()
+    dispatch({
+      type: POST_SIGN_IN,
+      response: response.status
+    })
+  }
+}
+
+export const GET_USERS = 'GET_USERS'
+export function fetchUser() {
+  console.log('here')
+ return async (dispatch) => {
+   const response = await fetch('http://localhost:5000/users')
+   // console.log(response)
+   const json = await response.json()
+   dispatch({
+     type: GET_USERS,
+     users: json
+   })
+ }
 }
