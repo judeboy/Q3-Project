@@ -1,22 +1,23 @@
 import React from "react";
 import {Input, Icon, Row, Button, } from 'react-materialize';
 import {Link } from 'react-router-dom'
-const SignIn = (props) => {
-  console.log(props);
-
+import {connect} from 'react-redux'
+import {fetchUser,postSignIn} from '../Actions'
+import { bindActionCreators } from 'redux'
+const SignIn = ({fetchUser,postSignIn}) => {
     return(
         <div className='backgroundImgForLandingPage'>
             <img className='carImg' src="/Images/CarImg.jpeg"/>
-            <Row className='loginRow'>
-              <Input className='email' type="email" s={10} placeholder="Email" validate><Icon>mail</Icon></Input>
-              <Input className='password' type='password' s={10} placeholder="Password" validate><Icon>lock</Icon></Input>
-            </Row>
-
-            <Link to='/dashboard'>
+            <form onSubmit={postSignIn}>
+              <Input className='email' type="email" s={10} placeholder="Email" name="email" validate><Icon>mail</Icon></Input>
+              <Input className='password' type='password' s={10} placeholder="Password" name="password" validate><Icon>lock</Icon></Input>
               <Button className='signInButton' waves='light'>
                 Sign In
               </Button>
-            </Link>
+            </form>
+            {/* <Link to='/dashboard'> */}
+            {/* </Link> */}
+
 
             <br />
             <Link to= '/signup'>
@@ -26,10 +27,20 @@ const SignIn = (props) => {
               <Link to ='/about'>
                 <span id="aboutUs">About Us</span>
               </Link>
-                <span id="ContactUs">Contact Us</span>
+                <span onClick={fetchUser} id="ContactUs">Contact Us</span>
             </p>
         </div>
     )
 }
+function mapStateToProps(state) {
+  return {
+    concerts: state.concertReducer.concerts,
+    concert: state.concertReducer.concert
+  }
+}
+const mapDispatchToProps = dispatch => bindActionCreators({
+  fetchUser,
+  postSignIn
+}, dispatch)
 
-export default SignIn;
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
