@@ -30,9 +30,18 @@ const ConcertCollapsible = ({concert,offerRide,props}) => {
                     Offer a Ride
                   </Button>
                 </Link>
+
                 <br></br>
                 <br></br>
                 <Button className='needRideButton'>Request a Ride</Button>
+                {/* <Link to='/rides' onClick={offerRide} id={concert.id}>OfferRide</Link> */}
+                <Link to ={{
+                  pathname: '/needRideForm',
+                  search: `?id=${concert.Id}` 
+                }} >
+                <Button waves='light' className='needRide'>NeedRide</Button>
+              </Link>
+
         	</CollapsibleItem>
         </Collapsible>
       </div>
