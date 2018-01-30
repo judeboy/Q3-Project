@@ -51,7 +51,7 @@ app.post('/signup', function(req, res, next){
         salt:salt
     }, '*')
     .then(user=> {
-      res.status(204).send({id:user[0].id})
+      res.status(200).send({id:user[0].id})
     })
     .catch(err => {
         res.status(404).send(err)
