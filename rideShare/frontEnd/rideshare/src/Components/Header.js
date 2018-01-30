@@ -3,10 +3,8 @@ import {Navbar, NavItem, Row, Input} from 'react-materialize'
 // import SideNav from './Navbar'
 const Header = () => {
   return(
-      <div>
       <div className = "header">
-        <span id="title">Ride Share</span>
-      </div>
+        <span id="title">hoist</span>
       </div>
   )
 }

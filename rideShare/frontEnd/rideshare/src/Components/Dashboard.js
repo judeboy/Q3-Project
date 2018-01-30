@@ -7,12 +7,12 @@ import { bindActionCreators } from 'redux'
 const Dashboard = ({concerts,concert,fetchConcert}) => {
   console.log('concerts: ', concerts)
   return(
-    <div className='searchDiv'>
+    <div className='dashboardDiv'>
       <Row className="inputSearchField">
-        <Input s={12} type ='Number' placeholder="zip-code eg 80301" className="zipCode"></Input>
-        <Input s={12} type ='Number' placeholder="radius in miles eg 20" className="radius"></Input>
+        <Input s={12} type ='Number' placeholder="ZipCode" className="zipCode"></Input>
+        <Input s={12} type ='Number' placeholder="Radius in Miles" className="radius"></Input>
       </Row>
-        <Button waves='light' onClick={fetchConcert} className="searchConcert">Search</Button>
+        <Button onClick={fetchConcert} className="searchConcertButton">Search for Shows</Button>
       {concerts.map(concert=> {
         return(
           <ConcertCollapsible key={concert.id} id={concert.id} concert={concert} />

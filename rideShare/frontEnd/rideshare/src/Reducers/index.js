@@ -7,6 +7,8 @@ const initialState = {
   offerRide: [],
   needRide: [],
   user: {},
+  isSignUp: false,
+  isSignIn: false,
 }
 const concertReducer = (state=initialState,action) => {
   switch (action.type) {
@@ -25,6 +27,11 @@ const concertReducer = (state=initialState,action) => {
           }
         })
       }
+      case 'POST_SIGN_IN':
+        return{
+          ...state,
+          isSignIn: action.isSignIn
+        }
     case 'POST_OFFER_RIDE':
       return{
         state
@@ -32,7 +39,8 @@ const concertReducer = (state=initialState,action) => {
     case 'POST_SIGN_UP':
       return{
         ...state,
-        user: action.newUser
+        user: action.newUser,
+        isSignUp: action.isSignUp
       }
     case 'GET_USERS':
     console.log(action.users)

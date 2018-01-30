@@ -6,15 +6,11 @@ const port = process.env.PORT || 5000
 const cors = require('cors')
 const bcrypt = require('bcrypt')
 
-app.use(express.static('public'))
+app.use(express.static('./frontEnd/rideshare/public'))//may need to change to ./frontEnd
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use(cors())
-// Get all route
-// app.get('/', (req, res, next) => {
-//     res.send('working')
-// })
 
 // Get All
 app.get('/users', (req, res, next) => {
@@ -48,60 +44,31 @@ app.post('/signup', function(req, res, next){
     var hash = bcrypt.hashSync(req.body.password, salt);
     // console.log(req.body);
     knex('users').insert({
-        username:req.body.first,
+        username:req.body.username,
         email:req.body.email,
         phone_number:req.body.phone_number,
         password:hash,
         salt:salt
     }, '*')
     .then(user=> {
-      let newUser = {
-        id: user[0].id,
-        username: user[0].username,
-        email: user[0].email,
-        phone_number: user[0].phone_number,
-        password: user[0].password,
-      }
-        res.status(200).send(newUser)
+      res.status(200).send({id:user[0].id})
     })
     .catch(err => {
-      next(err)
+        res.status(404).send(err)
     })
 })
 
-
-
 // Log In Route
 app.post('/login', function (req, res) {
-    // knex('users').where({
-    // email: req.body.email
-    // })
-    // .first()
-    // .then(user => {
-    //     bcrypt.compare(req.body.password, user.password, function(err, ver) {
-    //         ver ? res.status(200).send({id:user.id}): res.sendStatus(401)
-    //     })
-    // })
-  let data = req.body
-   return knex('users')
-   .where('email', data.email)
-   .first()
-   .then(function(user) {
-    if(!user) {
-      res.status(401).send("Email doesnt exist")
-    }
-    if(bcrypt.compareSync(data.password, user.password)) {
-      // var token = jwt.sign({ id: user.id }, 'A4e2n84E0OpF3wW21')
-      // res.status(200).send({message: "logged in", token: token})
-      res.status(200).send({message: "logged in"})
-    }
-    else{
-      res.status(404).send("password doesn't match")
-    }
-  })
-  .catch(function(err){
-    return err
-  })
+    knex('users').where({
+    email: req.body.email
+    })
+    .first()
+    .then(user => {
+        bcrypt.compare(req.body.password, user.password, function(err, ver) {
+            ver ? res.status(200).send({id:user.id}): res.sendStatus(401)
+        })
+    })
 })
 
 // Rides Get All
@@ -123,6 +90,30 @@ app.get('/rides/:id', (req, res, next) => {
     .where('id',id)
     .select('id','*')
     .then(data=>{
+        res.send(data[0])
+    })
+    .catch(err => {
+        res.status(404).send(err)
+    })
+})
+
+//Rides Post
+app.post('/rides',(req,res,next) => {
+    knex('rides')
+    .insert({
+        username:req.body.username,
+        address:req.body.username,
+        city:req.body.city,
+        state:req.body.state,
+        departing_time:req.body.departing_time,
+        number_seats:req.body.number_seats,
+        comments:req.body.comments,
+        phone_number:req.body.number,
+        email:req.body.email
+    })
+    console.log('req.body ', req.body)
+    .then(data => {
+        console.log('data in then function: ', data)
         res.send(data[0])
     })
     .catch(err => {
@@ -163,12 +154,7 @@ app.delete('/rides/:id', (req, res, next) => {
     })
   })
 
-// Get all route
-app.get('/', (req, res, next) => {
-    res.send('working')
-})
-//get all for events database
-
+//Get All for Events 
 app.get('/events',(req,res,next)=>{
   knex('events')
     .select('*')
@@ -179,7 +165,7 @@ app.get('/events',(req,res,next)=>{
       res.status(404).send(err)
     })
 })
-
+// Get on for Events
 app.get('/events/:id',(req,res,next)=>{
   let id = req.params.id
   knex('events')
@@ -192,8 +178,6 @@ app.get('/events/:id',(req,res,next)=>{
     res.status(404).send(err)
   })
 })
-
-
 
 //Error
 app.use((err, req, res, next) => {
