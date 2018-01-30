@@ -74,7 +74,6 @@ export function postOfferRide(e) {
     comments: comments
   }
   return async (dispatch) => {
-    console.log(name)
     const response = await fetch('http://localhost:5000/rides', {
       method: 'POST',
       body: JSON.stringify({data}),
