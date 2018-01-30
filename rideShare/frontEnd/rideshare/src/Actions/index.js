@@ -33,15 +33,15 @@ export function offerRide(e) {
 export const POST_OFFER_RIDE = 'POST_OFFER_RIDE'
 export function postOfferRide(e) {
   e.preventDefault()
-  let driverName = e.target[0].value
-  let email = e.target[1].value
-  let phone = e.target[2].value
-  let availableSeats = e.target[3].value
-  let address = e.target[4].value
-  let city = e.target[5].value
-  let state = e.target[6].value
-  let departingTime = e.target[7].value
-  let comments = e.target[8].value
+  let driverName = e.target.Username.value
+  let email = e.target.Email.value
+  let phone = e.target.Phone.value
+  let availableSeats = e.target.Seats.value
+  let address = e.target.Address.value
+  let city = e.target.City.value
+  let state = e.target.State.value
+  let departingTime = e.target.Departing.value
+  let comments = e.target.Comments.value
   let data = {
     driverName: driverName,
     email: email,

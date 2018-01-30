@@ -22,10 +22,10 @@ const OfferRide = ({...props,concerts,postOfferRide}) => {
         </Modal>
         <form onSubmit={postOfferRide}>
           <label htmlFor="Driver">Driver Name</label>
-          <input id="driver" name="username" type="text"/>
+          <input id="driver" name="Username" type="text"/>
 
           <label htmlFor="email">Email</label>
-          <input id="email" name="email" type="email" placeholder='Email'/>
+          <input id="email" name="Email" type="email" placeholder='Email'/>
 
           <label htmlFor="Phone">Phone</label>
           <input id="Phone" name="Phone" type="number" />
@@ -48,7 +48,7 @@ const OfferRide = ({...props,concerts,postOfferRide}) => {
           <label htmlFor="Comments">Comments</label>
           <input id="Comments" name="Comments" type="text" />
 
-          <button>OfferRide</button>
+          <Button waves="light">OfferRide</Button>
         </form>
     </div>
   )
