@@ -1,7 +1,9 @@
 import React from 'react'
-import {Modal, Button, Input, Row} from 'react-materialize'
+import {Modal, Button, Input, Row, Form} from 'react-materialize'
 import {connect} from 'react-redux'
-const OfferRide = ({...props,concerts}) => {
+import {postOfferRide} from '../Actions'
+import { bindActionCreators } from 'redux'
+const OfferRide = ({...props,concerts,postOfferRide}) => {
   let a = props.location.search.slice(4)
   console.log(a)
   let concert = concerts.filter(ele => {
@@ -18,20 +20,44 @@ const OfferRide = ({...props,concerts}) => {
             <p className='rideOfferPara'>City: {concert[0].Venue.City}</p>
             <p className='rideOfferPara'>State: {concert[0].Venue.State}</p>
         </Modal>
-        <Row class='offerRideRow'>
-          <Input className='rideOfferPara' s={10} defaultValue="Username" disabled />
-          <Input className='rideOfferPara' s={10} defaultValue="999-999-9999" disabled />
-          <Input className='rideOfferPara' type='number' placeholder="Seats Available" s={10}/>
-          <Input className='rideOfferPara' s={10} type='text' placeholder='City' />
-          <Input className='rideOfferPara' s={10} type='text' placeholder='State' />
-          <Input className='rideOfferPara' s={10} type='text' placeholder='Comments' />
-          <Button waves='light' className='buttonOfferRide'>Offer Ride!</Button>
-        </Row>
+        <form onSubmit={postOfferRide}>
+          <label htmlFor="Driver">Driver Name</label>
+          <input id="driver" name="Username" type="text"/>
+
+          <label htmlFor="email">Email</label>
+          <input id="email" name="Email" type="email" placeholder='Email'/>
+
+          <label htmlFor="Phone">Phone</label>
+          <input id="Phone" name="Phone" type="number" />
+
+          <label htmlFor="seatsAvailable">Seats Available</label>
+          <input id="Seats" name="Seats" type="number" />
+
+          <label htmlFor="Address">Address</label>
+          <input id="Address" name="Address" type="text" />
+
+          <label htmlFor="City">City</label>
+          <input id="City" name="City" type="text" />
+
+          <label htmlFor="State">State</label>
+          <input id="State" name="State" type="text" />
+
+          <label htmlFor="Departing Time">Departing Time</label>
+          <input id="Departing" name="Departing" type="text" />
+
+          <label htmlFor="Comments">Comments</label>
+          <input id="Comments" name="Comments" type="text" />
+
+          <Button waves="light">OfferRide</Button>
+        </form>
     </div>
   )
 }
 function mapStateToProps(state) {
   return {concerts: state.concertReducer.concerts}
 }
-export default connect(mapStateToProps)(OfferRide)
+const mapDispatchToProps = dispatch => bindActionCreators({
+  postOfferRide
+}, dispatch)
+export default connect(mapStateToProps, mapDispatchToProps)(OfferRide)
 // export default OfferRide
