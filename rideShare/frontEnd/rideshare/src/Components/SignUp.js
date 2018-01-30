@@ -8,8 +8,11 @@ import { Redirect } from 'react-router'
 const SignUp = ({signUpPost,isSignUp}) => {
     return(
         <div className='backgroundImgForLandingPage'>
+<<<<<<< HEAD
             <img className='carImg' src="/Images/CarImg.jpeg" alt="CarImage"/>
             {isSignUp ? <Redirect to='/dashboard' /> :
+=======
+>>>>>>> d916b9230ad2567b6bd53a97dc4a9f9ed7c2b6b7
             <form onSubmit={signUpPost}>
               <Input className='userName' type="text" name="userName" s={10} placeholder="Username"><Icon>account_circle</Icon></Input>
               <Input className='email' type="email" name="email" s={10} placeholder="Email" validate><Icon>mail</Icon></Input>

@@ -17,7 +17,7 @@ const SignIn = ({postSignIn,isSignIn}) => {
                 Sign In
               </Button>
             </form>
-          }
+            }
             <br />
             <Link to= '/signup'>
               <Button className='newUserButton' waves='light'>New User</Button>
@@ -26,7 +26,6 @@ const SignIn = ({postSignIn,isSignIn}) => {
               <Link to ='/about'>
                 <span id="aboutUs">About Us</span>
               </Link>
-                <span id="ContactUs">Contact Us</span>
             </p>
         </div>
     )
