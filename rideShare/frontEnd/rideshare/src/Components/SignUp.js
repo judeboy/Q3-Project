@@ -16,9 +16,9 @@ const SignUp = ({signUpPost}) => {
               <Input className='password' type='password' name="password" s={10} placeholder="Password" validate><Icon>lock</Icon></Input>
               <Input className='confirmPassword' type='password' name="confirmPassword" s={10} placeholder="Password" validate><Icon>lock</Icon></Input>
               <Input className='phoneNumber' type='Number' name="phoneNumber" s={10} placeholder="Phone Number" validate><Icon>phone</Icon></Input>
-              <Link to= '/dashboard'>
+              {/* <Link to= '/dashboard'> */}
                 <Button className='signUpButton' waves='light'>Sign Up</Button><br></br>
-              </Link>
+              {/* </Link> */}
             </form>
         </div>
     )
