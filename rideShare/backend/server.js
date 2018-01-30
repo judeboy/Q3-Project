@@ -6,7 +6,7 @@ const port = process.env.PORT || 5000
 const cors = require('cors')
 const bcrypt = require('bcrypt')
 
-app.use(express.static('public'))
+app.use(express.static('./frontEnd/rideshare/public'))//may need to change to ./frontEnd
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
