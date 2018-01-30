@@ -3,20 +3,28 @@ import {Navbar,Icon, Row, Input, Button, Parallax,SideNav,SideNavItem} from 'rea
 const Landing = () => {
   return (
     <div class="body">
-      <Row style={{display:'none'}}>
-        <Input s={6} label="First Name" validate><Icon>account_circle</Icon></Input>
-        <Input s={6} label="Telephone" validate type='tel'><Icon>phone</Icon></Input>
-      </Row>
-      	<Parallax imageSrc="/Images/Image1.jpeg" className="firstImage"/>
-      	<div className="section white">
+      	<Parallax imageSrc="/Images/road.jpg" />
+      	<div className="parallaxTextBox">
       		<div className="row container">
-      			<p className="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
+      			<p className="parallaxText">
+                    Welcome to hoist!<br></br>
+                    The hitchhiker's guide to a ride. <br></br>
+                    Search for a concert in any location.<br></br>
+                    Be a hero & OFFER a ride.<br></br>
+                    Need a miracle, REQUEST a ride<br></br>
+                    Never miss a show.
+                </p>
       		</div>
       	</div>
-      	<Parallax imageSrc="http://materializecss.com/images/parallax2.jpg"/>
-        <div className="section white">
+      	<Parallax imageSrc="/Images/car.jpg"/>
+        <div className="parallaxTextBox">
       		<div className="row container">
-      			<p className="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
+      			<p className="parallaxText">
+                    "The tires are the things on your car<br></br>
+                    That make contact with the road<br></br>
+                    The car is the thing on the road<br></br>
+                    That takes you back to your abode"<br></br>
+                </p>
       		</div>
       	</div>
       </div>
