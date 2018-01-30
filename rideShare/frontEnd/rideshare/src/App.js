@@ -9,7 +9,6 @@ import {Button,Input} from 'react-materialize'
 import {connect} from 'react-redux'
 import SignUp from './Components/SignUp'
 import {fetchConcert} from './Actions'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {
   Route,
 } from 'react-router'
