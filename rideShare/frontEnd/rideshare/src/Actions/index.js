@@ -1,3 +1,6 @@
+// import React from 'react'
+// import {browserHistory,Redirect} from 'react-router'
+import store from '../store'
 export const CONCERTS_RECEIVED = 'CONCERTS_RECEIVED'
 export function fetchConcert() {
  let zipCode = document.getElementsByClassName('zipCode')[0].value
@@ -31,30 +34,60 @@ export function offerRide(e) {
 export const POST_OFFER_RIDE = 'POST_OFFER_RIDE'
 export function postOfferRide(e) {
   e.preventDefault()
+  console.log(e.target.id)
+  let a = store.getState().concertReducer.concerts
+  let concert = a.filter(ele=> {
+    if(ele.Id== e.target.id){
+      return ele
+    }
+  })
+  console.log(concert)
+  //concert info
+  let date_time = concert[0].Date
+  let venue_name = concert[0].Venue.Name
+  let venue_address = concert[0].Venue.Address
+  let artists = concert[0].Artists[0].Name
+  console.log(date_time,venue_name,venue_address,artists)
+  //person info
   let driverName = e.target.Username.value
   let email = e.target.Email.value
   let phone = e.target.Phone.value
   let availableSeats = e.target.Seats.value
-  let address = e.target.Address.value
+  let person_address = e.target.Address.value
   let city = e.target.City.value
   let state = e.target.State.value
   let departingTime = e.target.Departing.value
   let comments = e.target.Comments.value
   let data = {
+    date_time: date_time,
+    venue_name:venue_name,
+    venue_address:venue_address,
+    artists: artists,
     driverName: driverName,
     email: email,
     phone: phone,
     availableSeats: availableSeats,
-    address: address,
+    person_address: person_address,
     city: city,
     state: state,
     departingTime: departingTime,
     comments: comments
   }
   return async (dispatch) => {
+    console.log(name)
+    const response = await fetch('http://localhost:5000/rides', {
+      method: 'POST',
+      body: JSON.stringify({data}),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      }
+    })
+    console.log(response)
+    const offerRide = await response.json()
     dispatch({
-      type: OFFER_RIDE,
-      name: data
+      type: POST_SIGN_UP,
+      offerRide: offerRide,
     })
   }
 }
@@ -67,18 +100,14 @@ export function signUpPost(e) {
   let password = e.target.password.value
   let confirmPassword = e.target.confirmPassword.value
   let phoneNumber = e.target.phoneNumber.value
-  let data = {
-    first: name,
-    email: email,
-    phone_number: phoneNumber,
-    password: password,
+  if(password !== confirmPassword){
+    return alert('password does not match')
   }
-  console.log(data)
   return async (dispatch) => {
     console.log(name)
     const response = await fetch('http://localhost:5000/signup', {
       method: 'POST',
-      body: JSON.stringify({first: name, email: email, phone_number: phoneNumber, password: password}),
+      body: JSON.stringify({username: name, email: email, phone_number: phoneNumber, password: password}),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -86,10 +115,10 @@ export function signUpPost(e) {
     })
     console.log(response)
     const newUser = await response.json()
-    console.log(newUser)
     dispatch({
       type: POST_SIGN_UP,
-      newUser: newUser
+      newUser: newUser,
+      isSignUp: true
     })
   }
 }
@@ -110,23 +139,12 @@ export function postSignIn(e) {
       }
     })
     const user = await response.json()
+    console.log(response)
+    console.log(user)
     dispatch({
       type: POST_SIGN_IN,
-      response: response.status
+      response: response.status,
+      isSignIn: true,
     })
   }
-}
-
-export const GET_USERS = 'GET_USERS'
-export function fetchUser() {
-  console.log('here')
- return async (dispatch) => {
-   const response = await fetch('http://localhost:5000/users')
-   // console.log(response)
-   const json = await response.json()
-   dispatch({
-     type: GET_USERS,
-     users: json
-   })
- }
 }
