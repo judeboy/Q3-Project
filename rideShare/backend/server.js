@@ -1,4 +1,4 @@
-const express = require('express')
+const express =require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const knex = require('./knex')
@@ -46,17 +46,21 @@ app.get('/users/:id', (req, res, next) => {
 app.post('/signup', function(req, res, next){
     var salt = bcrypt.genSaltSync(4)
     var hash = bcrypt.hashSync(req.body.password, salt);
+    // console.log(req.body);
     knex('users').insert({
-        username:req.body.first,
+        username:req.body.username,
         email:req.body.email,
         phone_number:req.body.phone_number,
         password:hash,
         salt:salt
     },'*')
     .then(user=>{
+      console.log('user',user);
         res.status(204).send({id:user[0].id})
     })
 })
+
+
 
 // Log In Route
 app.post('/login', function (req, res) {

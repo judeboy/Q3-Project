@@ -1,10 +1,37 @@
 
 $( document ).ready(function() {
-    var $xhr = $.getJSON('http://localhost:3000/rides');
+    var $xhr = $.getJSON('http://localhost:3000/users');
     $xhr.done(function(data) {
         if ($xhr.status !== 200) {
             return;
         }
+//login POST
+
+
+
+//login post request testing
+$('.username').on('click',function(){
+
+  console.log('hello');
+  $.ajax({
+url: '/signup',
+type: 'POST',
+data: {
+    username: 'lkjslkjklj',
+    email:'blah@aol.com',
+    phone_number:'333-333-3333',
+    password: 'ooiioo9'
+}
+
+})
+  .done(() => {
+      console.log(data);
+    })
+})
+
+
+
+
 
         for(let i in data){
              numSeats = data[i].number_seats
