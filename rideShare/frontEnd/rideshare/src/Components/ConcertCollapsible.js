@@ -6,6 +6,7 @@ import {
   Link,
 } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
+
 const ConcertCollapsible = ({concert,offerRide,props}) => {
     console.log(concert.Artists[0].Name)
     let a = concert.TicketUrl.toString()
@@ -25,10 +26,14 @@ const ConcertCollapsible = ({concert,offerRide,props}) => {
                   pathname: '/rides',
                   search: `?id=${concert.Id}`
                 }}>
-                  <Button className='offerRide' waves='light'>
-                    OfferRide
+                  <Button className='offerRideButton' >
+                    Offer a Ride
                   </Button>
                 </Link>
+
+                <br></br>
+                <br></br>
+                <Button className='needRideButton'>Request a Ride</Button>
                 {/* <Link to='/rides' onClick={offerRide} id={concert.id}>OfferRide</Link> */}
                 <Link to ={{
                   pathname: '/needRideForm',
@@ -36,6 +41,7 @@ const ConcertCollapsible = ({concert,offerRide,props}) => {
                 }} >
                 <Button waves='light' className='needRide'>NeedRide</Button>
               </Link>
+
         	</CollapsibleItem>
         </Collapsible>
       </div>

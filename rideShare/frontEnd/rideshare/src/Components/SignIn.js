@@ -6,29 +6,24 @@ import {fetchUser,postSignIn} from '../Actions'
 import { bindActionCreators } from 'redux'
 const SignIn = ({fetchUser,postSignIn}) => {
     return(
-        <div className='backgroundImgForLandingPage'>
-            <img className='carImg' src="/Images/CarImg.jpeg"/>
-            <form onSubmit={postSignIn}>
+        <div id='signInMainDiv'>
+            <form className='signInForm' onSubmit={postSignIn}>
               <Input className='email' type="email" s={10} placeholder="Email" name="email" validate><Icon>mail</Icon></Input>
               <Input className='password' type='password' s={10} placeholder="Password" name="password" validate><Icon>lock</Icon></Input>
-              <Button className='signInButton' waves='light'>
+              <Link to= '/dashboard'>
+              <Button className='signInButton' waves=''>
                 Sign In
               </Button>
-            </form>
-            {/* <Link to='/dashboard'> */}
-            {/* </Link> */}
-
-
-            <br />
-            <Link to= '/signup'>
-              <Button className='newUserButton' waves='light'>New User</Button>
-            </Link>
-            <p className='aboutUs'>
-              <Link to ='/about'>
-                <span id="aboutUs">About Us</span>
               </Link>
-                <span onClick={fetchUser} id="ContactUs">Contact Us</span>
-            </p>
+            </form>
+        <br />
+        <Link to= '/signup'>
+          <Button className='newUserButton' waves=''>New User</Button>
+        </Link>
+         <br/>
+         <br/>
+          <Link className="aboutUsLink" to ='/about'>About Us
+          </Link>
         </div>
     )
 }
