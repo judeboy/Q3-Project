@@ -127,6 +127,7 @@ app.delete('/rides/:id', (req, res, next) => {
     .catch(err => {
         res.status(404).send(err)
     })
+  })
 
 // Get all route
 app.get('/', (req, res, next) => {

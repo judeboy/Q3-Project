@@ -30,6 +30,10 @@ const concertReducer = (state=initialState,action) => {
           }
         })
       }
+    case 'POST_OFFER_RIDE':
+    return{
+      state
+    }
     default:
       return state
   }

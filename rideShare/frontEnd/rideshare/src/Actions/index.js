@@ -29,3 +29,35 @@ export function offerRide(e) {
     })
   }
 }
+
+export const POST_OFFER_RIDE = 'POST_OFFER_RIDE'
+export function postOfferRide(e) {
+  e.preventDefault()
+  let driverName = e.target[0].value
+  let email = e.target[1].value
+  let phone = e.target[2].value
+  let availableSeats = e.target[3].value
+  let address = e.target[4].value
+  let city = e.target[5].value
+  let state = e.target[6].value
+  let departingTime = e.target[7].value
+  let comments = e.target[8].value
+  let data = {
+    driverName: driverName,
+    email: email,
+    phone: phone,
+    availableSeats: availableSeats,
+    address: address,
+    city: city,
+    state: state,
+    departingTime: departingTime,
+    comments: comments
+  }
+  console.log(data)
+  return async (dispatch) => {
+    dispatch({
+      type: OFFER_RIDE,
+      name: data
+    })
+  }
+}
