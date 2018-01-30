@@ -1,20 +1,32 @@
 import React from "react";
 import {Input, Icon, Row, Button} from 'react-materialize';
-
-const SignUp = () => {
+import {signUpPost}  from '../Actions'
+import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux'
+import {Link } from 'react-router-dom'
+import { Redirect } from 'react-router'
+const SignUp = ({signUpPost}) => {
     return(
         <div className='backgroundImgForLandingPage'>
-            <img className='carImg' src="/Images/CarImg.jpeg"/>
+            <img className='carImg' src="/Images/CarImg.jpeg" alt="CarImage"/>
 
-            <Row className='loginRow'>
-                <Input className='userName' type="text" s={10} placeholder="Username" validate><Icon>account_circle</Icon></Input>
-                <Input className='email' type="email" s={10} placeholder="Email" validate><Icon>mail</Icon></Input>
-                <Input className='password' type='password' s={10} placeholder="Password" validate><Icon>lock</Icon></Input>
-                <Input className='confirmPassword' type='password' s={10} placeholder="Password" validate><Icon>lock</Icon></Input>
-            </Row>
-            <Button className='signUpButton' waves='light'>Sign Up</Button><br></br>
+            <form onSubmit={signUpPost}>
+              <Input className='userName' type="text" name="userName" s={10} placeholder="Username"><Icon>account_circle</Icon></Input>
+              <Input className='email' type="email" name="email" s={10} placeholder="Email" validate><Icon>mail</Icon></Input>
+              <Input className='password' type='password' name="password" s={10} placeholder="Password" validate><Icon>lock</Icon></Input>
+              <Input className='confirmPassword' type='password' name="confirmPassword" s={10} placeholder="Password" validate><Icon>lock</Icon></Input>
+              <Input className='phoneNumber' type='Number' name="phoneNumber" s={10} placeholder="Phone Number" validate><Icon>phone</Icon></Input>
+              {/* <Link to= '/dashboard'> */}
+                <Button className='signUpButton' waves='light'>Sign Up</Button><br></br>
+              {/* </Link> */}
+            </form>
         </div>
     )
 }
-
-export default SignUp;
+function mapStateToProps(state) {
+  return {concerts: state.concertReducer.concerts}
+}
+const mapDispatchToProps = dispatch => bindActionCreators({
+  signUpPost
+}, dispatch)
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
