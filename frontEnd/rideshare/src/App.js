@@ -4,6 +4,7 @@ import Landing from './Components/Landing'
 import Dashboard from './Components/Dashboard'
 import SignIn from './Components/SignIn'
 import Header from  './Components/Header'
+import myRides from './Components/Rides'
 import OfferRide from './Components/OfferRide'
 import {Button,Input} from 'react-materialize'
 import {connect} from 'react-redux'
@@ -22,7 +23,7 @@ const App = (props) => {
       <Route path='/dashboard' component={Dashboard} />
       <Route path='/about' component ={Landing} />
       <Route path='/rides' component={OfferRide} />
-      <Route path='/myrides' component={Rides} />
+      <Route path='/myrides' component={myRides} />
     </div>
   )
 };

@@ -1,37 +1,28 @@
 import React from 'react'
-import {Modal, Button, Input, Row, Form} from 'react-materialize'
+import {connect} from 'react-redux'
+import {fetchConcert} from '../Actions'
+import {Modal, Button, Input, Row, Form, Icon} from 'react-materialize'
+import { bindActionCreators } from 'redux'
 
-const RidesPage = () => {
+const myRides = () => {
 	return (
 		<div>
-			<Modal
-				header='Modal Header'
-				trigger={<Button waves='light'>OR ME!<Icon right>insert_chart</Icon></Button>}>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-					incididunt ut labore et dolore magna aliqua.</p>
+			<Modal header='Modal Header' trigger={<Button waves='light'>REQUESTED<Icon right>insert_chart</Icon></Button>}>
+				<p>
+					Concert Info
+				</p>
 			</Modal>
-		<div>
-
-
-				{/* <p>Name: Matt</p>
-				<p>Departing From: 123 mySt</p>
-				<p>Departing Time: 12oclock</p>
-				<p>Phone Number: 333-444-5555</p>
-				<p>Email: ji9oo@aol.com</p>
-				<p>Seats Available: 2</p> */}
-
-  <form>
-
-    <Input className="riderName" type="text" name="riderName" s={10} placeholder="Name"><Icon>account_circle</Icon></Input>
-    <Input className="phoneNumber" validate type='tel' name="riderPhone" s={10} placeholder="Phone Number"><Icon>account_circle</Icon></Input>
-    <Input className="Email" type="email" name="riderEmail" s={12} placeholder="Email"><Icon>account_circle</Icon></Input>
-    <Input className="seatsNeeded" type="number" name="seatsNeeded" s={10} placeholder="Seats Needed"><Icon>account_circle</Icon></Input>
-    <Input className="Comments" type="text" name="Comments" s={10} placeholder="Comments"><Icon>account_circle</Icon></Input>
-
-
-  <input type="submit" value="Submit" />
-</form>
-</div>
-</div>
-
+		</div>
 )}
+
+function mapStateToProps(state) {
+  return {
+    concerts: state.concertReducer.concerts,
+    concert: state.concertReducer.concert
+  }
+}
+const mapDispatchToProps = dispatch => bindActionCreators({
+  fetchConcert
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(myRides)
