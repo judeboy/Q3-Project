@@ -132,7 +132,7 @@ export function postSignIn(e) {
   return async (dispatch) => {
     const response = await fetch('/login', {
       method: 'POST',
-      body: JSON.stringify({email: email,password: password}),
+      body: JSON.stringify({email: email, password: password}),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
