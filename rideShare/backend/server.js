@@ -5,9 +5,9 @@ const knex = require('./knex')
 const bcrypt = require('bcrypt')
 const port = process.env.PORT || 5000
 const path = require('path')
+const dotenv = require('dotenv').config()
 
-
-app.use(express.static(path.join(__dirname, './frontEnd/rideshare/public')));
+app.use(express.static(path.join(__dirname, './frontEnd/rideshare/build')));
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
