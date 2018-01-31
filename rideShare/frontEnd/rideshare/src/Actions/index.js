@@ -9,7 +9,7 @@ export function fetchConcert() {
    radius = '20'
  }
  return async (dispatch) => {
-   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=22c7usm63w7kpdw2q3e62aed`)
+   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=vty4dsmgqahqfszehhus9a5t`)
    // console.log(response)
    const json = await response.json()
    dispatch({
@@ -74,7 +74,6 @@ export function postOfferRide(e) {
     comments: comments
   }
   return async (dispatch) => {
-    console.log(name)
     const response = await fetch('http://localhost:5000/rides', {
       method: 'POST',
       body: JSON.stringify({data}),

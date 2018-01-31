@@ -8,7 +8,6 @@ import {Redirect} from 'react-router'
 const SignIn = ({postSignIn,isSignIn}) => {
     return(
         <div className='backgroundImgForLandingPage'>
-            <img className='carImg' src="/Images/CarImg.jpeg"/>
             {isSignIn ? <Redirect to ='/dashboard'/> :
             <form onSubmit={postSignIn}>
               <Input className='email' type="email" s={10} placeholder="Email" name="email" validate><Icon>mail</Icon></Input>

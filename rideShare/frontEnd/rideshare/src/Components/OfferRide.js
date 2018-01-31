@@ -33,14 +33,14 @@ const OfferRide = ({...props,concerts,postOfferRide}) => {
           <label className='offerRideLabels' htmlFor="seatsAvailable">Seats Available</label>
           <input id="Seats" name="Seats" type="number" />
 
-          {/* <label htmlFor="Address">Address</label>
+          <label htmlFor="Address">Address</label>
           <input id="Address" name="Address" type="text" />
 
           <label htmlFor="City">City</label>
           <input id="City" name="City" type="text" />
 
           <label htmlFor="State">State</label>
-          <input id="State" name="State" type="text" /> */}
+          <input id="State" name="State" type="text" />
 
           <label className='offerRideLabels' htmlFor="Departing Time">Departing Time</label>
           <input id="Departing" name="Departing" type="text" />
