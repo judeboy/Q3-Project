@@ -1,5 +1,3 @@
-// import React from 'react'
-// import {browserHistory,Redirect} from 'react-router'
 import store from '../store'
 export const CONCERTS_RECEIVED = 'CONCERTS_RECEIVED'
 export function fetchConcert() {
@@ -9,7 +7,7 @@ export function fetchConcert() {
    radius = '20'
  }
  return async (dispatch) => {
-   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=22c7usm63w7kpdw2q3e62aed`)
+   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=vty4dsmgqahqfszehhus9a5t`)
    // console.log(response)
    const json = await response.json()
    dispatch({
@@ -34,49 +32,41 @@ export function offerRide(e) {
 export const POST_OFFER_RIDE = 'POST_OFFER_RIDE'
 export function postOfferRide(e) {
   e.preventDefault()
-  console.log(e.target.id)
   let a = store.getState().concertReducer.concerts
   let concert = a.filter(ele=> {
-    if(ele.Id== e.target.id){
+    if(ele.Id == e.target.id) {
       return ele
     }
   })
-  console.log(concert)
   //concert info
+  let concert_id = concert[0].Id
   let date_time = concert[0].Date
   let venue_name = concert[0].Venue.Name
   let venue_address = concert[0].Venue.Address
   let artists = concert[0].Artists[0].Name
-  console.log(date_time,venue_name,venue_address,artists)
   //person info
   let driverName = e.target.Username.value
   let email = e.target.Email.value
   let phone = e.target.Phone.value
   let availableSeats = e.target.Seats.value
   let person_address = e.target.Address.value
-  let city = e.target.City.value
-  let state = e.target.State.value
   let departingTime = e.target.Departing.value
   let comments = e.target.Comments.value
-  let data = {
-    date_time: date_time,
-    venue_name:venue_name,
-    venue_address:venue_address,
-    artists: artists,
-    driverName: driverName,
-    email: email,
-    phone: phone,
-    availableSeats: availableSeats,
-    person_address: person_address,
-    city: city,
-    state: state,
-    departingTime: departingTime,
-    comments: comments
-  }
   return async (dispatch) => {
     const response = await fetch('/rides', {
       method: 'POST',
-      body: JSON.stringify({data}),
+      body: JSON.stringify({concert_id: concert_id,
+      date_time: date_time,
+      venue_name:venue_name,
+      venue_address:venue_address,
+      artists: artists,
+      driverName: driverName,
+      email: email,
+      phone: phone,
+      availableSeats: availableSeats,
+      person_address: person_address,
+      departingTime: departingTime,
+      comments: comments}),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -84,9 +74,10 @@ export function postOfferRide(e) {
     })
     console.log(response)
     const offerRide = await response.json()
+    console.log(offerRide)
     dispatch({
-      type: POST_SIGN_UP,
-      offerRide: offerRide,
+      type: POST_OFFER_RIDE,
+      inDashboard: true,
     })
   }
 }
@@ -114,6 +105,11 @@ export function signUpPost(e) {
     })
     console.log(response)
     const newUser = await response.json()
+    console.log(newUser)
+    if(response.status === 200){
+      let cookie = `jwt=${newUser.token}`
+      document.cookie = cookie;
+    }
     dispatch({
       type: POST_SIGN_UP,
       newUser: newUser,
@@ -137,9 +133,13 @@ export function postSignIn(e) {
         'Accept': 'application/json',
       }
     })
-    const user = await response.json()
     console.log(response)
-    console.log(user)
+    const user = await response.json()
+    if(response.status === 200) {
+      let cookie = `jwt=${user.token}`
+      document.cookie = cookie;
+      localStorage.setItem('token', user.token)
+    }
     dispatch({
       type: POST_SIGN_IN,
       response: response.status,
