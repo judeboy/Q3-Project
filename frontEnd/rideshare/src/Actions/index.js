@@ -1,6 +1,8 @@
 import store from '../store'
 export const CONCERTS_RECEIVED = 'CONCERTS_RECEIVED'
-export function fetchConcert() {
+
+
+export function fetchConcert () {
  let zipCode = document.getElementsByClassName('zipCode')[0].value
  let radius = document.getElementsByClassName('radius')[0].value
  if(radius === "") {
@@ -16,6 +18,7 @@ export function fetchConcert() {
    })
  }
 }
+
 export const OFFER_RIDE = 'OFFER_RIDE'
 export function offerRide(e) {
   console.log(e.target)
@@ -52,22 +55,24 @@ export function postOfferRide(e) {
   let person_address = e.target.Address.value
   let departingTime = e.target.Departing.value
   let comments = e.target.Comments.value
+
   return async (dispatch) => {
     const response = await fetch('/rides', {
       method: 'POST',
-      body: JSON.stringify({concert_id: concert_id,
-      date_time: date_time,
-      venue_name:venue_name,
-      venue_address:venue_address,
-      artists: artists,
-      driverName: driverName,
-      email: email,
-      phone: phone,
-      availableSeats: availableSeats,
-      person_address: person_address,
-      departingTime: departingTime,
-      comments: comments}),
-      headers: {
+      body: JSON.stringify({
+          concert_id: concert_id,
+          date_time: date_time,
+          venue_name:venue_name,
+          venue_address:venue_address,
+          artists: artists,
+          driverName: driverName,
+          email: email,
+          phone: phone,
+          availableSeats: availableSeats,
+          person_address: person_address,
+          departingTime: departingTime,
+          comments: comments
+      }), headers:{
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       }
