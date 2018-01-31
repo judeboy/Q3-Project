@@ -12,7 +12,7 @@ app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
-app.use(express.static('./frontEnd/rideshare/build'))//may need to change to ./frontEnd
+app.use(express.static('./frontEnd/rideshare/public'))//may need to change to ./frontEnd
 
 app.use(cors())
 
