@@ -21,7 +21,7 @@ const OfferRide = ({...props,concerts,postOfferRide, inDashboard}) => {
             <p className='rideOfferPara'>City: {concert[0].Venue.City}</p>
             <p className='rideOfferPara'>State: {concert[0].Venue.State}</p>
         </Modal>
-        {inDashboard ? <Redirect to ='/dashboard' /> :
+        {/* {inDashboard ? <Redirect to ='/dashboard' /> : */}
           <form onSubmit={postOfferRide} id={concert[0].Id}>
             <label htmlFor="Driver">Driver Name</label>
             <input id="driver" name="Username" type="text"/>
@@ -52,7 +52,7 @@ const OfferRide = ({...props,concerts,postOfferRide, inDashboard}) => {
 
             <Button className='offerRideLabels' className="offerRideButton">OfferRide</Button>
           </form>
-        }
+        {/* } */}
     </div>
   )
 }

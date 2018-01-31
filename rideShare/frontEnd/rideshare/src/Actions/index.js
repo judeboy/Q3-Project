@@ -54,6 +54,8 @@ export function postOfferRide(e) {
   let person_address = e.target.Address.value
   let departingTime = e.target.Departing.value
   let comments = e.target.Comments.value
+  let jwt = localStorage.getItem('token')
+  console.log(jwt)
   return async (dispatch) => {
     const response = await fetch('http://localhost:5000/rides', {
       method: 'POST',
@@ -68,7 +70,9 @@ export function postOfferRide(e) {
       availableSeats: availableSeats,
       person_address: person_address,
       departingTime: departingTime,
-      comments: comments}),
+      comments: comments,
+      jwt: jwt,
+    }),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
