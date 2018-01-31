@@ -9,7 +9,7 @@ const dotenv = require('dotenv').config()
 // if (process.env.NODE_ENV === 'production') {
 //   app.use(express.static('frontEnd/rideshare/build'));
 // }
-app.use(express.static('./frontEnd/rideshare/'));
+app.use(express.static('./frontEnd/rideshare/build'));
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
