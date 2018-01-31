@@ -1,25 +1,24 @@
 import React from 'react'
+import {Modal, Button, Input, Row, Form} from 'react-materialize'
 
 const RidesPage = () => {
-
-return (
-
-<div>
-<Modal
-	header='Modal Header'
-	trigger={<Button waves='light'>OR ME!<Icon right>insert_chart</Icon></Button>}>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-		incididunt ut labore et dolore magna aliqua.</p>
-</Modal>
-<div>
+	return (
+		<div>
+			<Modal
+				header='Modal Header'
+				trigger={<Button waves='light'>OR ME!<Icon right>insert_chart</Icon></Button>}>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+					incididunt ut labore et dolore magna aliqua.</p>
+			</Modal>
+		<div>
 
 
-<p>Name: Matt</p>
-<p>Departing From: 123 mySt</p>
-<p>Departing Time: 12oclock</p>
-<p>Phone Number: 333-444-5555</p>
-<p>Email: ji9oo@aol.com</p>
-<p>Seats Available: 2</p>
+				{/* <p>Name: Matt</p>
+				<p>Departing From: 123 mySt</p>
+				<p>Departing Time: 12oclock</p>
+				<p>Phone Number: 333-444-5555</p>
+				<p>Email: ji9oo@aol.com</p>
+				<p>Seats Available: 2</p> */}
 
   <form>
 
