@@ -140,7 +140,7 @@ app.post('/rides', (req,res,next) => {
     .then(newRide => {
       let ride ={
         id: newRide[0].id,
-        user_id: 3,
+        user_id: newRide[0].user_id,
         concert_id:newRide[0].concert_id,
         date_time: newRide[0].date_time,
         venue_name: newRide[0].venue_name,
