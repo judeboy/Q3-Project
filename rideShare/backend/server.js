@@ -8,12 +8,13 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 
-app.use(express.static('./frontEnd/rideshare/public'))//may need to change to ./frontEnd
-
+app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+
+app.use(express.static('./frontEnd/rideshare/public'))//may need to change to ./frontEnd
+
 app.use(cors())
-app.use(cookieParser())
 
 // Get All
 app.get('/users', (req, res, next) => {
@@ -110,8 +111,8 @@ app.get('/rides/:id', (req, res, next) => {
 
 //Rides Post
 app.post('/rides', (req,res,next) => {
-  let cookie = req.headers.cookies
-  console.log(cookie)
+  let cookie = req.cookies
+  console.log(req.headers.cookies)
   // var decoded = jwt.verify(cookie.jwt, 'A4e2n84E0OpF3wW21', function(err, decoded) {
   //  if(err) {
   //      console.log(err)
@@ -120,10 +121,10 @@ app.post('/rides', (req,res,next) => {
   //  }
   // })
   // console.log(decoded.id)
-  // console.log(req.body)
     knex('rides')
     .insert({
-        driver_id: decoded.id,
+        user_id: 3,
+        concert_id:req.body.concert_id,
         date_time: req.body.date_time,
         venue_name: req.body.venue_name,
         venue_address: req.body.venue_address,
@@ -135,10 +136,25 @@ app.post('/rides', (req,res,next) => {
         person_address:req.body.person_address,
         departingTime:req.body.departingTime,
         comments:req.body.comments,
-    })
-    .then(data => {
-        console.log('data in then function: ', data)
-        res.send(data[0])
+    },'*')
+    .then(newRide => {
+      let ride ={
+        id: newRide[0].id,
+        user_id: 3,
+        concert_id:newRide[0].concert_id,
+        date_time: newRide[0].date_time,
+        venue_name: newRide[0].venue_name,
+        venue_address: newRide[0].venue_address,
+        artists: newRide[0].artists,
+        driverName:newRide[0].driverName,
+        email: newRide[0].email,
+        phone:newRide[0].phone,
+        availableSeats: newRide[0].availableSeats,
+        person_address:newRide[0].person_address,
+        departingTime:newRide[0].departingTime,
+        comments:newRide[0].comments,
+      }
+        res.status(200).send(ride)
     })
     .catch(err => {
         res.status(404).send(err)

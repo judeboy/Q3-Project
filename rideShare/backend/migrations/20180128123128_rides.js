@@ -2,8 +2,9 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('rides',table =>{
     table.increments('id')
-    table.integer('driver_id')
-    table.foreign('driver_id').references('id').inTable('users').onDelete('CASCADE')
+    table.integer('user_id')
+    table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE')
+    table.integer('concert_id')
     table.string('date_time')
     table.string('venue_name')
     table.string('venue_address')

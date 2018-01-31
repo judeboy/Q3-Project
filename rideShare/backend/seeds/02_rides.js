@@ -4,7 +4,8 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('rides').insert([
         {
-        driver_id:1,
+        user_id:1,
+        concert_id:1,
         date_time:'feb,1',
         venue_name:'Red Rocks',
         venue_address:'Golden,CO',

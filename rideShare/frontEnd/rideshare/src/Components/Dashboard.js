@@ -8,6 +8,8 @@ const Dashboard = ({concerts,concert,fetchConcert}) => {
   console.log('concerts: ', concerts)
   return(
     <div className='dashboardDiv'>
+      <Button>MyOfferRide</Button>
+      <Button>MyNeedRide</Button>
       <Row className="inputSearchField">
         <Input s={12} type ='Number' placeholder="ZipCode" className="zipCode"></Input>
         <Input s={12} type ='Number' placeholder="Radius in Miles" className="radius"></Input>

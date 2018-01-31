@@ -34,20 +34,18 @@ export function offerRide(e) {
 export const POST_OFFER_RIDE = 'POST_OFFER_RIDE'
 export function postOfferRide(e) {
   e.preventDefault()
-  console.log(e.target.id)
   let a = store.getState().concertReducer.concerts
   let concert = a.filter(ele=> {
     if(ele.Id == e.target.id) {
       return ele
     }
   })
-  console.log(concert)
   //concert info
+  let concert_id = concert[0].Id
   let date_time = concert[0].Date
   let venue_name = concert[0].Venue.Name
   let venue_address = concert[0].Venue.Address
   let artists = concert[0].Artists[0].Name
-  console.log(date_time,venue_name,venue_address,artists)
   //person info
   let driverName = e.target.Username.value
   let email = e.target.Email.value
@@ -56,24 +54,21 @@ export function postOfferRide(e) {
   let person_address = e.target.Address.value
   let departingTime = e.target.Departing.value
   let comments = e.target.Comments.value
-  let data = {
-    date_time: date_time,
-    venue_name:venue_name,
-    venue_address:venue_address,
-    artists: artists,
-    driverName: driverName,
-    email: email,
-    phone: phone,
-    availableSeats: availableSeats,
-    person_address: person_address,
-    departingTime: departingTime,
-    comments: comments
-  }
-  console.log(data)
   return async (dispatch) => {
     const response = await fetch('http://localhost:5000/rides', {
       method: 'POST',
-      body: JSON.stringify({data}),
+      body: JSON.stringify({concert_id: concert_id,
+      date_time: date_time,
+      venue_name:venue_name,
+      venue_address:venue_address,
+      artists: artists,
+      driverName: driverName,
+      email: email,
+      phone: phone,
+      availableSeats: availableSeats,
+      person_address: person_address,
+      departingTime: departingTime,
+      comments: comments}),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -83,8 +78,8 @@ export function postOfferRide(e) {
     const offerRide = await response.json()
     console.log(offerRide)
     dispatch({
-      type: POST_SIGN_UP,
-      offerRide: offerRide,
+      type: POST_OFFER_RIDE,
+      inDashboard: true,
     })
   }
 }
@@ -140,11 +135,12 @@ export function postSignIn(e) {
         'Accept': 'application/json',
       }
     })
+    console.log(response)
     const user = await response.json()
-    console.log(user)
     if(response.status === 200) {
       let cookie = `jwt=${user.token}`
       document.cookie = cookie;
+      localStorage.setItem('token', user.token)
     }
     dispatch({
       type: POST_SIGN_IN,
