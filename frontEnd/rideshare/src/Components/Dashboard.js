@@ -14,7 +14,7 @@ if(!concerts){concerts=[]}
   console.log('concerts: ', concerts)
   return(
     <div className='dashboardDiv'>
-      <form>
+      <form onSubmit = {fetchConcert}>
       <Row className="inputSearchField">
         <Input s={12} type ='Number' placeholder="ZipCode" className="zipCode" required></Input>
         <Input s={12} type ='Number' placeholder="Radius in Miles" className="radius"></Input>
@@ -39,6 +39,5 @@ function mapStateToProps(state) {
 const mapDispatchToProps = dispatch => bindActionCreators({
   fetchConcert
 }, dispatch)
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
