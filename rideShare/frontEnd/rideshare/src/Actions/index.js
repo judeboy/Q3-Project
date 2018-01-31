@@ -74,7 +74,7 @@ export function postOfferRide(e) {
     comments: comments
   }
   return async (dispatch) => {
-    const response = await fetch('http://localhost:5000/rides', {
+    const response = await fetch('/rides', {
       method: 'POST',
       body: JSON.stringify({data}),
       headers: {
@@ -104,7 +104,7 @@ export function signUpPost(e) {
   }
   return async (dispatch) => {
     console.log(name)
-    const response = await fetch('http://localhost:5000/signup', {
+    const response = await fetch('/signup', {
       method: 'POST',
       body: JSON.stringify({username: name, email: email, phone_number: phoneNumber, password: password}),
       headers: {
@@ -129,7 +129,7 @@ export function postSignIn(e) {
   let password = e.target.password.value
   console.log(email, password)
   return async (dispatch) => {
-    const response = await fetch('http://localhost:5000/login', {
+    const response = await fetch('/login', {
       method: 'POST',
       body: JSON.stringify({email: email,password: password}),
       headers: {
