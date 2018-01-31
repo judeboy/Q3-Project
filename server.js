@@ -9,7 +9,7 @@ const dotenv = require('dotenv').config()
 // if (process.env.NODE_ENV === 'production') {
 //   app.use(express.static('frontEnd/rideshare/build'));
 // }
-app.use(express.static('./frontEnd/rideshare/build'));
+app.use(express.static('./frontEnd/rideshare/'));
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
@@ -161,10 +161,10 @@ app.get('/events/:id',(req,res,next)=>{
     res.status(404).send(err)
   })
 })
-app.get('*', function (req, res) {
- // load the front-end (react / angular / etc handles page changes)
- res.sendFile(path.join(__dirname, './frontEnd/rideshare/static'));
-});
+// app.get('*', function (req, res) {
+//  // load the front-end (react / angular / etc handles page changes)
+//  res.sendFile(path.join(__dirname, './frontEnd/rideshare/public'));
+// });
 
 
 
