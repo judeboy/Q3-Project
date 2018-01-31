@@ -1,15 +1,16 @@
 import store from '../store'
 export const CONCERTS_RECEIVED = 'CONCERTS_RECEIVED'
-
-
-export function fetchConcert () {
+export function fetchConcert(e) {
+  console.log('fetchConcert');
+  e.preventDefault()
  let zipCode = document.getElementsByClassName('zipCode')[0].value
+ if(!zipCode){return}
  let radius = document.getElementsByClassName('radius')[0].value
  if(radius === "") {
    radius = '20'
  }
  return async (dispatch) => {
-   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=vty4dsmgqahqfszehhus9a5t`)
+   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=22c7usm63w7kpdw2q3e62aed`)
    // console.log(response)
    const json = await response.json()
    dispatch({

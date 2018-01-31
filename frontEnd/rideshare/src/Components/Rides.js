@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal, Button, Input, Row, Form} from 'react-materialize'
+import {Modal, Button, Input, Row, Form, Icon} from 'react-materialize'
 
 const RidesPage = () => {
 	return (
@@ -35,3 +35,5 @@ const RidesPage = () => {
 </div>
 
 )}
+
+export default RidesPage
