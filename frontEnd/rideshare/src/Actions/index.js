@@ -116,6 +116,7 @@ export function signUpPost(e) {
     if(response.status === 200){
       let cookie = `jwt=${newUser.token}`
       document.cookie = cookie;
+      localStorage.setItem('token', newUser.token)
     }
     dispatch({
       type: POST_SIGN_UP,
