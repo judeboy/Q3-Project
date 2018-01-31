@@ -12,7 +12,7 @@ app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
-app.use(express.static('./frontEnd/rideshare/build'))//may need to change to ./frontEnd
+app.use(express.static('./frontEnd/rideshare/public'))//may need to change to ./frontEnd
 
 app.use(cors())
 
@@ -111,19 +111,19 @@ app.get('/rides/:id', (req, res, next) => {
 
 //Rides Post
 app.post('/rides', (req,res,next) => {
-  let cookie = req.cookies
-  console.log(req.headers.cookies)
-  // var decoded = jwt.verify(cookie.jwt, 'A4e2n84E0OpF3wW21', function(err, decoded) {
-  //  if(err) {
-  //      console.log(err)
-  //  } else{
-  //      return decoded
-  //  }
-  // })
-  // console.log(decoded.id)
+  let jwtkey = req.body.jwt
+  console.log(jwtkey)
+  var decoded = jwt.verify(jwtkey, 'A4e2n84E0OpF3wW21', function(err, decoded) {
+   if(err) {
+       console.log(err)
+   } else{
+       return decoded
+   }
+  })
+  console.log(decoded.id)
     knex('rides')
     .insert({
-        user_id: 3,
+        user_id: decoded.id,
         concert_id:req.body.concert_id,
         date_time: req.body.date_time,
         venue_name: req.body.venue_name,
