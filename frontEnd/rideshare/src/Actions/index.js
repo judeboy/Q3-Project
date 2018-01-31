@@ -2,7 +2,9 @@
 // import {browserHistory,Redirect} from 'react-router'
 import store from '../store'
 export const CONCERTS_RECEIVED = 'CONCERTS_RECEIVED'
-export function fetchConcert() {
+
+
+export function fetchConcert () {
  let zipCode = document.getElementsByClassName('zipCode')[0].value
  let radius = document.getElementsByClassName('radius')[0].value
  if(radius === "") {
@@ -18,6 +20,7 @@ export function fetchConcert() {
    })
  }
 }
+
 export const OFFER_RIDE = 'OFFER_RIDE'
 export function offerRide(e) {
   console.log(e.target)

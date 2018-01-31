@@ -22,6 +22,7 @@ const App = (props) => {
       <Route path='/dashboard' component={Dashboard} />
       <Route path='/about' component ={Landing} />
       <Route path='/rides' component={OfferRide} />
+      <Route path='/myrides' component={Rides} />
     </div>
   )
 };
