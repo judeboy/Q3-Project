@@ -55,24 +55,26 @@ export function postOfferRide(e) {
   let person_address = e.target.Address.value
   let departingTime = e.target.Departing.value
   let comments = e.target.Comments.value
-
+  let jwt = localStorage.getItem('token')
+  console.log(jwt)
   return async (dispatch) => {
-    const response = await fetch('/rides', {
+    const response = await fetch('http://localhost:5000/rides', {
       method: 'POST',
-      body: JSON.stringify({
-          concert_id: concert_id,
-          date_time: date_time,
-          venue_name:venue_name,
-          venue_address:venue_address,
-          artists: artists,
-          driverName: driverName,
-          email: email,
-          phone: phone,
-          availableSeats: availableSeats,
-          person_address: person_address,
-          departingTime: departingTime,
-          comments: comments
-      }), headers:{
+      body: JSON.stringify({concert_id: concert_id,
+      date_time: date_time,
+      venue_name:venue_name,
+      venue_address:venue_address,
+      artists: artists,
+      driverName: driverName,
+      email: email,
+      phone: phone,
+      availableSeats: availableSeats,
+      person_address: person_address,
+      departingTime: departingTime,
+      comments: comments,
+      jwt: jwt,
+    }),
+      headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       }
@@ -100,7 +102,7 @@ export function signUpPost(e) {
   }
   return async (dispatch) => {
     console.log(name)
-    const response = await fetch('/signup', {
+    const response = await fetch('http://localhost:5000/signup', {
       method: 'POST',
       body: JSON.stringify({username: name, email: email, phone_number: phoneNumber, password: password}),
       headers: {
@@ -130,7 +132,7 @@ export function postSignIn(e) {
   let password = e.target.password.value
   console.log(email, password)
   return async (dispatch) => {
-    const response = await fetch('/login', {
+    const response = await fetch('http://localhost:5000/login', {
       method: 'POST',
       body: JSON.stringify({email: email,password: password}),
       headers: {
