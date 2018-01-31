@@ -2,15 +2,20 @@ const express =require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const knex = require('./knex')
-const port = process.env.PORT || 5000
-const cors = require('cors')
 const bcrypt = require('bcrypt')
+const port = process.env.PORT || 5000
+const path = require('path')
 
-app.use(express.static('./frontEnd/rideshare/public'))//may need to change to ./frontEnd
+
+app.use(express.static(path.join(__dirname, './frontEnd/rideshare/public')));
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
-app.use(cors())
+
+// Get all route
+// app.get('/', (req, res, next) => {
+//     res.send('working')
+// })
 
 // Get All
 app.get('/users', (req, res, next) => {
@@ -49,14 +54,14 @@ app.post('/signup', function(req, res, next){
         phone_number:req.body.phone_number,
         password:hash,
         salt:salt
-    }, '*')
-    .then(user=> {
-      res.status(200).send({id:user[0].id})
-    })
-    .catch(err => {
-        res.status(404).send(err)
+    },'*')
+    .then(user=>{
+      console.log('user',user);
+        res.status(200).send({id:user[0].id})
     })
 })
+
+
 
 // Log In Route
 app.post('/login', function (req, res) {
@@ -97,30 +102,6 @@ app.get('/rides/:id', (req, res, next) => {
     })
 })
 
-//Rides Post
-app.post('/rides',(req,res,next) => {
-    knex('rides')
-    .insert({
-        username:req.body.username,
-        address:req.body.username,
-        city:req.body.city,
-        state:req.body.state,
-        departing_time:req.body.departing_time,
-        number_seats:req.body.number_seats,
-        comments:req.body.comments,
-        phone_number:req.body.number,
-        email:req.body.email
-    })
-    console.log('req.body ', req.body)
-    .then(data => {
-        console.log('data in then function: ', data)
-        res.send(data[0])
-    })
-    .catch(err => {
-        res.status(404).send(err)
-    })
-})
-
 // Patch Rides
 app.patch('/rides/:id', (req, res, next) => {
     let id = req.params.id
@@ -135,7 +116,7 @@ app.patch('/rides/:id', (req, res, next) => {
         res.send(data[0])
     })
     .catch(err => {
-        res.status(404).json({error: 'Not able to find it'})
+        res.status(404).send(err)
     })
 })
 
@@ -152,9 +133,9 @@ app.delete('/rides/:id', (req, res, next) => {
     .catch(err => {
         res.status(404).send(err)
     })
-  })
+})
+//get all for events database
 
-//Get All for Events 
 app.get('/events',(req,res,next)=>{
   knex('events')
     .select('*')
@@ -165,7 +146,7 @@ app.get('/events',(req,res,next)=>{
       res.status(404).send(err)
     })
 })
-// Get on for Events
+
 app.get('/events/:id',(req,res,next)=>{
   let id = req.params.id
   knex('events')
@@ -179,6 +160,8 @@ app.get('/events/:id',(req,res,next)=>{
   })
 })
 
+
+
 //Error
 app.use((err, req, res, next) => {
     const status = err.status || 404
@@ -186,7 +169,7 @@ app.use((err, req, res, next) => {
 })
 
 app.use((req, res, next) => {
-    res.status(404).json({ error: { status: 404, message: 'Not been found' }})
+    res.status(404).json({ error: { status: 404, message: 'Not found' }})
 })
 
 const listener = () => console.log( `Listening on port ${port}!`)
