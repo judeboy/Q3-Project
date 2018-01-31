@@ -6,8 +6,10 @@ const bcrypt = require('bcrypt')
 const port = process.env.PORT || 5000
 const path = require('path')
 const dotenv = require('dotenv').config()
-
-app.use(express.static(path.join(__dirname, './frontEnd/rideshare/build')));
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static('frontEnd/rideshare/build'));
+// }
+app.use(express.static('./frontEnd/rideshare/build'));
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
@@ -159,6 +161,10 @@ app.get('/events/:id',(req,res,next)=>{
     res.status(404).send(err)
   })
 })
+app.get('*', function (req, res) {
+ // load the front-end (react / angular / etc handles page changes)
+ res.sendFile(path.join(__dirname, './frontEnd/rideshare/static'));
+});
 
 
 
