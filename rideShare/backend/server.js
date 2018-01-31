@@ -5,12 +5,15 @@ const knex = require('./knex')
 const port = process.env.PORT || 5000
 const cors = require('cors')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
 
 app.use(express.static('./frontEnd/rideshare/public'))//may need to change to ./frontEnd
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use(cors())
+app.use(cookieParser())
 
 // Get All
 app.get('/users', (req, res, next) => {
@@ -42,7 +45,7 @@ app.get('/users/:id', (req, res, next) => {
 app.post('/signup', function(req, res, next){
     var salt = bcrypt.genSaltSync(4)
     var hash = bcrypt.hashSync(req.body.password, salt);
-    // console.log(req.body);
+    console.log(req.body);
     knex('users').insert({
         username:req.body.username,
         email:req.body.email,
@@ -51,7 +54,8 @@ app.post('/signup', function(req, res, next){
         salt:salt
     }, '*')
     .then(user=> {
-      res.status(200).send({id:user[0].id})
+      var token = jwt.sign({ id: user.id }, 'A4e2n84E0OpF3wW21')
+      res.status(200).send({id: user[0].id, token: token})
     })
     .catch(err => {
         res.status(404).send(err)
@@ -64,10 +68,17 @@ app.post('/login', function (req, res) {
     email: req.body.email
     })
     .first()
-    .then(user => {
-        bcrypt.compare(req.body.password, user.password, function(err, ver) {
-            ver ? res.status(200).send({id:user.id}): res.sendStatus(401)
-        })
+    .then(function(user) {
+      if(!user) {
+        res.status(401).send("Email doesnt exist")
+      }
+      if(bcrypt.compareSync(req.body.password, user.password)) {
+        var token = jwt.sign({ id: user.id }, 'A4e2n84E0OpF3wW21')
+        res.status(200).send({message: "logged in", token: token})
+      }
+      else{
+        res.status(404).send("password doesn't match")
+      }
     })
 })
 
@@ -98,20 +109,33 @@ app.get('/rides/:id', (req, res, next) => {
 })
 
 //Rides Post
-app.post('/rides',(req,res,next) => {
+app.post('/rides', (req,res,next) => {
+  let cookie = req.headers.cookies
+  console.log(cookie)
+  // var decoded = jwt.verify(cookie.jwt, 'A4e2n84E0OpF3wW21', function(err, decoded) {
+  //  if(err) {
+  //      console.log(err)
+  //  } else{
+  //      return decoded
+  //  }
+  // })
+  // console.log(decoded.id)
+  // console.log(req.body)
     knex('rides')
     .insert({
-        username:req.body.username,
-        address:req.body.username,
-        city:req.body.city,
-        state:req.body.state,
-        departing_time:req.body.departing_time,
-        number_seats:req.body.number_seats,
+        driver_id: decoded.id,
+        date_time: req.body.date_time,
+        venue_name: req.body.venue_name,
+        venue_address: req.body.venue_address,
+        artists: req.body.artists,
+        driverName:req.body.driverName,
+        email: req.body.email,
+        phone:req.body.phone,
+        availableSeats: req.body.availableSeats,
+        person_address:req.body.person_address,
+        departingTime:req.body.departingTime,
         comments:req.body.comments,
-        phone_number:req.body.number,
-        email:req.body.email
     })
-    console.log('req.body ', req.body)
     .then(data => {
         console.log('data in then function: ', data)
         res.send(data[0])
@@ -154,7 +178,7 @@ app.delete('/rides/:id', (req, res, next) => {
     })
   })
 
-//Get All for Events 
+//Get All for Events
 app.get('/events',(req,res,next)=>{
   knex('events')
     .select('*')

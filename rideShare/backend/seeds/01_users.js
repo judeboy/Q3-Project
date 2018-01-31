@@ -26,7 +26,7 @@ exports.seed = function(knex, Promise) {
           salt: '$2a$04$TW0dZf8ulcaQsatUvoUt3b'
         },
       ])
-      .then(function(){
-        return knex.raw("SELECT setval('rides_id_seq',(SELECT MAX(id) FROM rides))")
+      .then(function() {
+        return knex.raw("SELECT setval('users_id_seq',(SELECT MAX(id) FROM users))")
       })
 };

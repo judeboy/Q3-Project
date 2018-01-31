@@ -9,7 +9,7 @@ export function fetchConcert() {
    radius = '20'
  }
  return async (dispatch) => {
-   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=22c7usm63w7kpdw2q3e62aed`)
+   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=vty4dsmgqahqfszehhus9a5t`)
    // console.log(response)
    const json = await response.json()
    dispatch({
@@ -37,7 +37,7 @@ export function postOfferRide(e) {
   console.log(e.target.id)
   let a = store.getState().concertReducer.concerts
   let concert = a.filter(ele=> {
-    if(ele.Id== e.target.id){
+    if(ele.Id == e.target.id) {
       return ele
     }
   })
@@ -54,8 +54,6 @@ export function postOfferRide(e) {
   let phone = e.target.Phone.value
   let availableSeats = e.target.Seats.value
   let person_address = e.target.Address.value
-  let city = e.target.City.value
-  let state = e.target.State.value
   let departingTime = e.target.Departing.value
   let comments = e.target.Comments.value
   let data = {
@@ -68,13 +66,11 @@ export function postOfferRide(e) {
     phone: phone,
     availableSeats: availableSeats,
     person_address: person_address,
-    city: city,
-    state: state,
     departingTime: departingTime,
     comments: comments
   }
+  console.log(data)
   return async (dispatch) => {
-    console.log(name)
     const response = await fetch('http://localhost:5000/rides', {
       method: 'POST',
       body: JSON.stringify({data}),
@@ -85,6 +81,7 @@ export function postOfferRide(e) {
     })
     console.log(response)
     const offerRide = await response.json()
+    console.log(offerRide)
     dispatch({
       type: POST_SIGN_UP,
       offerRide: offerRide,
@@ -115,6 +112,11 @@ export function signUpPost(e) {
     })
     console.log(response)
     const newUser = await response.json()
+    console.log(newUser)
+    if(response.status === 200){
+      let cookie = `jwt=${newUser.token}`
+      document.cookie = cookie;
+    }
     dispatch({
       type: POST_SIGN_UP,
       newUser: newUser,
@@ -139,8 +141,11 @@ export function postSignIn(e) {
       }
     })
     const user = await response.json()
-    console.log(response)
     console.log(user)
+    if(response.status === 200) {
+      let cookie = `jwt=${user.token}`
+      document.cookie = cookie;
+    }
     dispatch({
       type: POST_SIGN_IN,
       response: response.status,
