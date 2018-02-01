@@ -10,7 +10,7 @@ export function fetchConcert(e) {
    radius = '20'
  }
  return async (dispatch) => {
-   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=22c7usm63w7kpdw2q3e62aed`)
+   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=rw79kgvgnavjdhdxhxreufen`)
    // console.log(response)
    const json = await response.json()
    dispatch({
@@ -153,6 +153,61 @@ export function postSignIn(e) {
       type: POST_SIGN_IN,
       response: response.status,
       isSignIn: true,
+    })
+  }
+}
+
+export const NEED_RIDE = 'NEED_RIDE'
+export function needRide(e) {
+  console.log(e.target.id)
+  let id = e.target.id
+  console.log('herer')
+  return async (dispatch) => {
+    const response = await fetch(`http://localhost:5000/rides`)
+    console.log(response)
+    const newRides = await response.json()
+    dispatch({
+      type: NEED_RIDE,
+      rides: newRides,
+      id: id
+    })
+  }
+}
+export const BOOK_SEAT = 'BOOK_SEAT'
+export function bookSeat() {
+  console.log('herer')
+  let driverName = document.getElementsByClassName('driverName1').value
+  let departingTime = document.getElementsByClassName('departingTime1').value
+  let departingFrom = document.getElementsByClassName('departingFrom1').value
+  let phoneNumber = document.getElementsByClassName('phoneNumber1').value
+  let email = document.getElementsByClassName('driverName1').value
+  let seatsAvailable = document.getElementsByClassName('seatsAvailable1').value
+  console.log(driverName,departingFrom,departingTime,phoneNumber,email,seatsAvailable)
+  return async (dispatch) => {
+  //   const response = await fetch('http://localhost:5000/confirmedrides', {
+  //     method: 'POST',
+  //     body: JSON.stringify({user_id:ride[0].id,
+  //     concert_id:ride[0].concert_id,
+  //     date_time: ride[0].date_time,
+  //     venue_name: ride[0].venue_name,
+  //     artists: ride[0].artists,
+  //     driverName:ride[0].driverName,
+  //     email:ride[0].email,
+  //     phone: ride[0].phone,
+  //     departingTime: ride[0].departingTime,
+  //     jwt: jwt,
+  //   }),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json',
+  //     }
+  //   })
+  //   console.log(response)
+  //   const offerRide = await response.json()
+  //   console.log(offerRide)
+    dispatch({
+      type: BOOK_SEAT,
+      inDashboard: true,
     })
   }
 }
