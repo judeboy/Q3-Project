@@ -1,13 +1,13 @@
 import React from 'react'
 import {Collapsible,CollapsibleItem, Button, Row, Modal} from 'react-materialize'
-import {offerRide} from '../Actions'
+import {offerRide, needRide} from '../Actions'
 import {connect} from 'react-redux'
 import {
   Link,
 } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 
-const ConcertCollapsible = ({concert,offerRide,props}) => {
+const ConcertCollapsible = ({concert,offerRide,props,needRide}) => {
     console.log(concert.Artists[0].Name)
     let a = concert.TicketUrl.toString()
     console.log(a)
@@ -37,17 +37,20 @@ const ConcertCollapsible = ({concert,offerRide,props}) => {
                   pathname: '/needRideForm',
                   search: `?id=${concert.Id}`
                 }} >
-                <Button className='needRideButton'>Request a Ride</Button>
-              </Link>
+                </Link>
+                <Link to='myrides'>
+                  <Button className='needRideButton' onClick={needRide} id={concert.Id}>Request a Ride</Button>
+                </Link>
         	</CollapsibleItem>
         </Collapsible>
       </div>
   )
 }
-function mapStateToProps(state) {
-  return {messages: state.messageReducer.messages}
-}
+// function mapStateToProps(state) {
+//   return {messages: state.messageReducer.messages}
+// }
 const mapDispatchToProps = dispatch => bindActionCreators({
   offerRide: offerRide,
+  needRide: needRide
 }, dispatch)
 export default connect(null, mapDispatchToProps)(ConcertCollapsible)

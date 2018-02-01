@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import { CONCERTS_RECEIVED, OFFER_RIDE,POST_SIGN_IN,POST_SIGN_UP,POST_OFFER_RIDE} from '../Actions'
+import { CONCERTS_RECEIVED, OFFER_RIDE,POST_SIGN_IN,POST_SIGN_UP,POST_OFFER_RIDE,NEED_RIDE} from '../Actions'
 import store from '../store'
 const initialState = {
   concerts: [],
@@ -10,6 +10,8 @@ const initialState = {
   isSignUp: false,
   isSignIn: false,
   inDashboard: false,
+  ride: [],
+  id: null,
 }
 const concertReducer = (state=initialState,action) => {
   switch (action.type) {
@@ -45,6 +47,13 @@ const concertReducer = (state=initialState,action) => {
         user: action.newUser,
         isSignUp: action.isSignUp
       }
+      case 'NEED_RIDE':
+        return{
+          ...state,
+          ride: action.rides,
+          id: action.id
+        }
+        break;
     default:
       return state
   }
