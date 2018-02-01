@@ -2,6 +2,7 @@ import React from 'react'
 import {Modal, Button, Input, Row, Form} from 'react-materialize'
 import NeedRide from './needRide'
 import {connect} from 'react-redux'
+
 const Rides = ({ride,id}) => {
 	let a = ride.filter(ele => {
     if(ele.concert_id == id) {
@@ -31,3 +32,4 @@ function mapStateToProps(state) {
 //   needRide: needRide
 // }, dispatch)
 export default connect(mapStateToProps)(Rides)
+

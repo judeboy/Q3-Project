@@ -4,9 +4,12 @@ import {connect} from 'react-redux'
 import {Input, Button, Row} from 'react-materialize'
 import {fetchConcert} from '../Actions'
 import { bindActionCreators } from 'redux'
+<<<<<<< HEAD
+=======
 import initialState from  '../index.js'
 
 
+>>>>>>> faa25c59f7b5923e17a5e0d6c2eb91ce8fd461bc
 
 
 const Dashboard = ({concerts,concert,fetchConcert}) => {
