@@ -40,6 +40,7 @@ app.get('/confirmedrides', (req, res, next) => {
 
 app.post('/confirmedrides', (req,res,next)=> {
   let jwtkey = req.body.jwt
+  console.log(jwtkey)
   var decoded = jwt.verify(jwtkey, 'A4e2n84E0OpF3wW21', function(err, decoded) {
    if(err) {
        console.log(err)
@@ -47,6 +48,7 @@ app.post('/confirmedrides', (req,res,next)=> {
        return decoded
    }
   })
+  console.log(decoded.id)
     knex('confirmedrides')
     .insert({
         user_id: decoded.id,
@@ -181,10 +183,11 @@ app.post('/rides', (req,res,next) => {
    if(err) {
        console.log(err)
    } else{
+
        return decoded
    }
   })
-  console.log(decoded.id)
+  console.log(decoded)
     knex('rides')
     .insert({
         user_id: decoded.id,
@@ -228,15 +231,15 @@ app.post('/rides', (req,res,next) => {
 // Patch Rides
 app.patch('/rides/:id', (req, res, next) => {
     let id = req.params.id
-    console.log(req.body.number_seats)
+    console.log('id',id)
+    console.log(req.body)
     knex('rides')
     .where('id',id)
     .update({
-        id: req.body.id,
-        number_seats:req.body.number_seats,
+        availableSeats:  req.body.seatsAvailable,
     })
     .then(data=>{
-        res.send(data[0])
+        res.status(200).send({id: 'hellow'})
     })
     .catch(err => {
         res.status(404).json({error: 'Not able to find it'})

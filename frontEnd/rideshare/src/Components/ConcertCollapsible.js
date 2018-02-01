@@ -8,10 +8,7 @@ import {
 import { bindActionCreators } from 'redux'
 
 const ConcertCollapsible = ({concert,offerRide,props,needRide,offeraRide}) => {
-    console.log(concert.Artists[0].Name)
     let a = concert.TicketUrl.toString()
-    console.log(a)
-
   return(
       <div>
         <Collapsible accordion id='concertCollapsible' onClick={offerRide}>
