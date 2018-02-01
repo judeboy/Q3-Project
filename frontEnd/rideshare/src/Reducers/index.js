@@ -17,6 +17,7 @@ const initialState = {
   offeredRides: [],
   inofferRide: false,
   deleteRide: false,
+  deleteConfirmedRides :false
 }
 const concertReducer = (state=initialState,action) => {
   switch (action.type) {
@@ -45,7 +46,7 @@ const concertReducer = (state=initialState,action) => {
     console.log('in reducer')
       return{
         ...state,
-        inDashboard: action.inDashboard,
+        inDashboard: false,
         inofferRide: action.inofferRide
       }
     case 'POST_SIGN_UP':
@@ -71,12 +72,15 @@ const concertReducer = (state=initialState,action) => {
           ...state,
           confirmedrides: action.confirmedrides,
           isConfirmedRides: action.isConfirmedRides,
+          deleteConfirmedRides:false,
         }
       case 'MY_OFFERED_RIDES':
         return{
           ...state,
           offeredRides: action.offeredRides,
-          myofferRide: action.myofferRide
+          myofferRide: action.myofferRide,
+          inDashboard: true,
+          deleteRide: false,
         }
       case 'TAKE_TO_DASHBOARD':
       return{
@@ -93,6 +97,18 @@ const concertReducer = (state=initialState,action) => {
         inDashboard: action.inDashboard,
         deleteRide: action.deleteRide
       }
+      case 'OFFER_A_RIDE':
+      return{
+        ...state,
+        inofferRide: false,
+      }
+      case 'DELETE_CONFIRMED_RIDES':
+      console.log('in hererereer')
+      return{
+        ...state,
+        deleteConfirmedRides: true
+      }
+        break;
     default:
       return state
   }

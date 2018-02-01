@@ -1,6 +1,9 @@
 import React from 'react'
 import {Collapsible,CollapsibleItem,Button} from 'react-materialize'
-const MyConfirmedRide = ({confirmRide}) => {
+import {deleteConfirmedRides} from '../Actions'
+import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux'
+const MyConfirmedRide = ({confirmRide,deleteConfirmedRides}) => {
   return(
     <div>
       <Collapsible accordion id='concertCollapsible'>
@@ -12,11 +15,14 @@ const MyConfirmedRide = ({confirmRide}) => {
           <p>Departing Date Time: {confirmRide.departingTime} </p>
           <p>Driver Email: {confirmRide.email} </p>
           <p>Driver Phone Number: {confirmRide.phone} </p>
-          <Button>Delete Ride </Button>
+          <Button onClick={deleteConfirmedRides} id={confirmRide.id}>Delete Ride </Button>
         </CollapsibleItem>
       </Collapsible>
       <br />
   </div>
   )
 }
-export default MyConfirmedRide
+const mapDispatchToProps = dispatch => bindActionCreators({
+  deleteConfirmedRides
+}, dispatch)
+export default connect(null, mapDispatchToProps)(MyConfirmedRide)
