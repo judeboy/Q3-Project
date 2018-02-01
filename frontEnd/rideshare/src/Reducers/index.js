@@ -14,7 +14,9 @@ const initialState = {
   id: null,
   confirmedrides: [],
   isConfirmedRides: false,
-  offeredRides : [],
+  offeredRides: [],
+  inofferRide: false,
+  deleteRide: false,
 }
 const concertReducer = (state=initialState,action) => {
   switch (action.type) {
@@ -43,7 +45,8 @@ const concertReducer = (state=initialState,action) => {
     console.log('in reducer')
       return{
         ...state,
-        inDashboard: action.inDashboard
+        inDashboard: action.inDashboard,
+        inofferRide: action.inofferRide
       }
     case 'POST_SIGN_UP':
       return{
@@ -72,15 +75,24 @@ const concertReducer = (state=initialState,action) => {
       case 'MY_OFFERED_RIDES':
         return{
           ...state,
-          offeredRides: action.offeredRides
+          offeredRides: action.offeredRides,
+          myofferRide: action.myofferRide
         }
       case 'TAKE_TO_DASHBOARD':
       return{
         ...state,
         inDashboard: false
       }
-
-        break;
+      case 'LOG_OUT':
+      return{
+        state
+      }
+      case 'DELETE_OFFER_RIDE':
+      return{
+        ...state,
+        inDashboard: action.inDashboard,
+        deleteRide: action.deleteRide
+      }
     default:
       return state
   }

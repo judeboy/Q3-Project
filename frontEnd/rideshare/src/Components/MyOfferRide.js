@@ -1,8 +1,16 @@
 import React from 'react'
-import {Collapsible,CollapsibleItem} from 'react-materialize'
-const MyOfferRide = ({offerRide}) => {
+import {Collapsible,CollapsibleItem,Button} from 'react-materialize'
+import {deleteOfferRide} from '../Actions'
+import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux'
+import {
+  Link,
+} from 'react-router-dom'
+import { Redirect } from 'react-router'
+const MyOfferRide = ({offerRide,deleteOfferRide,inDashboard}) => {
   return(
     <div>
+      {/* {inDashboard ? */}
       <Collapsible accordion id='concertCollapsible'>
         <CollapsibleItem header={offerRide.artists} icon='filter_drama'>
           <p>Venue Information </p>
@@ -18,10 +26,19 @@ const MyOfferRide = ({offerRide}) => {
           <p>Driver Phone Number: {offerRide.phone} </p>
           <p>No Of Seats Available: {offerRide.availableSeats} </p>
           <p>Your Comment: {offerRide.comments} </p>
+          <br />
+            <Button onClick={deleteOfferRide} id={offerRide.id}>Delete Ride</Button>
         </CollapsibleItem>
       </Collapsible>
+      {/* <Redirect to ='/dashboard' /> : */}
       <br />
   </div>
   )
 }
-export default MyOfferRide
+function mapStateToProps(state) {
+  return {inDashboard: state.concertReducer.inDashboard}
+}
+const mapDispatchToProps = dispatch => bindActionCreators({
+  deleteOfferRide
+}, dispatch)
+export default connect(null, mapDispatchToProps)(MyOfferRide)

@@ -3,7 +3,7 @@ import MyOfferRide from './MyOfferRide'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router'
 
-const MyOfferRides = ({offeredRides}) => {
+const MyOfferRides = ({offeredRides,deleteRide}) => {
   let token = localStorage.getItem('token').toString()
   function parseJwt(token) {
       var base64Url = token.split('.')[1];
@@ -18,6 +18,7 @@ const MyOfferRides = ({offeredRides}) => {
   })
   return(
     <div>
+      {deleteRide ? <Redirect to='/dashboard' /> :
       <div>
         {arr.map(ele => {
           return(
@@ -32,6 +33,8 @@ const MyOfferRides = ({offeredRides}) => {
 function mapStateToProps(state) {
   return {
     offeredRides: state.concertReducer.offeredRides,
+    deleteRide: state.concertReducer.deleteRide
   }
 }
+
 export default connect(mapStateToProps)(MyOfferRides)

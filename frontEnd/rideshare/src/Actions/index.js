@@ -82,12 +82,13 @@ export function postOfferRide(e) {
         'Accept': 'application/json',
       }
     })
-    console.log(response)
     const offerRide = await response.json()
-    console.log(offerRide)
+    if(response.status === 200) {
+      window.Materialize.toast('Rides Offered Successful', 2000)
+    }
     dispatch({
       type: POST_OFFER_RIDE,
-      inDashboard: true,
+      inofferRide: true,
     })
   }
 }
@@ -101,7 +102,10 @@ export function signUpPost(e) {
   let confirmPassword = e.target.confirmPassword.value
   let phoneNumber = e.target.phoneNumber.value
   if(password !== confirmPassword){
-    return alert('password does not match')
+    window.Materialize.toast('Password doesnt match', 3000)
+    e.target.password.value = ""
+    e.target.confirmPassword.value= ""
+    return
   }
   return async (dispatch) => {
     console.log(name)
@@ -145,10 +149,12 @@ export function postSignIn(e) {
       }
     })
     console.log(response)
+    if(response.status !== 200) {
+      window.Materialize.toast('please check your credentials', 3000)
+      return
+    }
     const user = await response.json()
     if(response.status === 200) {
-      let cookie = `jwt=${user.token}`
-      document.cookie = cookie;
       localStorage.setItem('token', user.token)
     }
     dispatch({
@@ -246,6 +252,7 @@ export function myOfferedRide(){
     dispatch({
       type: MY_OFFERED_RIDES,
       offeredRides: offeredRides,
+      myofferRide: true
     })
   }
 }
@@ -254,6 +261,34 @@ export function takeToDashboard() {
   return async (dispatch) => {
     dispatch({
       type: TAKE_TO_DASHBOARD,
+    })
+  }
+}
+export const LOG_OUT = 'LOG_OUT'
+export function logout() {
+  return async (dispatch) => {
+    localStorage.setItem('token', '')
+    dispatch({
+      type: LOG_OUT,
+    })
+  }
+}
+export const DELETE_OFFER_RIDE = 'DELETE_OFFER_RIDE'
+export function deleteOfferRide(e) {
+  e.preventDefault()
+  var id = e.target.id
+  return async (dispatch) => {
+    const response = await fetch(`http://localhost:5000/rides/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      }
+    })
+    dispatch({
+      type: DELETE_OFFER_RIDE,
+      inDashboard: true,
+      deleteRide: true,
     })
   }
 }

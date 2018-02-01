@@ -1,5 +1,5 @@
 import React from 'react'
-import {Collapsible,CollapsibleItem} from 'react-materialize'
+import {Collapsible,CollapsibleItem,Button} from 'react-materialize'
 const MyConfirmedRide = ({confirmRide}) => {
   return(
     <div>
@@ -12,6 +12,7 @@ const MyConfirmedRide = ({confirmRide}) => {
           <p>Departing Date Time: {confirmRide.departingTime} </p>
           <p>Driver Email: {confirmRide.email} </p>
           <p>Driver Phone Number: {confirmRide.phone} </p>
+          <Button>Delete Ride </Button>
         </CollapsibleItem>
       </Collapsible>
       <br />

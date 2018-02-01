@@ -6,9 +6,9 @@ body{
     height: 100%;
     /* background: url('/Images/backpacker2.jpg'); */
 
-    background: 
+    background:
     linear-gradient(
-      rgba(0, 0, 0, 0.15), 
+      rgba(0, 0, 0, 0.15),
       rgba(0, 0, 0, 0.25)
     ),
     url('/Images/backpacker2.jpg');
@@ -132,11 +132,11 @@ ul.slides{
 }
 
 /***** Joe CSS *****/
-input:not([type]), input[type=text], 
-input[type=password], input[type=email], 
-input[type=url], input[type=time], input[type=date], 
-input[type=datetime], input[type=datetime-local], 
-input[type=tel], input[type=number], input[type=search], 
+input:not([type]), input[type=text],
+input[type=password], input[type=email],
+input[type=url], input[type=time], input[type=date],
+input[type=datetime], input[type=datetime-local],
+input[type=tel], input[type=number], input[type=search],
 textarea.materialize-textarea {
   color:#f3cb6f ;
   font-size: 20px !important;
@@ -144,7 +144,7 @@ textarea.materialize-textarea {
 .alignCenter{
   margin-top:20px;
   margin-left: 140px;
-  
+
 }
 
 .btn, .btn-large {
@@ -157,6 +157,12 @@ textarea.materialize-textarea {
   cursor: pointer;
 }
 
+#toast-container {
+  top: auto !important;
+  right: auto !important;
+  bottom: 95%;
+  height: 40px;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

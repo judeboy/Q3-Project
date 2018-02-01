@@ -13,7 +13,7 @@ const SignUp = ({signUpPost,isSignUp}) => {
               <Input className='userName textFormSize' type="text" name="userName" s={10} placeholder="Username"><Icon>account_circle</Icon></Input>
               <Input className='email textFormSize' type="email" name="email" s={10} placeholder="Email" validate><Icon>mail</Icon></Input>
               <Input className='password textFormSize' type='password' name="password" s={10} placeholder="Password" validate><Icon>lock</Icon></Input>
-              <Input className='confirmPassword textFormSize' type='password' name="confirmPassword" s={10} placeholder="Password" validate><Icon>lock</Icon></Input>
+              <Input className='confirmPassword textFormSize' type='password' name="confirmPassword" s={10} placeholder="Confirm Password" validate><Icon>lock</Icon></Input>
               <Input className='phoneNumber' type='Number' name="phoneNumber" s={10} placeholder="Phone Number" validate><Icon>phone</Icon></Input>
                 <Button className='signUpButton' waves='light'>Sign Up</Button><br></br>
             </form>
