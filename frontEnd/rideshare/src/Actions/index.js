@@ -10,7 +10,7 @@ export function fetchConcert(e) {
    radius = '20'
  }
  return async (dispatch) => {
-   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=22c7usm63w7kpdw2q3e62aed`)
+   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=vty4dsmgqahqfszehhus9a5t`)
    // console.log(response)
    const json = await response.json()
    dispatch({
@@ -182,6 +182,7 @@ export function needRide(e) {
     })
   }
 }
+export const PATCH_SEAT = 'PATCH_SEAT'
 export const BOOK_SEAT = 'BOOK_SEAT'
 export function bookSeat(e) {
   e.preventDefault()
@@ -191,6 +192,8 @@ export function bookSeat(e) {
       return ele
     }
   })
+  let ID = e.target.className.slice(3)
+  console.log(ID)
   console.log(concert)
   let driverName = document.getElementsByClassName('driverName1')[0].innerHTML
   let departingTime = document.getElementsByClassName('departingTime1')[0].innerHTML
@@ -199,11 +202,12 @@ export function bookSeat(e) {
   let email = document.getElementsByClassName('email1')[0].innerHTML
   let seatsAvailable = document.getElementsByClassName('seatsAvailable1')[0].innerHTML
   let jwt = localStorage.getItem('token')
+  let noOfSeats = Number(seatsAvailable) - 1
   return async (dispatch) => {
     const response = await fetch('http://localhost:5000/confirmedrides', {
       method: 'POST',
       body: JSON.stringify({
-      concert_id:concert[0].Id,
+      concert_id: concert[0].Id,
       date_time: concert[0].Date,
       venue_name: concert[0].Venue.Name,
       artists: concert[0].Artists[0].Name,
@@ -223,10 +227,21 @@ export function bookSeat(e) {
       window.Materialize.toast('successfully Added to your Need Ride', 2000)
     }
     const requestedRide = await response.json()
-  //   console.log(offerRide)
+    console.log(offerRide)
+  const responsePatch = await fetch(`http://localhost:5000/rides/${ID}`, {
+    method: 'PATCH',
+    body: JSON.stringify({"seatsAvailable": noOfSeats}),
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    }
+  })
+  let a = await responsePatch.json()
+  // console.log(responsePatch)
+  console.log('json response: ',a)
     dispatch({
       type: BOOK_SEAT,
-      inDashboard: inDashboard,
+      inDashboard: 'inDashboard',
     })
   }
 }
@@ -287,8 +302,34 @@ export function deleteOfferRide(e) {
     })
     dispatch({
       type: DELETE_OFFER_RIDE,
-      inDashboard: true,
       deleteRide: true,
+    })
+  }
+}
+export const OFFER_A_RIDE = 'OFFER_A_RIDE'
+export function offeraRide() {
+  return async (dispatch) => {
+    dispatch({
+      type: OFFER_A_RIDE,
+    })
+  }
+}
+export const DELETE_CONFIRMED_RIDES = 'DELETE_CONFIRMED_RIDES'
+export function deleteConfirmedRides(e) {
+  e.preventDefault()
+  var id = e.target.id
+  console.log(id)
+  return async (dispatch) => {
+    const response = await fetch(`http://localhost:5000/confirmedrides/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      }
+    })
+    console.log(response)
+    dispatch({
+      type: DELETE_CONFIRMED_RIDES,
     })
   }
 }
