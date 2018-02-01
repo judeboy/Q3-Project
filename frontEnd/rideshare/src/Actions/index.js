@@ -120,9 +120,7 @@ export function signUpPost(e) {
     // console.log(response)
     const newUser = await response.json()
     console.log(newUser)
-    if(response.status === 200){
-      let cookie = `jwt=${newUser.token}`
-      document.cookie = cookie;
+    if(response.status === 200) {
       localStorage.setItem('token', newUser.token)
     }
     dispatch({

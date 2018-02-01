@@ -183,11 +183,10 @@ app.post('/rides', (req,res,next) => {
    if(err) {
        console.log(err)
    } else{
-
        return decoded
    }
   })
-  console.log(decoded)
+  console.log(decoded.id)
     knex('rides')
     .insert({
         user_id: decoded.id,
