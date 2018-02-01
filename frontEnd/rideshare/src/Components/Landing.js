@@ -1,10 +1,17 @@
 import React from 'react'
+
 import {Navbar,Icon, Row, Input, Button, Parallax,SideNav,SideNavItem} from 'react-materialize'
+import {
+  BrowserRouter as Router,
+} from 'react-router-dom'
+
+
 const Landing = () => {
   return (
-    <div class="body">
+    <div className="body">
       	<Parallax imageSrc="/Images/road.jpg" />
       	<div className="parallaxTextBox">
+          {/* <div><button onPress={() => goBack()}>Go Back</button></div> */}
       		<div className="row container">
       			<p className="parallaxText">
                     Welcome to hoist!<br></br>

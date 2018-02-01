@@ -2,22 +2,19 @@ const express =require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const knex = require('./knex')
-const bcrypt = require('bcrypt')
 const port = process.env.PORT || 5000
-const path = require('path')
-const dotenv = require('dotenv').config()
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static('frontEnd/rideshare/build'));
-// }
-app.use(express.static('./frontEnd/rideshare/build'));
+const cors = require('cors')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
 
+app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
-// Get all route
-// app.get('/', (req, res, next) => {
-//     res.send('working')
-// })
+app.use(express.static('./frontEnd/rideshare/public'))//may need to change to ./frontEnd
+
+app.use(cors())
 
 // Get All
 app.get('/users', (req, res, next) => {
@@ -30,7 +27,60 @@ app.get('/users', (req, res, next) => {
         res.status(404).send(err)
     })
 })
+app.get('/confirmedrides', (req, res, next) => {
+    knex('confirmedrides')
+    .select()
+    .then(data=>{
+        res.status(200).send(data)
+    })
+    .catch(err => {
+        res.status(404).send(err)
+    })
+})
 
+app.post('/confirmedrides',(req,res,next)=> {
+  let jwtkey = req.body.jwt
+  console.log(jwtkey)
+  var decoded = jwt.verify(jwtkey, 'A4e2n84E0OpF3wW21', function(err, decoded) {
+   if(err) {
+       console.log(err)
+   } else{
+       return decoded
+   }
+  })
+  console.log(decoded.id)
+    knex('rides')
+    .insert({
+        user_id: decoded.id,
+        concert_id:req.body.concert_id,
+        date_time: req.body.date_time,
+        venue_name: req.body.venue_name,
+        artists: req.body.artists,
+        driverName:req.body.driverName,
+        email:req.body.email,
+        phone: req.body.phone,
+        departingTime: req.body.departingTime
+
+      }, '*')
+      .then(newRide => {
+        let ride ={
+          id: ride[0].id,
+          user_id:ride[0].id,
+          concert_id:ride[0].concert_id,
+          date_time: ride[0].date_time,
+          venue_name: ride[0].venue_name,
+          artists: ride[0].artists,
+          driverName:ride[0].driverName,
+          email:ride[0].email,
+          phone: ride[0].phone,
+          departingTime: ride[0].departingTime
+        }
+          res.status(200).send(ride)
+      })
+      .catch(err => {
+          res.status(404).send(err)
+      })
+})
 //Get One
 app.get('/users/:id', (req, res, next) => {
     let id = req.params.id
@@ -49,21 +99,22 @@ app.get('/users/:id', (req, res, next) => {
 app.post('/signup', function(req, res, next){
     var salt = bcrypt.genSaltSync(4)
     var hash = bcrypt.hashSync(req.body.password, salt);
-    // console.log(req.body);
+    console.log(req.body);
     knex('users').insert({
         username:req.body.username,
         email:req.body.email,
         phone_number:req.body.phone_number,
         password:hash,
         salt:salt
-    },'*')
-    .then(user=>{
-      console.log('user',user);
-        res.status(200).send({id:user[0].id})
+    }, '*')
+    .then(user=> {
+      var token = jwt.sign({ id: user.id }, 'A4e2n84E0OpF3wW21')
+      res.status(200).send({id: user[0].id, token: token})
+    })
+    .catch(err => {
+        res.status(404).send(err)
     })
 })
-
-
 
 // Log In Route
 app.post('/login', function (req, res) {
@@ -71,10 +122,17 @@ app.post('/login', function (req, res) {
     email: req.body.email
     })
     .first()
-    .then(user => {
-        bcrypt.compare(req.body.password, user.password, function(err, ver) {
-            ver ? res.status(200).send({id:user.id}): res.sendStatus(401)
-        })
+    .then(function(user) {
+      if(!user) {
+        res.status(401).send("Email doesnt exist")
+      }
+      if(bcrypt.compareSync(req.body.password, user.password)) {
+        var token = jwt.sign({ id: user.id }, 'A4e2n84E0OpF3wW21')
+        res.status(200).send({message: "logged in", token: token})
+      }
+      else{
+        res.status(404).send("password doesn't match")
+      }
     })
 })
 
@@ -104,6 +162,58 @@ app.get('/rides/:id', (req, res, next) => {
     })
 })
 
+//Rides Post
+app.post('/rides', (req,res,next) => {
+    let jwtkey = req.body.jwt
+    console.log(jwtkey)
+    var decoded = jwt.verify(jwtkey, 'A4e2n84E0OpF3wW21', function(err, decoded) {
+    if(err) {
+        console.log(err)
+    } else{
+        return decoded
+    }
+    })
+    console.log(decoded.id)
+    knex('rides')
+    .insert({
+        user_id: decoded_id,
+        concert_id:req.body.concert_id,
+        date_time: req.body.date_time,
+        venue_name: req.body.venue_name,
+        venue_address: req.body.venue_address,
+        artists: req.body.artists,
+        driverName:req.body.driverName,
+        email: req.body.email,
+        phone:req.body.phone,
+        availableSeats: req.body.availableSeats,
+        person_address:req.body.person_address,
+        departingTime:req.body.departingTime,
+        comments:req.body.comments,
+    },'*')
+    .then(newRide => {
+      let ride ={
+        id: newRide[0].id,
+        user_id: decoded_id,
+        concert_id:newRide[0].concert_id,
+        date_time: newRide[0].date_time,
+        venue_name: newRide[0].venue_name,
+        venue_address: newRide[0].venue_address,
+        artists: newRide[0].artists,
+        driverName:newRide[0].driverName,
+        email: newRide[0].email,
+        phone:newRide[0].phone,
+        availableSeats: newRide[0].availableSeats,
+        person_address:newRide[0].person_address,
+        departingTime:newRide[0].departingTime,
+        comments:newRide[0].comments,
+      }
+        res.status(200).send(ride)
+    })
+    .catch(err => {
+        res.status(404).send(err)
+    })
+})
+
 // Patch Rides
 app.patch('/rides/:id', (req, res, next) => {
     let id = req.params.id
@@ -118,7 +228,7 @@ app.patch('/rides/:id', (req, res, next) => {
         res.send(data[0])
     })
     .catch(err => {
-        res.status(404).send(err)
+        res.status(404).json({error: 'Not able to find it'})
     })
 })
 
@@ -135,9 +245,9 @@ app.delete('/rides/:id', (req, res, next) => {
     .catch(err => {
         res.status(404).send(err)
     })
-})
-//get all for events database
+  })
 
+//Get All for Events
 app.get('/events',(req,res,next)=>{
   knex('events')
     .select('*')
@@ -149,6 +259,7 @@ app.get('/events',(req,res,next)=>{
     })
 })
 
+// Get on for Events
 app.get('/events/:id',(req,res,next)=>{
   let id = req.params.id
   knex('events')
@@ -161,12 +272,6 @@ app.get('/events/:id',(req,res,next)=>{
     res.status(404).send(err)
   })
 })
-// app.get('*', function (req, res) {
-//  // load the front-end (react / angular / etc handles page changes)
-//  res.sendFile(path.join(__dirname, './frontEnd/rideshare/public'));
-// });
-
-
 
 //Error
 app.use((err, req, res, next) => {
@@ -175,7 +280,7 @@ app.use((err, req, res, next) => {
 })
 
 app.use((req, res, next) => {
-    res.status(404).json({ error: { status: 404, message: 'Not found' }})
+    res.status(404).json({ error: { status: 404, message: 'Not been found' }})
 })
 
 const listener = () => console.log( `Listening on port ${port}!`)

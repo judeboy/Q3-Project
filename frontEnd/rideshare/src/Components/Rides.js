@@ -1,38 +1,34 @@
 import React from 'react'
+import {Modal, Button, Input, Row, Form} from 'react-materialize'
+import NeedRide from './needRide'
+import {connect} from 'react-redux'
 
-const RidesPage = () => {
-
-return (
-
-<div>
-<Modal
-	header='Modal Header'
-	trigger={<Button waves='light'>OR ME!<Icon right>insert_chart</Icon></Button>}>
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-		incididunt ut labore et dolore magna aliqua.</p>
-</Modal>
-<div>
-
-
-<p>Name: Matt</p>
-<p>Departing From: 123 mySt</p>
-<p>Departing Time: 12oclock</p>
-<p>Phone Number: 333-444-5555</p>
-<p>Email: ji9oo@aol.com</p>
-<p>Seats Available: 2</p>
-
-  <form>
-
-    <Input className="riderName" type="text" name="riderName" s={10} placeholder="Name"><Icon>account_circle</Icon></Input>
-    <Input className="phoneNumber" validate type='tel' name="riderPhone" s={10} placeholder="Phone Number"><Icon>account_circle</Icon></Input>
-    <Input className="Email" type="email" name="riderEmail" s={12} placeholder="Email"><Icon>account_circle</Icon></Input>
-    <Input className="seatsNeeded" type="number" name="seatsNeeded" s={10} placeholder="Seats Needed"><Icon>account_circle</Icon></Input>
-    <Input className="Comments" type="text" name="Comments" s={10} placeholder="Comments"><Icon>account_circle</Icon></Input>
-
-
-  <input type="submit" value="Submit" />
-</form>
-</div>
-</div>
+const Rides = ({ride,id}) => {
+	let a = ride.filter(ele => {
+    if(ele.concert_id == id) {
+      return ele
+    }
+  })
+  console.log(a)
+	return (
+		<div>
+			hello
+			{a.map(ele => {
+				return(
+					<NeedRide id={ele.id} key={ele.id} ride={ele} />
+				)
+			})}
+		</div>
 
 )}
+function mapStateToProps(state) {
+  return {
+    ride: state.concertReducer.ride,
+		id: state.concertReducer.id
+  }
+}
+// const mapDispatchToProps = dispatch => bindActionCreators({
+//   offerRide: offerRide,
+//   needRide: needRide
+// }, dispatch)
+export default connect(mapStateToProps)(Rides)
