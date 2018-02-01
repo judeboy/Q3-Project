@@ -1,41 +1,36 @@
 /*************** Color CSS ****************/
 body{
   height: 100%;
-  /* background: url('/Images/backpacker2.jpg'); */
-
+  /* Background Image and color */
   background:
   linear-gradient(
     rgba(0, 0, 0, 0.15),
     rgba(0, 0, 0, 0.25)
   ),
   url('/Images/backpacker2.jpg');
-
-
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
   background-position: cover;
-  background-color: #c14431;
-}
 
+}
 .header{
-  position: relative;
   width: 100%;
-  height: 8%;
-  background-color: #bbbbbb;
+  background-color: #c14431;
+  position:fixed;top:0;
 }
-
-#title{
-  margin-left: 25%;
-  font-size: 40px;
-  margin-top: 20px;
-  font-family: 'Open Sans', sans-serif;
-  color: #930a03;
+.logoutButton{
+  color:#f3cb6f ;
+  font-size: 15px !important;
+  margin-top: -35px;
+  margin-bottom: 20px;
+  margin-left: 10px;
 }
-
-i{
-color:  #e2d8cd
+/* Sign Up page */
+.test{
+  margin-top: 175px
 }
-
+/* Text fields */
 input:not([type]), input[type=text],
 input[type=password], input[type=email],
 input[type=url], input[type=time], input[type=date],
@@ -45,27 +40,41 @@ textarea.materialize-textarea {
   color:#f3cb6f ;
   font-size: 20px !important;
 }
+/* Align Button */
 .alignCenter{
   margin-top:20px;
   margin-left: 140px;
-
 }
-
-.btn, .btn-large {
-  text-decoration: none;
-  color: #000;
-  background-color: #f3cb6f;
-  text-align: center;
-  letter-spacing: .5px;
-  transition: .2s ease-out;
-  cursor: pointer;
-}
-/* Grey Color Buttons */
-
+/* Buttons Color */
 .signInButton, .signUpButton, .newUserButton, .searchConcertButton, .offerRideButton, .needRideButton{
   background-color: #57575b;
   width: 50%;
   margin-left: 25%;
+}
+
+#aboutUs {
+  border-radius: 0px !important;
+  position:fixed;bottom:0px;width:100%;
+  background-color: #57575b;
+  color:#fff;
+}
+#ridesButton{
+  padding: 10px 0 10px 0;
+  border-radius: 0px !important;
+  position:fixed;top:64px;width:50%;
+  background-color: #57575b;
+  color:#fff;
+}
+#ridesButtonTwo{
+  padding: 10px 0 10px 0;
+  border-radius: 0px !important;
+  position:fixed;top:64px;width:50%;
+  background-color: #fff;
+  color:#57575b;
+  margin-left:195px;
+}
+.signInForm{
+margin-top: 50px;
 }
 /*************** Color CSS ****************/
 
@@ -129,10 +138,6 @@ html{
   margin-left: 5%
 }
 
-/* #collapsibleHeader{
-  font-size: 20px;
-  color: #826767;
-} */
 
 .inputSearchField{
   margin-top: 50%;
@@ -157,8 +162,6 @@ html{
   font-size: 20px;
 }
 
-
-
 .offerRideLabels{
     font-family: 'Open Sans', sans-serif;
     font-size: 15px;
@@ -166,35 +169,6 @@ html{
 }
 
 
-
-<<<<<<< HEAD
-=======
-/***** Joe CSS *****/
-input:not([type]), input[type=text],
-input[type=password], input[type=email],
-input[type=url], input[type=time], input[type=date],
-input[type=datetime], input[type=datetime-local],
-input[type=tel], input[type=number], input[type=search],
-textarea.materialize-textarea {
-  color:#f3cb6f ;
-  font-size: 20px !important;
-}
-.alignCenter{
-  margin-top:20px;
-  margin-left: 140px;
-
-}
-
-.btn, .btn-large {
-  text-decoration: none;
-  color: #000;
-  background-color: #f3cb6f;
-  text-align: center;
-  letter-spacing: .5px;
-  transition: .2s ease-out;
-  cursor: pointer;
-}
->>>>>>> b564a90c589bc2db028236c229cb4cb83dd8e1f6
 
 #toast-container {
   top: auto !important;

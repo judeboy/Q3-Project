@@ -20,7 +20,7 @@ const NeedRide = ({ride,id,bookSeat,inDashboard}) => {
           <p>Phone Number:<span className="phoneNumber1"> {ride.phone}</span></p>
           <p>Email:<span className="email1"> {ride.email}</span></p>
           <p>Seats Available:<span className="seatsAvailable1"> {ride.availableSeats}</span></p>
-          <Button onClick={bookSeat} id={ride.concert_id}>Book A Seat </Button>
+          <Button onClick={bookSeat} id={ride.concert_id} className={ride.id}>Book A Seat </Button>
       </Modal>
     }
     </div>
