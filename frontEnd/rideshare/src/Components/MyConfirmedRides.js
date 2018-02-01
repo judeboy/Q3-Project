@@ -1,0 +1,38 @@
+import React from 'react'
+import MyConfirmedRide from './MyConfirmedRide'
+import {connect} from 'react-redux'
+import {Redirect} from 'react-router'
+
+const MyConfirmedRides = ({confirmedrides,isConfirmedRides}) => {
+  let token = localStorage.getItem('token').toString()
+  function parseJwt(token) {
+      var base64Url = token.split('.')[1];
+      var base64 = base64Url.replace('-', '+').replace('_', '/');
+      return JSON.parse(window.atob(base64));
+  };
+  let id = parseJwt(token).id
+  let arr = confirmedrides.filter(ele => {
+    if(ele.user_id === id) {
+      return ele
+    }
+  })
+  return(
+    <div>
+      <div>
+        {arr.map(ele => {
+          return(
+            <MyConfirmedRide id={ele.id} key={ele.id} confirmRide={ele} />
+          )
+        })}
+      </div>
+      }
+  </div>
+  )
+}
+function mapStateToProps(state) {
+  return {
+    confirmedrides: state.concertReducer.confirmedrides,
+    isConfirmedRides: state.concertReducer.isConfirmedRides
+  }
+}
+export default connect(mapStateToProps)(MyConfirmedRides)

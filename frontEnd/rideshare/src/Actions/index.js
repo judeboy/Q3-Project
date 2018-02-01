@@ -28,7 +28,8 @@ export function offerRide(e) {
   return async (dispatch) => {
     dispatch({
       type: OFFER_RIDE,
-      id: e.target.id
+      id: e.target.id,
+      inDashboard: false,
     })
   }
 }
@@ -51,12 +52,13 @@ export function postOfferRide(e) {
   //person info
   let driverName = e.target.Username.value
   let email = e.target.Email.value
-  let phone = e.target.Phone.value
-  let availableSeats = e.target.Seats.value
+  let phone = e.target.Phone.value.toString()
+  let availableSeats = e.target.Seats.value.toString()
   let person_address = e.target.Address.value
   let departingTime = e.target.Departing.value
   let comments = e.target.Comments.value
   let jwt = localStorage.getItem('token')
+  console.log(availableSeats,typeof(person_address))
   console.log(jwt)
   return async (dispatch) => {
     const response = await fetch('http://localhost:5000/rides', {
@@ -80,12 +82,13 @@ export function postOfferRide(e) {
         'Accept': 'application/json',
       }
     })
-    console.log(response)
     const offerRide = await response.json()
-    console.log(offerRide)
+    if(response.status === 200) {
+      window.Materialize.toast('Rides Offered Successful', 2000)
+    }
     dispatch({
       type: POST_OFFER_RIDE,
-      inDashboard: true,
+      inofferRide: true,
     })
   }
 }
@@ -99,7 +102,10 @@ export function signUpPost(e) {
   let confirmPassword = e.target.confirmPassword.value
   let phoneNumber = e.target.phoneNumber.value
   if(password !== confirmPassword){
-    return alert('password does not match')
+    window.Materialize.toast('Password doesnt match', 3000)
+    e.target.password.value = ""
+    e.target.confirmPassword.value= ""
+    return
   }
   return async (dispatch) => {
     console.log(name)
@@ -143,10 +149,12 @@ export function postSignIn(e) {
       }
     })
     console.log(response)
+    if(response.status !== 200) {
+      window.Materialize.toast('please check your credentials', 3000)
+      return
+    }
     const user = await response.json()
     if(response.status === 200) {
-      let cookie = `jwt=${user.token}`
-      document.cookie = cookie;
       localStorage.setItem('token', user.token)
     }
     dispatch({
@@ -169,45 +177,118 @@ export function needRide(e) {
     dispatch({
       type: NEED_RIDE,
       rides: newRides,
-      id: id
+      id: id,
+      inDashboard: false,
     })
   }
 }
 export const BOOK_SEAT = 'BOOK_SEAT'
-export function bookSeat() {
-  console.log('herer')
-  let driverName = document.getElementsByClassName('driverName1').value
-  let departingTime = document.getElementsByClassName('departingTime1').value
-  let departingFrom = document.getElementsByClassName('departingFrom1').value
-  let phoneNumber = document.getElementsByClassName('phoneNumber1').value
-  let email = document.getElementsByClassName('driverName1').value
-  let seatsAvailable = document.getElementsByClassName('seatsAvailable1').value
-  console.log(driverName,departingFrom,departingTime,phoneNumber,email,seatsAvailable)
+export function bookSeat(e) {
+  e.preventDefault()
+  let a = store.getState().concertReducer.concerts
+  let concert = a.filter(ele=> {
+    if(ele.Id == e.target.id) {
+      return ele
+    }
+  })
+  console.log(concert)
+  let driverName = document.getElementsByClassName('driverName1')[0].innerHTML
+  let departingTime = document.getElementsByClassName('departingTime1')[0].innerHTML
+  let departingFrom = document.getElementsByClassName('departingFrom1')[0].innerHTML
+  let phoneNumber = document.getElementsByClassName('phoneNumber1')[0].innerHTML
+  let email = document.getElementsByClassName('email1')[0].innerHTML
+  let seatsAvailable = document.getElementsByClassName('seatsAvailable1')[0].innerHTML
+  let jwt = localStorage.getItem('token')
   return async (dispatch) => {
-  //   const response = await fetch('http://localhost:5000/confirmedrides', {
-  //     method: 'POST',
-  //     body: JSON.stringify({user_id:ride[0].id,
-  //     concert_id:ride[0].concert_id,
-  //     date_time: ride[0].date_time,
-  //     venue_name: ride[0].venue_name,
-  //     artists: ride[0].artists,
-  //     driverName:ride[0].driverName,
-  //     email:ride[0].email,
-  //     phone: ride[0].phone,
-  //     departingTime: ride[0].departingTime,
-  //     jwt: jwt,
-  //   }),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json',
-  //     }
-  //   })
-  //   console.log(response)
-  //   const offerRide = await response.json()
+    const response = await fetch('http://localhost:5000/confirmedrides', {
+      method: 'POST',
+      body: JSON.stringify({
+      concert_id:concert[0].Id,
+      date_time: concert[0].Date,
+      venue_name: concert[0].Venue.Name,
+      artists: concert[0].Artists[0].Name,
+      driverName:driverName,
+      email:email,
+      phone:phoneNumber,
+      departingTime:departingTime,
+      jwt: jwt,
+    }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      }
+    })
+    if(response.status === 200) {
+      var inDashboard = true
+      window.Materialize.toast('successfully Added to your Need Ride', 2000)
+    }
+    const requestedRide = await response.json()
   //   console.log(offerRide)
     dispatch({
       type: BOOK_SEAT,
+      inDashboard: inDashboard,
+    })
+  }
+}
+export const MY_CONFIRMED_RIDES = 'MY_CONFIRMED_RIDES'
+export function myConfirmedRides(){
+  return async (dispatch) => {
+    const response = await fetch('http://localhost:5000/confirmedrides')
+    // console.log(response)
+    const confirmedrides = await response.json()
+    dispatch({
+      type: MY_CONFIRMED_RIDES,
+      confirmedrides: confirmedrides,
+      isConfirmedRides: true
+    })
+  }
+}
+export const MY_OFFERED_RIDES = 'MY_OFFERED_RIDES'
+export function myOfferedRide(){
+  return async (dispatch) => {
+    const response = await fetch('http://localhost:5000/rides')
+    // console.log(response)
+    const offeredRides = await response.json()
+    dispatch({
+      type: MY_OFFERED_RIDES,
+      offeredRides: offeredRides,
+      myofferRide: true
+    })
+  }
+}
+export const TAKE_TO_DASHBOARD = 'TAKE_TO_DASHBOARD'
+export function takeToDashboard() {
+  return async (dispatch) => {
+    dispatch({
+      type: TAKE_TO_DASHBOARD,
+    })
+  }
+}
+export const LOG_OUT = 'LOG_OUT'
+export function logout() {
+  return async (dispatch) => {
+    localStorage.setItem('token', '')
+    dispatch({
+      type: LOG_OUT,
+    })
+  }
+}
+export const DELETE_OFFER_RIDE = 'DELETE_OFFER_RIDE'
+export function deleteOfferRide(e) {
+  e.preventDefault()
+  var id = e.target.id
+  return async (dispatch) => {
+    const response = await fetch(`http://localhost:5000/rides/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      }
+    })
+    dispatch({
+      type: DELETE_OFFER_RIDE,
       inDashboard: true,
+      deleteRide: true,
     })
   }
 }

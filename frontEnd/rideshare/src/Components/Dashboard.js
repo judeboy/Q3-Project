@@ -2,18 +2,23 @@ import React from 'react'
 import ConcertCollapsible from './ConcertCollapsible'
 import {connect} from 'react-redux'
 import {Input, Button, Row} from 'react-materialize'
-import {fetchConcert} from '../Actions'
+import {fetchConcert,myConfirmedRides,myOfferedRide} from '../Actions'
 import { bindActionCreators } from 'redux'
 import initialState from  '../index.js'
-
-
-
-
-const Dashboard = ({concerts,concert,fetchConcert}) => {
+import {
+  Link,
+} from 'react-router-dom'
+const Dashboard = ({concerts,concert,fetchConcert,myConfirmedRides,myOfferedRide}) => {
 if(!concerts){concerts=[]}
   console.log('concerts: ', concerts)
   return(
     <div className='dashboardDiv'>
+      <Link to='/confirmedrides'>
+        <Button onClick={myConfirmedRides}>My Confirmed Rides</Button>
+      </Link>
+      <Link to='/offeredRides'>
+        <Button onClick={myOfferedRide}>My Offered Rides</Button>
+      </Link>
       <form onSubmit = {fetchConcert}>
       <Row className="inputSearchField">
         <Input s={12} type ='Number' placeholder="ZipCode" className="zipCode" required></Input>
@@ -37,7 +42,9 @@ function mapStateToProps(state) {
   }
 }
 const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchConcert
+  fetchConcert,
+  myConfirmedRides,
+  myOfferedRide
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

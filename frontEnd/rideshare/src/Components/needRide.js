@@ -3,33 +3,36 @@ import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {Modal, Button,Input,Icon} from 'react-materialize'
 import {bookSeat} from '../Actions'
-const NeedRide = ({ride,id,bookSeat}) => {
+import {Redirect} from 'react-router'
+const NeedRide = ({ride,id,bookSeat,inDashboard}) => {
+  console.log(ride,id)
   return(
     <div>
+      {inDashboard ? <Redirect to='/dashboard' /> :
       <Modal
       	header='Driver Info'
       	fixedFooter
       	trigger={<Button>Drivername</Button>}>
         rtists
-
-          <p className="driverName1" value={ride.driverName}>Name: {ride.driverName}</p>
-          <p className="departingFrom1" value={ride.person_address}>Departing From: {ride.person_address}</p>
-          <p className="departingTime1" value={ride.departingTime}>Departing Time: {ride.departingTime}</p>
-          <p className="phoneNumber1" value={ride.phone}>Phone Number: {ride.phone}</p>
-          <p className="Email1" value={ride.email}>Email: {ride.email}</p>
-          <p className="seatsAvailable1" value={ride.availableSeats}>Seats Available: {ride.availableSeats}</p>
-          <Button onClick={bookSeat}>Book A Seat </Button>
+          <p>Name:<span className="driverName1"> {ride.driverName}</span></p>
+          <p>Departing From:<span className="departingFrom1"> {ride.person_address}</span></p>
+          <p>Departing Time:<span className="departingTime1"> {ride.departingTime}</span></p>
+          <p>Phone Number:<span className="phoneNumber1"> {ride.phone}</span></p>
+          <p>Email:<span className="email1"> {ride.email}</span></p>
+          <p>Seats Available:<span className="seatsAvailable1"> {ride.availableSeats}</span></p>
+          <Button onClick={bookSeat} id={ride.concert_id}>Book A Seat </Button>
       </Modal>
-
+    }
     </div>
   )
 }
 function mapStateToProps(state) {
   return {
-    id: state.concertReducer.id
+    id: state.concertReducer.id,
+    inDashboard: state.concertReducer.inDashboard
   }
 }
 const mapDispatchToProps = dispatch => bindActionCreators({
   bookSeat
 }, dispatch)
-export default NeedRide
+export default connect(mapStateToProps, mapDispatchToProps)(NeedRide)
