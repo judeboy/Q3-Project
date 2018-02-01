@@ -15,7 +15,7 @@ const Rides = ({ride,id}) => {
 			hello
 			{a.map(ele => {
 				return(
-					<NeedRide id={ele.id} key={ele.id} ride={ele} />
+					<NeedRide id={ele.concert_id} key={ele.concert_id} ride={ele} />
 				)
 			})}
 		</div>

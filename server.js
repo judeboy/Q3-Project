@@ -38,9 +38,8 @@ app.get('/confirmedrides', (req, res, next) => {
     })
 })
 
-app.post('/confirmedrides',(req,res,next)=> {
+app.post('/confirmedrides', (req,res,next)=> {
   let jwtkey = req.body.jwt
-  console.log(jwtkey)
   var decoded = jwt.verify(jwtkey, 'A4e2n84E0OpF3wW21', function(err, decoded) {
    if(err) {
        console.log(err)
@@ -48,8 +47,7 @@ app.post('/confirmedrides',(req,res,next)=> {
        return decoded
    }
   })
-  console.log(decoded.id)
-    knex('rides')
+    knex('confirmedrides')
     .insert({
         user_id: decoded.id,
         concert_id:req.body.concert_id,
@@ -60,12 +58,11 @@ app.post('/confirmedrides',(req,res,next)=> {
         email:req.body.email,
         phone: req.body.phone,
         departingTime: req.body.departingTime
-
       }, '*')
-      .then(newRide => {
-        let ride ={
+      .then(ride => {
+        let newRide = {
           id: ride[0].id,
-          user_id:ride[0].id,
+          user_id:ride[0].user_id,
           concert_id:ride[0].concert_id,
           date_time: ride[0].date_time,
           venue_name: ride[0].venue_name,
@@ -75,7 +72,7 @@ app.post('/confirmedrides',(req,res,next)=> {
           phone: ride[0].phone,
           departingTime: ride[0].departingTime
         }
-          res.status(200).send(ride)
+          res.status(200).send(newRide)
       })
       .catch(err => {
           res.status(404).send(err)
@@ -164,19 +161,19 @@ app.get('/rides/:id', (req, res, next) => {
 
 //Rides Post
 app.post('/rides', (req,res,next) => {
-    let jwtkey = req.body.jwt
-    console.log(jwtkey)
-    var decoded = jwt.verify(jwtkey, 'A4e2n84E0OpF3wW21', function(err, decoded) {
-    if(err) {
-        console.log(err)
-    } else{
-        return decoded
-    }
-    })
-    console.log(decoded.id)
+  let jwtkey = req.body.jwt
+  console.log(jwtkey)
+  var decoded = jwt.verify(jwtkey, 'A4e2n84E0OpF3wW21', function(err, decoded) {
+   if(err) {
+       console.log(err)
+   } else{
+       return decoded
+   }
+  })
+  console.log(decoded.id)
     knex('rides')
     .insert({
-        user_id: decoded_id,
+        user_id: decoded.id,
         concert_id:req.body.concert_id,
         date_time: req.body.date_time,
         venue_name: req.body.venue_name,
@@ -193,7 +190,7 @@ app.post('/rides', (req,res,next) => {
     .then(newRide => {
       let ride ={
         id: newRide[0].id,
-        user_id: decoded_id,
+        user_id: newRide[0].user_id,
         concert_id:newRide[0].concert_id,
         date_time: newRide[0].date_time,
         venue_name: newRide[0].venue_name,
@@ -258,7 +255,6 @@ app.get('/events',(req,res,next)=>{
       res.status(404).send(err)
     })
 })
-
 // Get on for Events
 app.get('/events/:id',(req,res,next)=>{
   let id = req.params.id

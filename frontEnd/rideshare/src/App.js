@@ -4,10 +4,11 @@ import Landing from './Components/Landing'
 import Dashboard from './Components/Dashboard'
 import SignIn from './Components/SignIn'
 import Header from  './Components/Header'
-
+import MyConfirmedRides from './Components/MyConfirmedRides'
 import OfferRide from './Components/OfferRide'
 // import needRide from './Components/needRide'
 // import Rides from './Components/Rides'
+import MyOfferRides from './Components/MyOfferRides'
 import {Button,Input} from 'react-materialize'
 import {connect} from 'react-redux'
 import SignUp from './Components/SignUp'
@@ -29,8 +30,8 @@ const App = (props) => {
       <Route path='/about' component ={Landing} />
       <Route path='/rides' component={OfferRide} />
       <Route path='/myrides' component={RidesPage} />
-      {/* <Route path='/myrides' component={Rides} />
-      <RidesPage /> */}
+      <Route path='/confirmedrides' component={MyConfirmedRides} />
+      <Route path='/offeredRides' component={MyOfferRides} />
     </div>
   )
 };
