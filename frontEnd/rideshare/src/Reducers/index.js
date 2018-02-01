@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import { CONCERTS_RECEIVED, OFFER_RIDE,POST_SIGN_IN,POST_SIGN_UP,POST_OFFER_RIDE,NEED_RIDE} from '../Actions'
+import { CONCERTS_RECEIVED, OFFER_RIDE,POST_SIGN_IN,POST_SIGN_UP,POST_OFFER_RIDE,NEED_RIDE,MY_CONFIRMED_RIDES,TAKE_TO_DASHBOARD} from '../Actions'
 import store from '../store'
 const initialState = {
   concerts: [],
@@ -12,6 +12,9 @@ const initialState = {
   inDashboard: false,
   ride: [],
   id: null,
+  confirmedrides: [],
+  isConfirmedRides: false,
+  offeredRides : [],
 }
 const concertReducer = (state=initialState,action) => {
   switch (action.type) {
@@ -28,7 +31,8 @@ const concertReducer = (state=initialState,action) => {
           if(concert.Id === Number(action.id)) {
             return concert
           }
-        })
+        }),
+        inDashboard: action.inDashboard
       }
       case 'POST_SIGN_IN':
         return{
@@ -51,8 +55,31 @@ const concertReducer = (state=initialState,action) => {
         return{
           ...state,
           ride: action.rides,
-          id: action.id
+          id: action.id,
+          inDashboard: action.inDashboard
         }
+      case 'BOOK_SEAT':
+        return{
+          ...state,
+          inDashboard: action.inDashboard
+        }
+      case 'MY_CONFIRMED_RIDES':
+        return{
+          ...state,
+          confirmedrides: action.confirmedrides,
+          isConfirmedRides: action.isConfirmedRides,
+        }
+      case 'MY_OFFERED_RIDES':
+        return{
+          ...state,
+          offeredRides: action.offeredRides
+        }
+      case 'TAKE_TO_DASHBOARD':
+      return{
+        ...state,
+        inDashboard: false
+      }
+
         break;
     default:
       return state
