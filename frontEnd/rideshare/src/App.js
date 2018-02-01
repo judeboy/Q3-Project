@@ -28,12 +28,9 @@ const App = (props) => {
       <Route path='/dashboard' component={Dashboard} />
       <Route path='/about' component ={Landing} />
       <Route path='/rides' component={OfferRide} />
-
+      <Route path='/myrides' component={RidesPage} />
       {/* <Route path='/myrides' component={Rides} />
       <RidesPage /> */}
-
-      <Route path='/myrides' component={RidesPage} />
-
     </div>
   )
 };

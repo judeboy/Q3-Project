@@ -32,4 +32,7 @@ function mapStateToProps(state) {
 //   needRide: needRide
 // }, dispatch)
 export default connect(mapStateToProps)(Rides)
+<<<<<<< HEAD
+=======
 
+>>>>>>> 54223116a5b313c614cd17b3b0cbf55430bc0bdc
