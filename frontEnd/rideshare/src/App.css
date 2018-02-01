@@ -2,9 +2,9 @@
 body{
   height: 100%;
   /* Background Image and color */
-  background: 
+  background:
   linear-gradient(
-    rgba(0, 0, 0, 0.15), 
+    rgba(0, 0, 0, 0.15),
     rgba(0, 0, 0, 0.25)
   ),
   url('/Images/backpacker2.jpg');
@@ -12,7 +12,7 @@ body{
   background-size: cover;
   background-attachment: fixed;
   background-position: cover;
-  
+
 }
 .header{
   width: 100%;
@@ -21,7 +21,7 @@ body{
 }
 .logoutButton{
   color:#f3cb6f ;
-  font-size: 15px !important;  
+  font-size: 15px !important;
   margin-top: -35px;
   margin-bottom: 20px;
   margin-left: 10px;
@@ -31,11 +31,11 @@ body{
   margin-top: 175px
 }
 /* Text fields */
-input:not([type]), input[type=text], 
-input[type=password], input[type=email], 
-input[type=url], input[type=time], input[type=date], 
-input[type=datetime], input[type=datetime-local], 
-input[type=tel], input[type=number], input[type=search], 
+input:not([type]), input[type=text],
+input[type=password], input[type=email],
+input[type=url], input[type=time], input[type=date],
+input[type=datetime], input[type=datetime-local],
+input[type=tel], input[type=number], input[type=search],
 textarea.materialize-textarea {
   color:#f3cb6f ;
   font-size: 20px !important;
@@ -63,7 +63,7 @@ textarea.materialize-textarea {
   border-radius: 0px !important;
   position:fixed;top:64px;width:50%;
   background-color: #57575b;
-  color:#fff; 
+  color:#fff;
 }
 #ridesButtonTwo{
   padding: 10px 0 10px 0;
@@ -71,14 +71,14 @@ textarea.materialize-textarea {
   position:fixed;top:64px;width:50%;
   background-color: #fff;
   color:#57575b;
-  margin-left:195px; 
+  margin-left:195px;
 }
 .signInForm{
-margin-top: 50px;  
+margin-top: 50px;
 }
 /*************** Color CSS ****************/
 
-   
+
 
 
 html{
@@ -88,7 +88,8 @@ html{
 
 
 #title{
-    text-decoration-color: #6a4372;
+
+    text-decoration-color: #930a03;
     font-family: 'Poppins', sans-serif;
     font-family: 'Roboto', sans-serif;
     padding-left: 40px;
@@ -167,13 +168,7 @@ html{
     text-decoration-color: white;
 }
 
-#title{
-  margin-left: 25%;
-  font-size: 40px;
-  margin-top: 20px;
-  font-family: 'Open Sans', sans-serif;
-  color: white;
-}
+
 
 #toast-container {
   top: auto !important;
