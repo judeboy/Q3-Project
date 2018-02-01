@@ -15,10 +15,10 @@ if(!concerts){concerts=[]}
     <div className='dashboardDiv'>
     <div className="test">
       <form onSubmit = {fetchConcert}>
-      <Row className="inputSearchField">
+      
         <Input s={12} type ='Number' placeholder="ZipCode" className="zipCode" required></Input>
         <Input s={12} type ='Number' placeholder="Radius in Miles" className="radius"></Input>
-      </Row>
+      
         <Button type='submit'  className="searchConcertButton">Search for Shows</Button>
       </form>
       </div>

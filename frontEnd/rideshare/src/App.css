@@ -18,6 +18,7 @@ body{
   width: 100%;
   background-color: #c14431;
   position:fixed;top:0;
+  margin-bottom: 40px;
 }
 .logoutButton{
   color:#f3cb6f ;
@@ -61,20 +62,23 @@ textarea.materialize-textarea {
 #ridesButton{
   padding: 10px 0 10px 0;
   border-radius: 0px !important;
-  position:fixed;top:64px;width:50%;
+  position:fixed;top:64px;width:52%;
   background-color: #57575b;
   color:#fff;
 }
 #ridesButtonTwo{
   padding: 10px 0 10px 0;
   border-radius: 0px !important;
-  position:fixed;top:64px;width:50%;
+  position:fixed;top:64px;width:52%;
   background-color: #fff;
   color:#57575b;
   margin-left:195px;
 }
 .signInForm{
 margin-top: 50px;
+}
+#concertModal{
+  margin-top: 150px;
 }
 /*************** Color CSS ****************/
 
@@ -88,11 +92,11 @@ html{
 
 
 #title{
-
-    text-decoration-color: #930a03;
-    font-family: 'Poppins', sans-serif;
-    font-family: 'Roboto', sans-serif;
-    padding-left: 40px;
+  margin-left: 38%;
+  font-size: 40px;
+  margin-top: 20px;
+  font-family: 'Open Sans', sans-serif;
+  color: white;
 }
 
 .loginRow{
