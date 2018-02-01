@@ -10,7 +10,7 @@ export function fetchConcert(e) {
    radius = '20'
  }
  return async (dispatch) => {
-   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=22c7usm63w7kpdw2q3e62aed`)
+   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=3eg5zjnkxt8gpv29ef2b944g`)
    // console.log(response)
    const json = await response.json()
    dispatch({
@@ -120,9 +120,7 @@ export function signUpPost(e) {
     // console.log(response)
     const newUser = await response.json()
     console.log(newUser)
-    if(response.status === 200){
-      let cookie = `jwt=${newUser.token}`
-      document.cookie = cookie;
+    if(response.status === 200) {
       localStorage.setItem('token', newUser.token)
     }
     dispatch({
