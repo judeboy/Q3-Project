@@ -1,24 +1,63 @@
+/*************** Color CSS ****************/
+body{
+  height: 100%;
+  /* background: url('/Images/backpacker2.jpg'); */
+
+  background: 
+  linear-gradient(
+    rgba(0, 0, 0, 0.15), 
+    rgba(0, 0, 0, 0.25)
+  ),
+  url('/Images/backpacker2.jpg');
+
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: cover;
+  background-color: #c14431;
+}
+
+input:not([type]), input[type=text], 
+input[type=password], input[type=email], 
+input[type=url], input[type=time], input[type=date], 
+input[type=datetime], input[type=datetime-local], 
+input[type=tel], input[type=number], input[type=search], 
+textarea.materialize-textarea {
+  color:#f3cb6f ;
+  font-size: 20px !important;
+}
+.alignCenter{
+  margin-top:20px;
+  margin-left: 140px;
+  
+}
+
+.btn, .btn-large {
+  text-decoration: none;
+  color: #000;
+  background-color: #f3cb6f;
+  text-align: center;
+  letter-spacing: .5px;
+  transition: .2s ease-out;
+  cursor: pointer;
+}
+/* Grey Color Buttons */
+
+.signInButton, .signUpButton, .newUserButton, .searchConcertButton, .offerRideButton, .needRideButton{
+  background-color: #57575b;
+  width: 50%;
+  margin-left: 25%;
+}
+/*************** Color CSS ****************/
+
+   
+
+
 html{
     height:100%;
 }
 
-body{
-    height: 100%;
-    /* background: url('/Images/backpacker2.jpg'); */
 
-    background: 
-    linear-gradient(
-      rgba(0, 0, 0, 0.15), 
-      rgba(0, 0, 0, 0.25)
-    ),
-    url('/Images/backpacker2.jpg');
-
-
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: cover;
-    background-color: #c14431;
-}
 
 #title{
     text-decoration-color: #6a4372;
@@ -31,11 +70,7 @@ body{
     margin-top: 20%;
     margin-left: 10%;
 }
-.signInButton, .signUpButton, .newUserButton, .searchConcertButton, .offerRideButton, .needRideButton{
-    background-color: #57575b;
-    width: 50%;
-    margin-left: 25%;
-}
+
 
 .signInForm{
     padding-top: 70%;
@@ -64,15 +99,7 @@ body{
 .slider .slides li{
   opacity: 1
 }
-/* div.slider{
-  height: 440px;
-  touch-action: pan-y;
-  -webkit-user-drag: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-ul.slides{
-  height: 400px;
-} */
+
 .collapsibleConcert{
   width: 95%;
   margin: auto;
@@ -131,12 +158,14 @@ ul.slides{
   color: white;
 }
 
+<<<<<<< HEAD
+=======
 /***** Joe CSS *****/
-input:not([type]), input[type=text], 
-input[type=password], input[type=email], 
-input[type=url], input[type=time], input[type=date], 
-input[type=datetime], input[type=datetime-local], 
-input[type=tel], input[type=number], input[type=search], 
+input:not([type]), input[type=text],
+input[type=password], input[type=email],
+input[type=url], input[type=time], input[type=date],
+input[type=datetime], input[type=datetime-local],
+input[type=tel], input[type=number], input[type=search],
 textarea.materialize-textarea {
   color:#f3cb6f ;
   font-size: 20px !important;
@@ -144,7 +173,7 @@ textarea.materialize-textarea {
 .alignCenter{
   margin-top:20px;
   margin-left: 140px;
-  
+
 }
 
 .btn, .btn-large {
@@ -156,7 +185,14 @@ textarea.materialize-textarea {
   transition: .2s ease-out;
   cursor: pointer;
 }
+>>>>>>> b564a90c589bc2db028236c229cb4cb83dd8e1f6
 
+#toast-container {
+  top: auto !important;
+  right: auto !important;
+  bottom: 95%;
+  height: 40px;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
