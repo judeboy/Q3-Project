@@ -1,15 +1,16 @@
 import store from '../store'
 export const CONCERTS_RECEIVED = 'CONCERTS_RECEIVED'
-
-
-export function fetchConcert () {
+export function fetchConcert(e) {
+  console.log('fetchConcert');
+  e.preventDefault()
  let zipCode = document.getElementsByClassName('zipCode')[0].value
+ if(!zipCode){return}
  let radius = document.getElementsByClassName('radius')[0].value
  if(radius === "") {
    radius = '20'
  }
  return async (dispatch) => {
-   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=vty4dsmgqahqfszehhus9a5t`)
+   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=rw79kgvgnavjdhdxhxreufen`)
    // console.log(response)
    const json = await response.json()
    dispatch({
@@ -55,24 +56,26 @@ export function postOfferRide(e) {
   let person_address = e.target.Address.value
   let departingTime = e.target.Departing.value
   let comments = e.target.Comments.value
-
+  let jwt = localStorage.getItem('token')
+  console.log(jwt)
   return async (dispatch) => {
-    const response = await fetch('/rides', {
+    const response = await fetch('http://localhost:5000/rides', {
       method: 'POST',
-      body: JSON.stringify({
-          concert_id: concert_id,
-          date_time: date_time,
-          venue_name:venue_name,
-          venue_address:venue_address,
-          artists: artists,
-          driverName: driverName,
-          email: email,
-          phone: phone,
-          availableSeats: availableSeats,
-          person_address: person_address,
-          departingTime: departingTime,
-          comments: comments
-      }), headers:{
+      body: JSON.stringify({concert_id: concert_id,
+      date_time: date_time,
+      venue_name:venue_name,
+      venue_address:venue_address,
+      artists: artists,
+      driverName: driverName,
+      email: email,
+      phone: phone,
+      availableSeats: availableSeats,
+      person_address: person_address,
+      departingTime: departingTime,
+      comments: comments,
+      jwt: jwt,
+    }),
+      headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       }
@@ -100,7 +103,7 @@ export function signUpPost(e) {
   }
   return async (dispatch) => {
     console.log(name)
-    const response = await fetch('/signup', {
+    const response = await fetch('http://localhost:5000/signup', {
       method: 'POST',
       body: JSON.stringify({username: name, email: email, phone_number: phoneNumber, password: password}),
       headers: {
@@ -114,6 +117,7 @@ export function signUpPost(e) {
     if(response.status === 200){
       let cookie = `jwt=${newUser.token}`
       document.cookie = cookie;
+      localStorage.setItem('token', newUser.token)
     }
     dispatch({
       type: POST_SIGN_UP,
@@ -130,7 +134,7 @@ export function postSignIn(e) {
   let password = e.target.password.value
   console.log(email, password)
   return async (dispatch) => {
-    const response = await fetch('/login', {
+    const response = await fetch('http://localhost:5000/login', {
       method: 'POST',
       body: JSON.stringify({email: email, password: password}),
       headers: {
@@ -149,6 +153,61 @@ export function postSignIn(e) {
       type: POST_SIGN_IN,
       response: response.status,
       isSignIn: true,
+    })
+  }
+}
+
+export const NEED_RIDE = 'NEED_RIDE'
+export function needRide(e) {
+  console.log(e.target.id)
+  let id = e.target.id
+  console.log('herer')
+  return async (dispatch) => {
+    const response = await fetch(`http://localhost:5000/rides`)
+    console.log(response)
+    const newRides = await response.json()
+    dispatch({
+      type: NEED_RIDE,
+      rides: newRides,
+      id: id
+    })
+  }
+}
+export const BOOK_SEAT = 'BOOK_SEAT'
+export function bookSeat() {
+  console.log('herer')
+  let driverName = document.getElementsByClassName('driverName1').value
+  let departingTime = document.getElementsByClassName('departingTime1').value
+  let departingFrom = document.getElementsByClassName('departingFrom1').value
+  let phoneNumber = document.getElementsByClassName('phoneNumber1').value
+  let email = document.getElementsByClassName('driverName1').value
+  let seatsAvailable = document.getElementsByClassName('seatsAvailable1').value
+  console.log(driverName,departingFrom,departingTime,phoneNumber,email,seatsAvailable)
+  return async (dispatch) => {
+  //   const response = await fetch('http://localhost:5000/confirmedrides', {
+  //     method: 'POST',
+  //     body: JSON.stringify({user_id:ride[0].id,
+  //     concert_id:ride[0].concert_id,
+  //     date_time: ride[0].date_time,
+  //     venue_name: ride[0].venue_name,
+  //     artists: ride[0].artists,
+  //     driverName:ride[0].driverName,
+  //     email:ride[0].email,
+  //     phone: ride[0].phone,
+  //     departingTime: ride[0].departingTime,
+  //     jwt: jwt,
+  //   }),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json',
+  //     }
+  //   })
+  //   console.log(response)
+  //   const offerRide = await response.json()
+  //   console.log(offerRide)
+    dispatch({
+      type: BOOK_SEAT,
+      inDashboard: true,
     })
   }
 }

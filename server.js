@@ -12,7 +12,7 @@ app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
-app.use(express.static('./frontEnd/rideshare/build'))//may need to change to ./frontEnd
+app.use(express.static('./frontEnd/rideshare/public'))//may need to change to ./frontEnd
 
 app.use(cors())
 
@@ -27,7 +27,60 @@ app.get('/users', (req, res, next) => {
         res.status(404).send(err)
     })
 })
+app.get('/confirmedrides', (req, res, next) => {
+    knex('confirmedrides')
+    .select()
+    .then(data=>{
+        res.status(200).send(data)
+    })
+    .catch(err => {
+        res.status(404).send(err)
+    })
+})
 
+app.post('/confirmedrides',(req,res,next)=> {
+  let jwtkey = req.body.jwt
+  console.log(jwtkey)
+  var decoded = jwt.verify(jwtkey, 'A4e2n84E0OpF3wW21', function(err, decoded) {
+   if(err) {
+       console.log(err)
+   } else{
+       return decoded
+   }
+  })
+  console.log(decoded.id)
+    knex('rides')
+    .insert({
+        user_id: decoded.id,
+        concert_id:req.body.concert_id,
+        date_time: req.body.date_time,
+        venue_name: req.body.venue_name,
+        artists: req.body.artists,
+        driverName:req.body.driverName,
+        email:req.body.email,
+        phone: req.body.phone,
+        departingTime: req.body.departingTime
+
+      }, '*')
+      .then(newRide => {
+        let ride ={
+          id: ride[0].id,
+          user_id:ride[0].id,
+          concert_id:ride[0].concert_id,
+          date_time: ride[0].date_time,
+          venue_name: ride[0].venue_name,
+          artists: ride[0].artists,
+          driverName:ride[0].driverName,
+          email:ride[0].email,
+          phone: ride[0].phone,
+          departingTime: ride[0].departingTime
+        }
+          res.status(200).send(ride)
+      })
+      .catch(err => {
+          res.status(404).send(err)
+      })
+})
 //Get One
 app.get('/users/:id', (req, res, next) => {
     let id = req.params.id
@@ -111,19 +164,19 @@ app.get('/rides/:id', (req, res, next) => {
 
 //Rides Post
 app.post('/rides', (req,res,next) => {
-  let cookie = req.cookies
-  console.log(req.headers.cookies)
-  // var decoded = jwt.verify(cookie.jwt, 'A4e2n84E0OpF3wW21', function(err, decoded) {
-  //  if(err) {
-  //      console.log(err)
-  //  } else{
-  //      return decoded
-  //  }
-  // })
-  // console.log(decoded.id)
+    let jwtkey = req.body.jwt
+    console.log(jwtkey)
+    var decoded = jwt.verify(jwtkey, 'A4e2n84E0OpF3wW21', function(err, decoded) {
+    if(err) {
+        console.log(err)
+    } else{
+        return decoded
+    }
+    })
+    console.log(decoded.id)
     knex('rides')
     .insert({
-        user_id: 3,
+        user_id: decoded_id,
         concert_id:req.body.concert_id,
         date_time: req.body.date_time,
         venue_name: req.body.venue_name,
@@ -140,7 +193,7 @@ app.post('/rides', (req,res,next) => {
     .then(newRide => {
       let ride ={
         id: newRide[0].id,
-        user_id: 3,
+        user_id: decoded_id,
         concert_id:newRide[0].concert_id,
         date_time: newRide[0].date_time,
         venue_name: newRide[0].venue_name,
@@ -205,6 +258,7 @@ app.get('/events',(req,res,next)=>{
       res.status(404).send(err)
     })
 })
+
 // Get on for Events
 app.get('/events/:id',(req,res,next)=>{
   let id = req.params.id
