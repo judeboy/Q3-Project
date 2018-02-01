@@ -10,7 +10,7 @@ export function fetchConcert(e) {
    radius = '20'
  }
  return async (dispatch) => {
-   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=rw79kgvgnavjdhdxhxreufen`)
+   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=22c7usm63w7kpdw2q3e62aed`)
    // console.log(response)
    const json = await response.json()
    dispatch({
@@ -117,7 +117,7 @@ export function signUpPost(e) {
         'Accept': 'application/json',
       }
     })
-    console.log(response)
+    // console.log(response)
     const newUser = await response.json()
     console.log(newUser)
     if(response.status === 200){

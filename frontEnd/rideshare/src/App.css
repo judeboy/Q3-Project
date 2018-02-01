@@ -3,9 +3,9 @@ body{
   height: 100%;
   /* background: url('/Images/backpacker2.jpg'); */
 
-  background: 
+  background:
   linear-gradient(
-    rgba(0, 0, 0, 0.15), 
+    rgba(0, 0, 0, 0.15),
     rgba(0, 0, 0, 0.25)
   ),
   url('/Images/backpacker2.jpg');
@@ -17,11 +17,30 @@ body{
   background-color: #c14431;
 }
 
-input:not([type]), input[type=text], 
-input[type=password], input[type=email], 
-input[type=url], input[type=time], input[type=date], 
-input[type=datetime], input[type=datetime-local], 
-input[type=tel], input[type=number], input[type=search], 
+.header{
+  position: relative;
+  width: 100%;
+  height: 8%;
+  background-color: #bbbbbb;
+}
+
+#title{
+  margin-left: 25%;
+  font-size: 40px;
+  margin-top: 20px;
+  font-family: 'Open Sans', sans-serif;
+  color: #930a03;
+}
+
+i{
+color:  #e2d8cd
+}
+
+input:not([type]), input[type=text],
+input[type=password], input[type=email],
+input[type=url], input[type=time], input[type=date],
+input[type=datetime], input[type=datetime-local],
+input[type=tel], input[type=number], input[type=search],
 textarea.materialize-textarea {
   color:#f3cb6f ;
   font-size: 20px !important;
@@ -29,7 +48,7 @@ textarea.materialize-textarea {
 .alignCenter{
   margin-top:20px;
   margin-left: 140px;
-  
+
 }
 
 .btn, .btn-large {
@@ -50,7 +69,7 @@ textarea.materialize-textarea {
 }
 /*************** Color CSS ****************/
 
-   
+
 
 
 html{
@@ -60,7 +79,8 @@ html{
 
 
 #title{
-    text-decoration-color: #6a4372;
+
+    text-decoration-color: #930a03;
     font-family: 'Poppins', sans-serif;
     font-family: 'Roboto', sans-serif;
     padding-left: 40px;
@@ -137,12 +157,7 @@ html{
   font-size: 20px;
 }
 
-.header{
-  position: relative;
-  width: 100%;
-  height: 8%;
-  background-color: #c14431;
-}
+
 
 .offerRideLabels{
     font-family: 'Open Sans', sans-serif;
@@ -150,13 +165,7 @@ html{
     text-decoration-color: white;
 }
 
-#title{
-  margin-left: 25%;
-  font-size: 40px;
-  margin-top: 20px;
-  font-family: 'Open Sans', sans-serif;
-  color: white;
-}
+
 
 <<<<<<< HEAD
 =======
