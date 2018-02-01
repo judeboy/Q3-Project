@@ -10,7 +10,7 @@ export function fetchConcert(e) {
    radius = '20'
  }
  return async (dispatch) => {
-   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=rw79kgvgnavjdhdxhxreufen`)
+   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=22c7usm63w7kpdw2q3e62aed`)
    // console.log(response)
    const json = await response.json()
    dispatch({

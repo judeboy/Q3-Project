@@ -15,7 +15,7 @@ const ConcertCollapsible = ({concert,offerRide,props,needRide}) => {
   return(
       <div>
         <Collapsible accordion id='concertCollapsible' onClick={offerRide}>
-        	<CollapsibleItem header={concert.Artists[0].Name} icon='filter_drama' id={concert.id}>
+        	<CollapsibleItem header={concert.Artists[0].Name} icon='place' id={concert.id}>
         		<p>Venue: {concert.Venue.Name}</p>
                 <p>Date/Time: {concert.Date}</p>
                 <p>Street Address: {concert.Venue.Address}</p>
