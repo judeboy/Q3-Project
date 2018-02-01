@@ -13,12 +13,7 @@ if(!concerts){concerts=[]}
   console.log('concerts: ', concerts)
   return(
     <div className='dashboardDiv'>
-      <Link to='/confirmedrides'>
-        <Button onClick={myConfirmedRides}>My Confirmed Rides</Button>
-      </Link>
-      <Link to='/offeredRides'>
-        <Button onClick={myOfferedRide}>My Offered Rides</Button>
-      </Link>
+    <div className="test">
       <form onSubmit = {fetchConcert}>
       <Row className="inputSearchField">
         <Input s={12} type ='Number' placeholder="ZipCode" className="zipCode" required></Input>
@@ -26,12 +21,19 @@ if(!concerts){concerts=[]}
       </Row>
         <Button type='submit'  className="searchConcertButton">Search for Shows</Button>
       </form>
+      </div>
      {concerts.map(concert=> {
 
         return(
           <ConcertCollapsible key={concert.id} id={concert.id} concert={concert} />
         )
       })}
+      <Link to='/confirmedrides'>
+        <Button id="ridesButton" onClick={myConfirmedRides}>My Confirmed Rides</Button>
+      </Link>
+      <Link to='/offeredRides'>
+        <Button id="ridesButtonTwo" onClick={myOfferedRide}>My Offered Rides</Button>
+      </Link>
     </div>
   )
 }

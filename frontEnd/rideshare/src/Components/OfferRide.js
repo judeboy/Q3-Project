@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal, Button, Input, Row, Form} from 'react-materialize'
+import {Input, Modal, Button, Row, Form, Icon} from 'react-materialize'
 import {connect} from 'react-redux'
 import {postOfferRide} from '../Actions'
 import { bindActionCreators } from 'redux'
@@ -23,30 +23,32 @@ const OfferRide = ({...props,concerts,postOfferRide, inofferRide}) => {
             <p className='rideOfferPara'>City: {concert[0].Venue.City}</p>
             <p className='rideOfferPara'>State: {concert[0].Venue.State}</p>
         </Modal>
+        <div className="test">
           <form onSubmit={postOfferRide} id={concert[0].Id}>
-            <label htmlFor="Driver">Driver Name</label>
-            <input id="driver" name="Username" type="text"/>
+            
+            <input id="driver" name="Username" type="text" Placeholder="Drive Name"/>
+          
+            
+            <input id="email" name="Email" type="email" Placeholder="Email"/>
 
-            <label className='offerRideLabels' htmlFor="email">Email</label>
-            <input id="email" name="Email" type="email"/>
+            
+            <input id="Phone" name="Phone" type="number" Placeholder="Phone"/>
 
-            <label className='offerRideLabels' htmlFor="Phone">Phone</label>
-            <input id="Phone" name="Phone" type="number" />
+            
+            <input id="Seats" name="Seats" type="number" Placeholder="Seat Available"/>
 
-            <label className='offerRideLabels' htmlFor="seatsAvailable">Seats Available</label>
-            <input id="Seats" name="Seats" type="number" />
+            
+            <input id="Address" name="Address" type="text" Placeholder="Address"/>
 
-            <label htmlFor="Address">Address</label>
-            <input id="Address" name="Address" type="text" />
+           
+            <input id="Departing" name="Departing" type="text" Placeholder="Departing Time"/>
 
-            <label className='offerRideLabels' htmlFor="Departing Time">Departing Time</label>
-            <input id="Departing" name="Departing" type="text" />
-
-            <label htmlFor="Comments">Comments</label>
-            <input id="Comments" name="Comments" type="text" />
+            
+            <input id="Comments" name="Comments" type="text" Placeholder="Comments"/>
 
             <Button className='offerRideLabels' className="offerRideButton">OfferRide</Button>
           </form>
+          </div>
         </div>
          }
     </div>

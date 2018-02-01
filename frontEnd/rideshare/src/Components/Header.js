@@ -12,13 +12,8 @@ const Header = ({takeToDashboard,logout}) => {
         <Link to ='/dashboard'>
           <span id="title" onClick={takeToDashboard}>hoist</span>
         </Link>
-        <p className='aboutUs'>
-          <Link to ='/about'>
-            <span id="aboutUs">About Us</span>
-          </Link>
-        </p>
         <Link to='/'>
-          <p onClick={logout}>Log Out</p>
+          <p className="logoutButton" onClick={logout}>Log Out</p>
         </Link>
       </div>
   )
