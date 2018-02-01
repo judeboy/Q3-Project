@@ -27,11 +27,7 @@ const App = (props) => {
       <Route path='/dashboard' component={Dashboard} />
       <Route path='/about' component ={Landing} />
       <Route path='/rides' component={OfferRide} />
-<<<<<<< HEAD
-      <Route path='/myrides' component={myRides} />
-=======
       <Route path='/myrides' component={RidesPage} />
->>>>>>> faa25c59f7b5923e17a5e0d6c2eb91ce8fd461bc
     </div>
   )
 };
