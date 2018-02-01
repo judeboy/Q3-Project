@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal, Button, Input, Row, Form} from 'react-materialize'
+import {Modal, Button, Input, Row, Form, Icon} from 'react-materialize'
 
 const RidesPage = () => {
 	return (
@@ -27,11 +27,11 @@ const RidesPage = () => {
     <Input className="Email" type="email" name="riderEmail" s={12} placeholder="Email"><Icon>account_circle</Icon></Input>
     <Input className="seatsNeeded" type="number" name="seatsNeeded" s={10} placeholder="Seats Needed"><Icon>account_circle</Icon></Input>
     <Input className="Comments" type="text" name="Comments" s={10} placeholder="Comments"><Icon>account_circle</Icon></Input>
-
-
-  <input type="submit" value="Submit" />
+	<Button className="alignCenter" type="submit" value="Submit">Submit</Button>
 </form>
 </div>
 </div>
 
 )}
+
+export default RidesPage
