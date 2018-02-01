@@ -78,6 +78,20 @@ app.post('/confirmedrides', (req,res,next)=> {
           res.status(404).send(err)
       })
 })
+app.delete('/confirmedrides/:id', (req, res, next) => {
+    let id = req.params.id
+    console.log(req.params.id)
+    knex('confirmedrides')
+    .where('id',id)
+    .returning(['*'])
+    .del()
+    .then(data => {
+        res.send(data[0])
+    })
+    .catch(err => {
+        res.status(404).send(err)
+    })
+  })
 //Get One
 app.get('/users/:id', (req, res, next) => {
     let id = req.params.id

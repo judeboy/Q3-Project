@@ -1,13 +1,13 @@
 import React from 'react'
 import {Collapsible,CollapsibleItem, Button, Row, Modal} from 'react-materialize'
-import {offerRide, needRide} from '../Actions'
+import {offerRide, needRide, offeraRide} from '../Actions'
 import {connect} from 'react-redux'
 import {
   Link,
 } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 
-const ConcertCollapsible = ({concert,offerRide,props,needRide}) => {
+const ConcertCollapsible = ({concert,offerRide,props,needRide,offeraRide}) => {
     console.log(concert.Artists[0].Name)
     let a = concert.TicketUrl.toString()
     console.log(a)
@@ -15,7 +15,7 @@ const ConcertCollapsible = ({concert,offerRide,props,needRide}) => {
   return(
       <div>
         <Collapsible accordion id='concertCollapsible' onClick={offerRide}>
-        	<CollapsibleItem header={concert.Artists[0].Name} icon='filter_drama' id={concert.id}>
+        	<CollapsibleItem header={concert.Artists[0].Name} icon='place' id={concert.id}>
         		<p>Venue: {concert.Venue.Name}</p>
                 <p>Date/Time: {concert.Date}</p>
                 <p>Street Address: {concert.Venue.Address}</p>
@@ -26,7 +26,7 @@ const ConcertCollapsible = ({concert,offerRide,props,needRide}) => {
                   pathname: '/rides',
                   search: `?id=${concert.Id}`
                 }}>
-                  <Button className='offerRideButton' >
+                  <Button className='offerRideButton'  onClick={offeraRide}>
                     Offer a Ride
                   </Button>
                 </Link>
@@ -51,6 +51,7 @@ const ConcertCollapsible = ({concert,offerRide,props,needRide}) => {
 // }
 const mapDispatchToProps = dispatch => bindActionCreators({
   offerRide: offerRide,
-  needRide: needRide
+  needRide: needRide,
+  offeraRide
 }, dispatch)
 export default connect(null, mapDispatchToProps)(ConcertCollapsible)

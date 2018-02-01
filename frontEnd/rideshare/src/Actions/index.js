@@ -10,7 +10,7 @@ export function fetchConcert(e) {
    radius = '20'
  }
  return async (dispatch) => {
-   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=rw79kgvgnavjdhdxhxreufen`)
+   const response = await fetch(`http://api.jambase.com/events?zipCode=${zipCode}&radius=${radius}&page=0&api_key=22c7usm63w7kpdw2q3e62aed`)
    // console.log(response)
    const json = await response.json()
    dispatch({
@@ -287,8 +287,34 @@ export function deleteOfferRide(e) {
     })
     dispatch({
       type: DELETE_OFFER_RIDE,
-      inDashboard: true,
       deleteRide: true,
+    })
+  }
+}
+export const OFFER_A_RIDE = 'OFFER_A_RIDE'
+export function offeraRide() {
+  return async (dispatch) => {
+    dispatch({
+      type: OFFER_A_RIDE,
+    })
+  }
+}
+export const DELETE_CONFIRMED_RIDES = 'DELETE_CONFIRMED_RIDES'
+export function deleteConfirmedRides(e) {
+  e.preventDefault()
+  var id = e.target.id
+  console.log(id)
+  return async (dispatch) => {
+    const response = await fetch(`http://localhost:5000/confirmedrides/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      }
+    })
+    console.log(response)
+    dispatch({
+      type: DELETE_CONFIRMED_RIDES,
     })
   }
 }

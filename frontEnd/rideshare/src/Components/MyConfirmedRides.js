@@ -3,7 +3,7 @@ import MyConfirmedRide from './MyConfirmedRide'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router'
 
-const MyConfirmedRides = ({confirmedrides,isConfirmedRides}) => {
+const MyConfirmedRides = ({confirmedrides,isConfirmedRides,deleteConfirmedRides}) => {
   let token = localStorage.getItem('token').toString()
   function parseJwt(token) {
       var base64Url = token.split('.')[1];
@@ -18,6 +18,7 @@ const MyConfirmedRides = ({confirmedrides,isConfirmedRides}) => {
   })
   return(
     <div>
+      {deleteConfirmedRides ? <Redirect to='/dashboard' /> :
       <div>
         {arr.map(ele => {
           return(
@@ -32,7 +33,8 @@ const MyConfirmedRides = ({confirmedrides,isConfirmedRides}) => {
 function mapStateToProps(state) {
   return {
     confirmedrides: state.concertReducer.confirmedrides,
-    isConfirmedRides: state.concertReducer.isConfirmedRides
+    isConfirmedRides: state.concertReducer.isConfirmedRides,
+    deleteConfirmedRides: state.concertReducer.deleteConfirmedRides
   }
 }
 export default connect(mapStateToProps)(MyConfirmedRides)
