@@ -28,12 +28,16 @@ const App = (props) => {
       <Route path='/dashboard' component={Dashboard} />
       <Route path='/about' component ={Landing} />
       <Route path='/rides' component={OfferRide} />
+<<<<<<< HEAD
+      <Route path='/myrides' component={RidesPage} />
+=======
 
       {/* <Route path='/myrides' component={Rides} />
       <RidesPage /> */}
 
       <Route path='/myrides' component={RidesPage} />
 
+>>>>>>> 54223116a5b313c614cd17b3b0cbf55430bc0bdc
     </div>
   )
 };
